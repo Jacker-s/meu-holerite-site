@@ -5,422 +5,574 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#14b865" />
   <title>Meu Holerite — Holerite, Ponto e Recibos</title>
-  <meta name="description" content="Meu Holerite: importe holerites e ponto do ePays, acompanhe banco de horas, faltas, recibos e saldo Alelo. Privacidade total: dados ficam no seu celular." />
+  <meta name="description" content="Importe holerites e ponto do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: dados ficam no seu celular." />
+
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Meu Holerite" />
+  <meta property="og:title" content="Meu Holerite — Holerite, Ponto e Recibos" />
+  <meta property="og:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: dados ficam no seu celular." />
+  <meta property="og:url" content="https://jacker-s.github.io/meu-holerite-site/" />
+  <meta property="og:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meu Holerite — Holerite, Ponto e Recibos" />
+  <meta name="twitter:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total." />
+  <meta name="twitter:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
+
+  <!-- iOS / PWA feel -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="apple-touch-icon" href="assets/icon.png" />
 
   <style>
     :root{
-      --bg:#f6f7fb;
-      --card:#ffffff;
+      --bg1:#f5f7fb;
+      --bg2:#eef2f7;
       --text:#0b1220;
       --muted:#6b7280;
 
       --green:#0ea55a;
       --green2:#12c26d;
 
-      --shadow: 0 18px 40px rgba(16,24,40,.12);
-      --shadow2: 0 10px 24px rgba(16,24,40,.10);
+      --glass: rgba(255,255,255,.72);
+      --glassBorder: rgba(255,255,255,.38);
 
-      --radius: 24px;
-      --radius2: 18px;
-      --max: 1120px;
+      --shadow: 0 22px 50px rgba(16,24,40,.12);
+      --shadow2: 0 12px 26px rgba(16,24,40,.10);
+      --shadow3: 0 6px 14px rgba(16,24,40,.08);
+
+      --radiusXL: 28px;
+      --radiusL: 22px;
+      --radiusM: 18px;
+
+      --max: 1160px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(18,194,109,.20), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(14,165,90,.16), transparent 55%),
-        var(--bg);
+        radial-gradient(1200px 640px at 20% -10%, rgba(18,194,109,.18), transparent 60%),
+        radial-gradient(900px 520px at 92% 0%, rgba(14,165,90,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      -webkit-font-smoothing: antialiased;
       overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
 
-    /* Topbar */
-    .topbar{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(180%) blur(14px);
-      background:rgba(246,247,251,.72);
-      border-bottom:1px solid rgba(17,24,39,.06);
-    }
-    .topbar-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px; font-weight:900;
-      letter-spacing:.2px;
-    }
-    .logo{
-      width:36px; height:36px; border-radius:12px;
-      background: linear-gradient(135deg, var(--green2), var(--green));
-      box-shadow: 0 10px 18px rgba(14,165,90,.25);
-      display:grid; place-items:center;
-      color:#fff; font-weight:950;
-    }
-    .nav{
-      display:flex; align-items:center; gap:14px;
-    }
-    .nav a{font-weight:750; color:rgba(11,18,32,.78)}
-    .nav a:hover{color:rgba(11,18,32,1)}
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
 
+    /* iOS glass */
+    .glass{
+      background: var(--glass);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(17,24,39,.06);
+    }
+
+    /* Buttons */
     .btn{
-      border:0; cursor:pointer;
-      padding:10px 14px; border-radius:14px;
-      font-weight:850;
-      transition:.2s transform, .2s box-shadow, .2s opacity;
-      display:inline-flex; align-items:center; gap:8px;
+      border:0;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius: 18px;
+      font-weight: 900;
+      letter-spacing: -.2px;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
       white-space:nowrap;
+      user-select:none;
     }
-    .btn:active{transform:scale(.98)}
+    .btn:active{ transform: scale(.98); }
     .btn-primary{
       background: linear-gradient(135deg, var(--green2), var(--green));
       color:#fff;
-      box-shadow: 0 14px 24px rgba(14,165,90,.22);
+      box-shadow: 0 16px 26px rgba(14,165,90,.22);
     }
-    .btn-primary:hover{box-shadow: 0 16px 28px rgba(14,165,90,.28)}
+    .btn-primary:hover{ box-shadow: 0 18px 30px rgba(14,165,90,.28); }
     .btn-ghost{
-      background:rgba(255,255,255,.86);
-      border:1px solid rgba(17,24,39,.08);
-      box-shadow: var(--shadow2);
-      color:rgba(11,18,32,.9);
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow3);
+      color: rgba(11,18,32,.92);
     }
-    .btn-ghost:hover{opacity:.95}
+    .btn-ghost:hover{ opacity:.96; }
+
+    /* Topbar */
+    header.topbar{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(17,24,39,.06);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 950;
+      letter-spacing: -.2px;
+    }
+    .logo{
+      width:38px; height:38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--green2), var(--green));
+      display:grid; place-items:center;
+      color:#fff;
+      box-shadow: 0 12px 20px rgba(14,165,90,.22);
+      font-weight: 950;
+    }
+    .brand-title{ line-height:1.05; }
+    .brand-title .t{ font-size:16px; }
+    .brand-title .s{ font-size:12px; opacity:.68; font-weight:850; margin-top:2px; }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .nav a{
+      font-weight: 850;
+      color: rgba(11,18,32,.72);
+    }
+    .nav a:hover{ color: rgba(11,18,32,.98); }
 
     /* Hero */
-    .hero{padding:52px 0 22px}
+    .hero{
+      padding: 56px 0 26px;
+    }
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:26px;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 26px;
       align-items:center;
     }
     .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px; border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
       background: rgba(14,165,90,.10);
-      border:1px solid rgba(14,165,90,.18);
-      color: rgba(11,18,32,.85);
-      font-weight:850;
+      border:1px solid rgba(14,165,90,.16);
+      color: rgba(11,18,32,.86);
+      font-weight: 900;
     }
     .k-dot{
-      width:10px;height:10px;border-radius:99px;
+      width:10px; height:10px; border-radius: 999px;
       background: linear-gradient(135deg, var(--green2), var(--green));
-      box-shadow: 0 0 0 4px rgba(14,165,90,.15);
+      box-shadow: 0 0 0 4px rgba(14,165,90,.12);
     }
+
     h1{
-      margin:16px 0 10px;
-      font-size: clamp(34px, 4vw, 52px);
-      line-height:1.05;
-      letter-spacing:-.8px;
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -1px;
     }
     .sub{
-      margin:0 0 18px;
-      color: rgba(11,18,32,.72);
-      font-size: clamp(16px, 1.4vw, 18px);
-      line-height:1.55;
-      max-width: 62ch;
+      margin: 0 0 18px;
+      color: rgba(11,18,32,.70);
+      font-size: clamp(16px, 1.35vw, 18px);
+      line-height: 1.58;
+      max-width: 64ch;
+      font-weight: 650;
     }
-    .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
 
     .badges{
-      margin-top:14px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      color: rgba(11,18,32,.65);
-      font-weight:750;
-      font-size:13px;
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color: rgba(11,18,32,.62);
+      font-weight: 800;
+      font-size: 13px;
     }
     .badge{
-      padding:8px 10px; border-radius:999px;
-      background: rgba(255,255,255,.75);
-      border:1px solid rgba(17,24,39,.08);
+      padding: 9px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(17,24,39,.08);
       box-shadow: 0 10px 18px rgba(16,24,40,.06);
     }
-
     .note{
-      margin-top:10px;
-      color: rgba(11,18,32,.62);
-      font-weight:700;
-      font-size:13px;
-      line-height:1.45;
-      max-width: 70ch;
+      margin-top: 10px;
+      padding: 12px 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: 0 10px 18px rgba(16,24,40,.06);
+      color: rgba(11,18,32,.66);
+      font-weight: 750;
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 72ch;
     }
-    .note b{font-weight:950}
+    .note b{ font-weight: 950; }
 
-    /* Phone mock (print real) */
+    /* iPhone frame (real print) */
     .phone{
-      justify-self:end;
-      width:min(390px, 100%);
-      border-radius: 34px;
-      background: #0b1220;
-      padding:12px;
-      box-shadow: 0 30px 70px rgba(0,0,0,.20);
-      position:relative;
+      justify-self: end;
+      width: min(410px, 100%);
+      border-radius: 40px;
+      background: rgba(11,18,32,1);
+      padding: 12px;
+      box-shadow: 0 36px 80px rgba(0,0,0,.22);
+      position: relative;
     }
     .screen{
-      border-radius: 26px;
-      background: #000;
+      border-radius: 30px;
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      position:relative;
-      min-height: 640px;
+      background:#000;
+      border: 1px solid rgba(255,255,255,.10);
+      min-height: 680px;
+      position: relative;
     }
     .hero-shot{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit: cover;
       display:block;
-      opacity:.98;
+      opacity:.99;
     }
-    .hero-shot-overlay{
-      position:absolute; inset:auto 0 0 0;
-      padding:14px 14px 16px;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.62));
+    .screen-overlay{
+      position:absolute;
+      inset: auto 0 0 0;
+      padding: 14px 14px 16px;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.66));
       color:#fff;
     }
-    .hero-shot-overlay .t{font-weight:950; letter-spacing:-.2px; font-size:18px}
-    .hero-shot-overlay .s{opacity:.9; font-weight:750; margin-top:4px; line-height:1.35; font-size:13px}
+    .screen-overlay .t{ font-weight: 950; font-size: 18px; letter-spacing: -.2px; }
+    .screen-overlay .s{ margin-top:4px; opacity:.88; font-weight: 750; font-size: 13px; line-height: 1.35; }
 
     /* Sections */
-    .section{padding:34px 0}
+    .section{
+      padding: 54px 0;
+    }
     .section h2{
       margin:0 0 8px;
-      font-size: clamp(24px, 2.2vw, 34px);
-      letter-spacing:-.4px;
+      font-size: clamp(24px, 2.2vw, 36px);
+      letter-spacing: -.7px;
     }
-    .section p.lead{
+    .lead{
       margin:0 0 18px;
-      color: rgba(11,18,32,.68);
-      line-height:1.6;
-      max-width: 75ch;
-      font-weight:650;
+      color: rgba(11,18,32,.66);
+      line-height: 1.62;
+      font-weight: 650;
+      max-width: 80ch;
     }
+
+    /* Feature grid */
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:14px;
+      gap: 14px;
+    }
+    .card{
+      border-radius: var(--radiusXL);
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow2);
     }
     .feat{
-      background: rgba(255,255,255,.86);
-      border:1px solid rgba(17,24,39,.08);
-      border-radius: var(--radius);
-      box-shadow: 0 14px 26px rgba(16,24,40,.08);
-      padding:16px;
+      padding: 16px;
       min-height: 160px;
     }
     .feat .ico{
-      width:46px; height:46px; border-radius:16px;
+      width: 48px; height: 48px;
+      border-radius: 18px;
       display:grid; place-items:center;
       background: rgba(14,165,90,.12);
-      border:1px solid rgba(14,165,90,.16);
-      font-size:20px;
+      border: 1px solid rgba(14,165,90,.16);
+      font-size: 20px;
     }
-    .feat h3{margin:12px 0 6px; font-size:16px; letter-spacing:-.2px}
-    .feat p{margin:0; color: rgba(11,18,32,.64); line-height:1.55; font-weight:650; font-size:14px}
+    .feat h3{
+      margin: 12px 0 6px;
+      font-size: 16px;
+      letter-spacing: -.3px;
+    }
+    .feat p{
+      margin:0;
+      color: rgba(11,18,32,.64);
+      line-height: 1.55;
+      font-weight: 650;
+      font-size: 14px;
+    }
 
-    /* Carousel */
+    /* Screenshots carousel */
     .shots-wrap{
-      background: rgba(255,255,255,.78);
-      border:1px solid rgba(17,24,39,.08);
-      border-radius: var(--radius);
+      border-radius: var(--radiusXL);
+      padding: 14px;
       box-shadow: var(--shadow2);
-      padding:14px;
     }
     .shots-head{
-      display:flex; justify-content:space-between; align-items:flex-end;
-      gap:14px; flex-wrap:wrap; margin-bottom:10px;
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-end;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
     }
-    .shots-head .hint{color: rgba(11,18,32,.60); font-weight:750; font-size:13px}
+    .hint{
+      color: rgba(11,18,32,.58);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .shots-controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .icon-btn{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow3);
+      cursor:pointer;
+      display:grid; place-items:center;
+      font-weight: 950;
+      transition: transform .18s ease, opacity .18s ease;
+      user-select:none;
+    }
+    .icon-btn:active{ transform: scale(.98); }
+
     .shots{
       display:flex;
-      gap:12px;
+      gap: 12px;
       overflow:auto;
-      scroll-snap-type:x mandatory;
-      padding:6px 2px 10px;
+      scroll-snap-type: x mandatory;
+      padding: 6px 2px 10px;
       -webkit-overflow-scrolling: touch;
     }
-    .shots::-webkit-scrollbar{height:10px}
-    .shots::-webkit-scrollbar-thumb{background:rgba(17,24,39,.10); border-radius:999px}
+    .shots::-webkit-scrollbar{ height: 10px; }
+    .shots::-webkit-scrollbar-thumb{
+      background: rgba(17,24,39,.10);
+      border-radius: 999px;
+    }
     .shot{
-      flex:0 0 auto;
-      width: 210px;
-      border-radius: 22px;
-      background:#0b1220;
-      padding:10px;
-      scroll-snap-align:start;
+      flex: 0 0 auto;
+      width: 216px;
+      border-radius: 26px;
+      background: rgba(11,18,32,1);
+      padding: 10px;
       box-shadow: 0 18px 30px rgba(16,24,40,.12);
-      position:relative;
+      scroll-snap-align: start;
       cursor:pointer;
       user-select:none;
     }
     .shot img{
-      width:100%;
-      height: 420px;
-      object-fit:cover;
-      border-radius: 16px;
-      display:block;
-    }
-    .shot .cap{
-      margin-top:10px;
-      color: rgba(11,18,32,.78);
-      font-weight:850;
-      font-size:13px;
-      background: rgba(255,255,255,.92);
-      border:1px solid rgba(17,24,39,.08);
-      border-radius: 14px;
-      padding:8px 10px;
-      box-shadow: 0 12px 22px rgba(16,24,40,.08);
-    }
-    .shots-controls{display:flex; gap:8px; align-items:center}
-    .icon-btn{
-      width:42px; height:42px; border-radius:14px;
-      border:1px solid rgba(17,24,39,.10);
-      background: rgba(255,255,255,.88);
-      box-shadow: 0 10px 18px rgba(16,24,40,.08);
-      cursor:pointer;
-      display:grid; place-items:center;
-      font-weight:900;
-    }
-    .icon-btn:active{transform:scale(.98)}
-    .dots{
-      display:flex; gap:8px; align-items:center;
-      justify-content:center;
-      margin-top:10px;
-    }
-    .dot{
-      width:7px; height:7px; border-radius:99px;
-      background: rgba(11,18,32,.18);
-    }
-    .dot.on{background: rgba(14,165,90,.95)}
-
-    /* Privacy block */
-    .privacy{
-      background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.45));
-      border:1px solid rgba(17,24,39,.08);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 18px 34px rgba(16,24,40,.08);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-    .privacy b{font-weight:950}
-    .privacy p{margin:6px 0 0; color: rgba(11,18,32,.66); line-height:1.55; font-weight:700}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:999px;
-      background: rgba(14,165,90,.10);
-      border:1px solid rgba(14,165,90,.18);
-      font-weight:900;
-      color: rgba(11,18,32,.82);
-      white-space:nowrap;
-    }
-
-    /* Footer */
-    footer{padding:26px 0 40px; color: rgba(11,18,32,.60); font-weight:700}
-    .foot{
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      border-top:1px solid rgba(17,24,39,.08);
-      padding-top:18px;
-    }
-    .small-links a{color: rgba(11,18,32,.64)}
-    .small-links a:hover{color: rgba(11,18,32,.95)}
-    .sep{margin:0 8px; opacity:.35}
-
-    /* Modal */
-    .modal{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.45);
-      display:none;
-      align-items:center; justify-content:center;
-      padding:18px;
-      z-index:50;
-    }
-    .modal.on{display:flex}
-    .dialog{
-      width:min(980px, 100%);
-      background: rgba(255,255,255,.96);
-      border-radius: 26px;
-      box-shadow: 0 30px 70px rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.20);
-      overflow:hidden;
-    }
-    .dialog-head{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:14px 14px 10px;
-      gap:10px;
-    }
-    .dialog-title{font-weight:950; letter-spacing:-.2px}
-    .close{
-      border:0; cursor:pointer;
-      padding:10px 12px;
-      border-radius: 14px;
-      background: rgba(11,18,32,.06);
-      font-weight:900;
-    }
-    .dialog-body{padding:0 14px 14px}
-    .dialog-body img{
-      width:100%;
-      height: min(76vh, 900px);
-      object-fit:contain;
-      background: #0b1220;
+      width: 100%;
+      height: 430px;
+      object-fit: cover;
       border-radius: 18px;
       display:block;
     }
+    .cap{
+      margin-top: 10px;
+      padding: 9px 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: 0 12px 22px rgba(16,24,40,.08);
+      font-weight: 900;
+      color: rgba(11,18,32,.80);
+      font-size: 13px;
+    }
+    .dots{
+      display:flex;
+      gap: 8px;
+      align-items:center;
+      justify-content:center;
+      margin-top: 10px;
+    }
+    .dot{
+      width: 7px; height: 7px;
+      border-radius: 999px;
+      background: rgba(11,18,32,.18);
+    }
+    .dot.on{ background: rgba(14,165,90,.96); }
+
+    /* Privacy block */
+    .privacy{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap:wrap;
+      padding: 18px;
+      border-radius: var(--radiusXL);
+      box-shadow: var(--shadow2);
+    }
+    .privacy .title{
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: -.3px;
+    }
+    .privacy p{
+      margin: 6px 0 0;
+      color: rgba(11,18,32,.66);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(14,165,90,.10);
+      border: 1px solid rgba(14,165,90,.18);
+      font-weight: 950;
+      color: rgba(11,18,32,.82);
+      white-space: nowrap;
+    }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 42px;
+      color: rgba(11,18,32,.60);
+      font-weight: 750;
+    }
+    .foot{
+      padding-top: 16px;
+      border-top: 1px solid rgba(17,24,39,.08);
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .small-links a{ color: rgba(11,18,32,.64); font-weight: 800; }
+    .small-links a:hover{ color: rgba(11,18,32,.95); }
+    .sep{ margin: 0 8px; opacity: .35; }
+
+    /* Modal */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 80;
+    }
+    .modal.on{ display:flex; }
+
+    .dialog{
+      width: min(980px, 100%);
+      border-radius: 28px;
+      overflow:hidden;
+      box-shadow: 0 40px 90px rgba(0,0,0,.26);
+      border: 1px solid rgba(255,255,255,.22);
+    }
+    .dialog-head{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 14px 14px 10px;
+      gap: 10px;
+    }
+    .dialog-title{
+      font-weight: 950;
+      letter-spacing: -.3px;
+    }
+    .close{
+      border:0;
+      cursor:pointer;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(11,18,32,.08);
+      font-weight: 950;
+      transition: transform .18s ease;
+    }
+    .close:active{ transform: scale(.98); }
+
+    .dialog-body{
+      padding: 0 14px 14px;
+    }
+    .dialog-body img{
+      width: 100%;
+      height: min(76vh, 900px);
+      object-fit: contain;
+      background: rgba(11,18,32,1);
+      border-radius: 20px;
+      display:block;
+    }
+
     .dialog-foot{
-      padding:12px 14px 16px;
-      display:flex; justify-content:space-between; align-items:center;
-      gap:10px; flex-wrap:wrap;
-      color: rgba(11,18,32,.65);
-      font-weight:750;
+      padding: 12px 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: rgba(11,18,32,.66);
+      font-weight: 850;
     }
 
     /* Reveal */
-    .reveal{opacity:0; transform: translateY(10px); transition:.6s ease}
-    .reveal.on{opacity:1; transform:none}
+    .reveal{ opacity:0; transform: translateY(10px); transition: .6s ease; }
+    .reveal.on{ opacity:1; transform:none; }
 
     /* Responsive */
-    @media (max-width: 940px){
-      .hero-grid{grid-template-columns:1fr}
-      .phone{justify-self:center}
-      .grid-3{grid-template-columns:1fr}
-      .nav{display:none}
-      .shot{width: 185px}
-      .shot img{height: 380px}
+    @media (max-width: 960px){
+      .nav{ display:none; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .phone{ justify-self: center; width: min(420px, 100%); }
+      .grid-3{ grid-template-columns: 1fr; }
+      .shot{ width: 190px; }
+      .shot img{ height: 390px; }
+      .section{ padding: 44px 0; }
     }
   </style>
 </head>
 
 <body>
-  <!-- ✅ LINK DO APK v1.7 -->
+  <!-- CONFIG do APK -->
   <script>
     const APK_URL = "https://github.com/Jacker-s/MeuHolerite/releases/download/1.7/app-release.apk";
     const APK_VERSION = "v1.7";
   </script>
 
-  <header class="topbar">
+  <header class="topbar glass">
     <div class="container">
       <div class="topbar-inner">
-        <div class="brand">
+        <a class="brand" href="./" aria-label="Meu Holerite">
           <div class="logo">MH</div>
-          <div style="line-height:1.05">
-            <div style="font-size:16px">Meu Holerite</div>
-            <div style="font-size:12px; opacity:.68; font-weight:850">Holerite • Ponto • Recibos</div>
+          <div class="brand-title">
+            <div class="t">Meu Holerite</div>
+            <div class="s">Holerite • Ponto • Recibos</div>
           </div>
-        </div>
+        </a>
 
-        <nav class="nav">
+        <nav class="nav" aria-label="Menu">
           <a href="#prints">Prints</a>
           <a href="#funcionalidades">Funcionalidades</a>
-          <a href="./privacidade/">Privacidade</a><span class="sep">•</span>
-<a href="./termos/">Termos</a>
-
-          <a href="#faq">FAQ</a>
+          <a href="#privacidade">Privacidade</a>
+          <a href="./termos/">Termos</a>
         </nav>
 
         <div style="display:flex; gap:10px; align-items:center;">
@@ -437,8 +589,9 @@
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
-            <span class="kicker"><span class="k-dot"></span> Interface moderna inspirada no padrão iOS</span>
-            <h1>Meu Holerite.<br>Simples, bonito e privado. ✅</h1>
+            <span class="kicker"><span class="k-dot"></span> Visual moderno inspirado no padrão iOS</span>
+
+            <h1>Meu Holerite.<br/>Simples, bonito e privado. ✅</h1>
 
             <p class="sub">
               Importe holerites e registros de ponto direto do <b>ePays</b>, acompanhe <b>banco de horas</b>,
@@ -452,7 +605,7 @@
             </div>
 
             <div class="badges">
-              <span class="badge">🆕 Versão atual: <b id="verBadge">v1.7</b></span>
+              <span class="badge">🆕 Versão: <b id="verBadge">v1.7</b></span>
               <span class="badge">🔒 Dados no dispositivo</span>
               <span class="badge">📥 Importação do ePays</span>
               <span class="badge">⏱️ Banco de horas</span>
@@ -466,11 +619,12 @@
             </div>
           </div>
 
-          <!-- Print real dentro do “celular” -->
+          <!-- Preview no “iPhone” com print real -->
           <div class="phone reveal" aria-label="Prévia do app">
             <div class="screen">
+              <!-- Escolha o print que quer destacar -->
               <img class="hero-shot" src="assets/screens/05-recibos.jpg" alt="Tela do Meu Holerite" />
-              <div class="hero-shot-overlay">
+              <div class="screen-overlay">
                 <div class="t">Recibos detalhados</div>
                 <div class="s">Veja proventos, descontos e acesse o PDF com 1 toque.</div>
               </div>
@@ -490,48 +644,49 @@
           </p>
         </div>
 
-        <div class="shots-wrap reveal">
+        <div class="shots-wrap glass reveal">
           <div class="shots-head">
             <div class="hint">Dica: no celular você pode arrastar →</div>
-            <div class="shots-controls" aria-label="Controles do carrossel">
+            <div class="shots-controls">
               <button class="icon-btn" id="prev" aria-label="Anterior">←</button>
               <button class="icon-btn" id="next" aria-label="Próximo">→</button>
             </div>
           </div>
 
           <div class="shots" id="shots">
+            <!-- IMPORTANTE: ajuste os nomes conforme seus arquivos em assets/screens/ -->
             <div class="shot" data-title="Bem-vindo" data-src="assets/screens/01-onboarding.jpg">
-              <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite">
+              <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite" />
               <div class="cap">👋 Bem-vindo</div>
             </div>
 
             <div class="shot" data-title="Cadastro" data-src="assets/screens/02-cadastro.jpg">
-              <img src="assets/screens/02-cadastro.jpg" alt="Cadastro de nome e matrícula">
+              <img src="assets/screens/02-cadastro.jpg" alt="Cadastro de nome e matrícula" />
               <div class="cap">🧑‍💼 Nome e matrícula</div>
             </div>
 
             <div class="shot" data-title="Faltas detectadas" data-src="assets/screens/03-faltas-modal.jpg">
-              <img src="assets/screens/03-faltas-modal.jpg" alt="Modal de faltas detectadas">
+              <img src="assets/screens/03-faltas-modal.jpg" alt="Modal de faltas detectadas" />
               <div class="cap">⚠️ Aviso de faltas</div>
             </div>
 
             <div class="shot" data-title="Detalhe do desconto" data-src="assets/screens/04-desconto-modal.jpg">
-              <img src="assets/screens/04-desconto-modal.jpg" alt="Modal com detalhes do desconto">
+              <img src="assets/screens/04-desconto-modal.jpg" alt="Modal com detalhes do desconto" />
               <div class="cap">🔎 Detalhe do desconto</div>
             </div>
 
             <div class="shot" data-title="Recibos" data-src="assets/screens/05-recibos.jpg">
-              <img src="assets/screens/05-recibos.jpg" alt="Tela de recibos">
+              <img src="assets/screens/05-recibos.jpg" alt="Tela de recibos" />
               <div class="cap">📄 Recibos</div>
             </div>
 
             <div class="shot" data-title="Detalhes do ponto" data-src="assets/screens/06-detalhes.jpg">
-              <img src="assets/screens/06-detalhes.jpg" alt="Tela de detalhes do ponto">
+              <img src="assets/screens/06-detalhes.jpg" alt="Tela de detalhes do ponto" />
               <div class="cap">🕒 Ponto e detalhes</div>
             </div>
 
             <div class="shot" data-title="Atualização disponível" data-src="assets/screens/07-update.jpg">
-              <img src="assets/screens/07-update.jpg" alt="Modal de atualização disponível">
+              <img src="assets/screens/07-update.jpg" alt="Modal de atualização disponível" />
               <div class="cap">🆕 Atualização</div>
             </div>
           </div>
@@ -550,37 +705,37 @@
         </div>
 
         <div class="grid-3">
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">📥</div>
             <h3>Importação Automática</h3>
             <p>Coleta holerites e registros de ponto diretamente do ePays.</p>
           </div>
 
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">⏱️</div>
             <h3>Banco de Horas</h3>
             <p>Controle completo do saldo e das horas extras.</p>
           </div>
 
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">🔔</div>
             <h3>Aviso de Faltas</h3>
             <p>Notificações automáticas em caso de ausência no mês.</p>
           </div>
 
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">📊</div>
             <h3>Recibos Detalhados</h3>
             <p>Visualização clara e organizada de proventos e descontos.</p>
           </div>
 
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">💳</div>
             <h3>Saldo Alelo</h3>
             <p>Integração para consulta do saldo do cartão.</p>
           </div>
 
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">🔒</div>
             <h3>Privacidade Garantida</h3>
             <p>Todas as informações ficam armazenadas exclusivamente no seu dispositivo.</p>
@@ -597,14 +752,15 @@
     <!-- PRIVACY -->
     <section class="section" id="privacidade">
       <div class="container">
-        <div class="privacy reveal">
+        <div class="privacy glass reveal">
           <div>
-            <div style="font-size:18px; font-weight:950;">🔒 Privacidade Garantida</div>
-            <p>
-              Sem envio para servidor. Seus dados ficam <b>no seu celular</b>.
-            </p>
+            <div class="title">🔒 Privacidade garantida</div>
+            <p>Sem envio para servidor. Seus dados ficam <b>no seu celular</b>.</p>
           </div>
-          <div class="pill">✅ Dados locais</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <div class="pill">✅ Dados locais</div>
+            <a class="btn btn-ghost" href="./privacidade/">Ler política</a>
+          </div>
         </div>
       </div>
     </section>
@@ -618,28 +774,30 @@
         </div>
 
         <div class="grid-3">
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">🌐</div>
             <h3>Precisa do ePays?</h3>
             <p>Sim. O app foi feito para importar documentos a partir do portal ePays.</p>
           </div>
 
-          <div class="feat reveal">
+          <div class="card feat reveal">
             <div class="ico">🛡️</div>
             <h3>Play Protect pode avisar?</h3>
             <p>Como é APK fora da Play Store, o Android pode exibir um aviso. Basta confirmar a instalação.</p>
           </div>
 
-          <div class="feat reveal">
-            <div class="ico">✉️</div>
+          <div class="card feat reveal">
+            <div class="ico">📩</div>
             <h3>Suporte</h3>
-            <p>Troque o e-mail abaixo pelo seu contato oficial de suporte.</p>
+            <p>Edite o e-mail abaixo no código para seu contato oficial.</p>
           </div>
         </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
           <a class="btn btn-primary" id="btnBottom" href="#" download>⬇️ Baixar agora</a>
+          <!-- TROQUE AQUI pelo seu email real -->
           <a class="btn btn-ghost" href="mailto:suporte@seudominio.com">✉️ suporte@seudominio.com</a>
+          <a class="btn btn-ghost" href="./termos/">📄 Termos</a>
         </div>
       </div>
     </section>
@@ -652,7 +810,8 @@
         <div class="small-links">
           <a href="#prints">Prints</a><span class="sep">•</span>
           <a href="#funcionalidades">Recursos</a><span class="sep">•</span>
-          <a href="#privacidade">Privacidade</a>
+          <a href="./privacidade/">Privacidade</a><span class="sep">•</span>
+          <a href="./termos/">Termos</a>
         </div>
       </div>
     </div>
@@ -660,19 +819,19 @@
 
   <!-- MODAL -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Visualização do print">
-    <div class="dialog">
+    <div class="dialog glass">
       <div class="dialog-head">
         <div class="dialog-title" id="modalTitle">Print</div>
-        <button class="close" id="close">Fechar</button>
+        <button class="close" id="close" aria-label="Fechar">Fechar</button>
       </div>
       <div class="dialog-body">
-        <img id="modalImg" src="" alt="Print ampliado">
+        <img id="modalImg" src="" alt="Print ampliado" />
       </div>
       <div class="dialog-foot">
         <div id="modalHint">Clique fora para fechar • ESC para fechar</div>
-        <div style="display:flex; gap:10px;">
-          <button class="btn btn-ghost" id="mPrev">← Anterior</button>
-          <button class="btn btn-primary" id="mNext">Próximo →</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-ghost" id="mPrev" type="button">← Anterior</button>
+          <button class="btn btn-primary" id="mNext" type="button">Próximo →</button>
         </div>
       </div>
     </div>
@@ -682,18 +841,17 @@
     // Ano
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Aplicar link do APK em todos botões
+    // Aplicar link do APK em todos os botões
     const btnIds = ["btnTop","btnHero","btnMid","btnBottom"];
     btnIds.forEach(id=>{
       const el = document.getElementById(id);
-      if(el){
-        el.href = APK_URL;
-        // texto dinâmico onde fizer sentido
-        if(id === "btnMid") el.textContent = `⬇️ Baixar APK (${APK_VERSION})`;
-      }
+      if(!el) return;
+      el.href = APK_URL;
+      el.setAttribute("download", "");
+      if(id === "btnMid") el.textContent = `⬇️ Baixar APK (${APK_VERSION})`;
     });
-    const verBadge = document.getElementById("verBadge");
-    if(verBadge) verBadge.textContent = APK_VERSION;
+    const ver = document.getElementById("verBadge");
+    if(ver) ver.textContent = APK_VERSION;
 
     // Reveal on scroll
     const els = Array.from(document.querySelectorAll(".reveal"));
@@ -720,79 +878,117 @@
     let activeIndex = 0;
 
     function renderDots(){
+      if(!dotsEl) return;
       dotsEl.innerHTML = "";
       items.forEach((_, i)=>{
         const d = document.createElement("div");
-        d.className = "dot" + (i===activeIndex ? " on":"");
+        d.className = "dot" + (i === activeIndex ? " on" : "");
         d.addEventListener("click", ()=>scrollToIndex(i));
         dotsEl.appendChild(d);
       });
     }
 
     function scrollToIndex(i){
-      activeIndex = Math.max(0, Math.min(items.length-1, i));
+      if(items.length === 0) return;
+      activeIndex = Math.max(0, Math.min(items.length - 1, i));
       const el = items[activeIndex];
-      el.scrollIntoView({behavior:"smooth", inline:"start", block:"nearest"});
+      if(el) el.scrollIntoView({ behavior:"smooth", inline:"start", block:"nearest" });
       renderDots();
     }
 
     function getClosestIndex(){
+      if(!shots || items.length === 0) return;
+
       const rect = shots.getBoundingClientRect();
-      const center = rect.left + rect.width/2;
+      const center = rect.left + rect.width / 2;
 
       let best = 0;
       let bestDist = Infinity;
 
       items.forEach((it, i)=>{
         const r = it.getBoundingClientRect();
-        const c = r.left + r.width/2;
+        const c = r.left + r.width / 2;
         const dist = Math.abs(c - center);
-        if(dist < bestDist){ bestDist = dist; best = i; }
+        if(dist < bestDist){
+          bestDist = dist;
+          best = i;
+        }
       });
 
       activeIndex = best;
       renderDots();
     }
 
-    prev.addEventListener("click", ()=>scrollToIndex(activeIndex-1));
-    next.addEventListener("click", ()=>scrollToIndex(activeIndex+1));
+    if(prev) prev.addEventListener("click", ()=>scrollToIndex(activeIndex - 1));
+    if(next) next.addEventListener("click", ()=>scrollToIndex(activeIndex + 1));
 
-    shots.addEventListener("scroll", ()=>{
-      window.clearTimeout(window.__t);
-      window.__t = window.setTimeout(getClosestIndex, 80);
-    });
+    if(shots){
+      shots.addEventListener("scroll", ()=>{
+        window.clearTimeout(window.__t);
+        window.__t = window.setTimeout(getClosestIndex, 90);
+      });
+    }
 
     function openModal(i){
-      activeIndex = i;
+      if(!modal || items.length === 0) return;
+      activeIndex = Math.max(0, Math.min(items.length - 1, i));
+
       const it = items[activeIndex];
-      modalTitle.textContent = it.dataset.title || "Print";
-      modalImg.src = it.dataset.src;
+      const title = it?.dataset?.title || "Print";
+      const src = it?.dataset?.src || "";
+
+      modalTitle.textContent = title;
+      modalImg.src = src;
+
       modal.classList.add("on");
       renderDots();
     }
-    function closeModal(){ modal.classList.remove("on"); }
 
-    items.forEach((it, i)=> it.addEventListener("click", ()=>openModal(i)));
+    function closeModal(){
+      if(!modal) return;
+      modal.classList.remove("on");
+    }
 
-    closeBtn.addEventListener("click", closeModal);
-    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
-
-    mPrev.addEventListener("click", ()=>{
-      const i = (activeIndex - 1 + items.length) % items.length;
-      openModal(i); scrollToIndex(i);
+    items.forEach((it, i)=>{
+      it.addEventListener("click", ()=>openModal(i));
     });
-    mNext.addEventListener("click", ()=>{
-      const i = (activeIndex + 1) % items.length;
-      openModal(i); scrollToIndex(i);
-    });
+
+    if(closeBtn) closeBtn.addEventListener("click", closeModal);
+
+    if(modal){
+      modal.addEventListener("click", (e)=>{
+        // clicar fora do dialog fecha
+        if(e.target === modal) closeModal();
+      });
+    }
+
+    if(mPrev){
+      mPrev.addEventListener("click", ()=>{
+        if(items.length === 0) return;
+        const i = (activeIndex - 1 + items.length) % items.length;
+        openModal(i);
+        scrollToIndex(i);
+      });
+    }
+
+    if(mNext){
+      mNext.addEventListener("click", ()=>{
+        if(items.length === 0) return;
+        const i = (activeIndex + 1) % items.length;
+        openModal(i);
+        scrollToIndex(i);
+      });
+    }
 
     window.addEventListener("keydown", (e)=>{
-      if(!modal.classList.contains("on")) return;
+      if(!modal || !modal.classList.contains("on")) return;
+
       if(e.key === "Escape") closeModal();
-      if(e.key === "ArrowLeft") mPrev.click();
-      if(e.key === "ArrowRight") mNext.click();
+      if(e.key === "ArrowLeft" && mPrev) mPrev.click();
+      if(e.key === "ArrowRight" && mNext) mNext.click();
     });
 
+    // init
     renderDots();
     getClosestIndex();
   </script>
