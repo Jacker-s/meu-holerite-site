@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#14b865" />
+  <title>Meu Holerite — Holerite, Ponto e Recibos</title>
+  <meta name="description" content="Meu Holerite: importe holerites e ponto do ePays, acompanhe banco de horas, faltas, recibos e saldo Alelo. Privacidade total: dados ficam no seu celular." />
+
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#6b7280;
+
+      --green:#0ea55a;
+      --green2:#12c26d;
+
+      --shadow: 0 18px 40px rgba(16,24,40,.12);
+      --shadow2: 0 10px 24px rgba(16,24,40,.10);
+
+      --radius: 24px;
+      --radius2: 18px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(18,194,109,.20), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(14,165,90,.16), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(180%) blur(14px);
+      background:rgba(246,247,251,.72);
+      border-bottom:1px solid rgba(17,24,39,.06);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:900;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--green2), var(--green));
+      box-shadow: 0 10px 18px rgba(14,165,90,.25);
+      display:grid; place-items:center;
+      color:#fff; font-weight:950;
+    }
+    .nav{
+      display:flex; align-items:center; gap:14px;
+    }
+    .nav a{font-weight:750; color:rgba(11,18,32,.78)}
+    .nav a:hover{color:rgba(11,18,32,1)}
+
+    .btn{
+      border:0; cursor:pointer;
+      padding:10px 14px; border-radius:14px;
+      font-weight:850;
+      transition:.2s transform, .2s box-shadow, .2s opacity;
+      display:inline-flex; align-items:center; gap:8px;
+      white-space:nowrap;
+    }
+    .btn:active{transform:scale(.98)}
+    .btn-primary{
+      background: linear-gradient(135deg, var(--green2), var(--green));
+      color:#fff;
+      box-shadow: 0 14px 24px rgba(14,165,90,.22);
+    }
+    .btn-primary:hover{box-shadow: 0 16px 28px rgba(14,165,90,.28)}
+    .btn-ghost{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow2);
+      color:rgba(11,18,32,.9);
+    }
+    .btn-ghost:hover{opacity:.95}
+
+    /* Hero */
+    .hero{padding:52px 0 22px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:26px;
+      align-items:center;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      background: rgba(14,165,90,.10);
+      border:1px solid rgba(14,165,90,.18);
+      color: rgba(11,18,32,.85);
+      font-weight:850;
+    }
+    .k-dot{
+      width:10px;height:10px;border-radius:99px;
+      background: linear-gradient(135deg, var(--green2), var(--green));
+      box-shadow: 0 0 0 4px rgba(14,165,90,.15);
+    }
+    h1{
+      margin:16px 0 10px;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+    }
+    .sub{
+      margin:0 0 18px;
+      color: rgba(11,18,32,.72);
+      font-size: clamp(16px, 1.4vw, 18px);
+      line-height:1.55;
+      max-width: 62ch;
+    }
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .badges{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: rgba(11,18,32,.65);
+      font-weight:750;
+      font-size:13px;
+    }
+    .badge{
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.75);
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: 0 10px 18px rgba(16,24,40,.06);
+    }
+
+    /* Phone mock (com print real) */
+    .phone{
+      justify-self:end;
+      width:min(390px, 100%);
+      border-radius: 34px;
+      background: #0b1220;
+      padding:12px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.20);
+      position:relative;
+    }
+    .screen{
+      border-radius: 26px;
+      background: #000;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      position:relative;
+      min-height: 640px;
+    }
+    .hero-shot{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:.98;
+    }
+    .hero-shot-overlay{
+      position:absolute; inset:auto 0 0 0;
+      padding:14px 14px 16px;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.62));
+      color:#fff;
+    }
+    .hero-shot-overlay .t{font-weight:950; letter-spacing:-.2px; font-size:18px}
+    .hero-shot-overlay .s{opacity:.9; font-weight:750; margin-top:4px; line-height:1.35; font-size:13px}
+
+    /* Sections */
+    .section{padding:34px 0}
+    .section h2{
+      margin:0 0 8px;
+      font-size: clamp(24px, 2.2vw, 34px);
+      letter-spacing:-.4px;
+    }
+    .section p.lead{
+      margin:0 0 18px;
+      color: rgba(11,18,32,.68);
+      line-height:1.6;
+      max-width: 75ch;
+      font-weight:650;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .feat{
+      background: rgba(255,255,255,.86);
+      border:1px solid rgba(17,24,39,.08);
+      border-radius: var(--radius);
+      box-shadow: 0 14px 26px rgba(16,24,40,.08);
+      padding:16px;
+      min-height: 160px;
+    }
+    .feat .ico{
+      width:46px; height:46px; border-radius:16px;
+      display:grid; place-items:center;
+      background: rgba(14,165,90,.12);
+      border:1px solid rgba(14,165,90,.16);
+      font-size:20px;
+    }
+    .feat h3{margin:12px 0 6px; font-size:16px; letter-spacing:-.2px}
+    .feat p{margin:0; color: rgba(11,18,32,.64); line-height:1.55; font-weight:650; font-size:14px}
+
+    /* Carousel de screenshots */
+    .shots-wrap{
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(17,24,39,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding:14px;
+    }
+    .shots-head{
+      display:flex; justify-content:space-between; align-items:flex-end;
+      gap:14px; flex-wrap:wrap; margin-bottom:10px;
+    }
+    .shots-head .hint{color: rgba(11,18,32,.60); font-weight:750; font-size:13px}
+    .shots{
+      display:flex;
+      gap:12px;
+      overflow:auto;
+      scroll-snap-type:x mandatory;
+      padding:6px 2px 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shots::-webkit-scrollbar{height:10px}
+    .shots::-webkit-scrollbar-thumb{background:rgba(17,24,39,.10); border-radius:999px}
+    .shot{
+      flex:0 0 auto;
+      width: 210px;
+      border-radius: 22px;
+      background:#0b1220;
+      padding:10px;
+      scroll-snap-align:start;
+      box-shadow: 0 18px 30px rgba(16,24,40,.12);
+      position:relative;
+      cursor:pointer;
+      user-select:none;
+    }
+    .shot img{
+      width:100%;
+      height: 420px;
+      object-fit:cover;
+      border-radius: 16px;
+      display:block;
+    }
+    .shot .cap{
+      margin-top:10px;
+      color: rgba(11,18,32,.78);
+      font-weight:850;
+      font-size:13px;
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(17,24,39,.08);
+      border-radius: 14px;
+      padding:8px 10px;
+      box-shadow: 0 12px 22px rgba(16,24,40,.08);
+    }
+    .shots-controls{
+      display:flex; gap:8px; align-items:center;
+    }
+    .icon-btn{
+      width:42px; height:42px; border-radius:14px;
+      border:1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 10px 18px rgba(16,24,40,.08);
+      cursor:pointer;
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .icon-btn:active{transform:scale(.98)}
+    .dots{
+      display:flex; gap:8px; align-items:center;
+      justify-content:center;
+      margin-top:10px;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:99px;
+      background: rgba(11,18,32,.18);
+    }
+    .dot.on{background: rgba(14,165,90,.95)}
+
+    /* Privacy block */
+    .privacy{
+      background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.45));
+      border:1px solid rgba(17,24,39,.08);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 18px 34px rgba(16,24,40,.08);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .privacy b{font-weight:950}
+    .privacy p{margin:6px 0 0; color: rgba(11,18,32,.66); line-height:1.55; font-weight:700}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px;
+      background: rgba(14,165,90,.10);
+      border:1px solid rgba(14,165,90,.18);
+      font-weight:900;
+      color: rgba(11,18,32,.82);
+      white-space:nowrap;
+    }
+
+    /* Footer */
+    footer{padding:26px 0 40px; color: rgba(11,18,32,.60); font-weight:700}
+    .foot{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      border-top:1px solid rgba(17,24,39,.08);
+      padding-top:18px;
+    }
+    .small-links a{color: rgba(11,18,32,.64)}
+    .small-links a:hover{color: rgba(11,18,32,.95)}
+    .sep{margin:0 8px; opacity:.35}
+
+    /* Modal (lightbox) estilo dialog */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.45);
+      display:none;
+      align-items:center; justify-content:center;
+      padding:18px;
+      z-index:50;
+    }
+    .modal.on{display:flex}
+    .dialog{
+      width:min(980px, 100%);
+      background: rgba(255,255,255,.96);
+      border-radius: 26px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.20);
+      overflow:hidden;
+    }
+    .dialog-head{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 14px 10px;
+      gap:10px;
+    }
+    .dialog-title{font-weight:950; letter-spacing:-.2px}
+    .close{
+      border:0; cursor:pointer;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(11,18,32,.06);
+      font-weight:900;
+    }
+    .dialog-body{padding:0 14px 14px}
+    .dialog-body img{
+      width:100%;
+      height: min(76vh, 900px);
+      object-fit:contain;
+      background: #0b1220;
+      border-radius: 18px;
+      display:block;
+    }
+    .dialog-foot{
+      padding:12px 14px 16px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; flex-wrap:wrap;
+      color: rgba(11,18,32,.65);
+      font-weight:750;
+    }
+
+    /* Reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition:.6s ease}
+    .reveal.on{opacity:1; transform:none}
+
+    /* Responsive */
+    @media (max-width: 940px){
+      .hero-grid{grid-template-columns:1fr}
+      .phone{justify-self:center}
+      .grid-3{grid-template-columns:1fr}
+      .nav{display:none}
+      .shot{width: 185px}
+      .shot img{height: 380px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="logo">MH</div>
+          <div style="line-height:1.05">
+            <div style="font-size:16px">Meu Holerite</div>
+            <div style="font-size:12px; opacity:.68; font-weight:850">Holerite • Ponto • Recibos</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a href="#prints">Prints</a>
+          <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#privacidade">Privacidade</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
+          <!-- TROQUE este href pelo link da Play Store -->
+          <a class="btn btn-primary" href="#" onclick="alert('Troque o link do botão Baixar no HTML.'); return false;">⬇️ Baixar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <span class="kicker"><span class="k-dot"></span> Interface moderna inspirada no padrão iOS</span>
+            <h1>Meu Holerite.<br>Simples, bonito e privado. ✅</h1>
+
+            <p class="sub">
+              Importe holerites e registros de ponto direto do <b>ePays</b>, acompanhe <b>banco de horas</b>,
+              receba <b>alertas de faltas</b>, visualize <b>proventos e descontos</b> com clareza e consulte <b>saldo Alelo</b>.
+              <b>Privacidade garantida</b>: tudo fica no seu dispositivo.
+            </p>
+
+            <div class="cta-row">
+              <!-- TROQUE pelo link da Play Store -->
+              <a class="btn btn-primary" href="#" onclick="alert('Coloque aqui o link da Play Store / APK.'); return false;">📱 Baixar agora</a>
+              <a class="btn btn-ghost" href="#funcionalidades">✨ Principais funcionalidades</a>
+            </div>
+
+            <div class="badges">
+              <span class="badge">🔒 Dados no dispositivo</span>
+              <span class="badge">📥 Importação do ePays</span>
+              <span class="badge">⏱️ Banco de horas</span>
+              <span class="badge">🔔 Aviso de faltas</span>
+              <span class="badge">💳 Saldo Alelo</span>
+            </div>
+          </div>
+
+          <!-- Mostra um print real dentro do “celular” -->
+          <div class="phone reveal" aria-label="Prévia do app">
+            <div class="screen">
+              <!-- Troque para o print que você quiser como destaque -->
+              <img class="hero-shot" src="assets/screens/05-recibos.jpg" alt="Tela do Meu Holerite" />
+              <div class="hero-shot-overlay">
+                <div class="t">Recibos detalhados</div>
+                <div class="s">Veja proventos, descontos e acesse o PDF com 1 toque.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINTS -->
+    <section class="section" id="prints">
+      <div class="container">
+        <div class="reveal">
+          <h2>📸 Prints do app</h2>
+          <p class="lead">
+            Navegue pelas telas principais do <b>Meu Holerite</b>. Clique em qualquer print para ampliar (modal estilo iOS).
+          </p>
+        </div>
+
+        <div class="shots-wrap reveal">
+          <div class="shots-head">
+            <div class="hint">Dica: no celular você pode arrastar →</div>
+            <div class="shots-controls" aria-label="Controles do carrossel">
+              <button class="icon-btn" id="prev" aria-label="Anterior">←</button>
+              <button class="icon-btn" id="next" aria-label="Próximo">→</button>
+            </div>
+          </div>
+
+          <div class="shots" id="shots">
+            <!-- IMPORTANTE: nomes devem bater com /assets/screens/ -->
+            <div class="shot" data-title="Bem-vindo" data-src="assets/screens/01-onboarding.jpg">
+              <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite">
+              <div class="cap">👋 Bem-vindo</div>
+            </div>
+
+            <div class="shot" data-title="Cadastro" data-src="assets/screens/02-cadastro.jpg">
+              <img src="assets/screens/02-cadastro.jpg" alt="Cadastro de nome e matrícula">
+              <div class="cap">🧑‍💼 Nome e matrícula</div>
+            </div>
+
+            <div class="shot" data-title="Faltas detectadas" data-src="assets/screens/03-faltas-modal.jpg">
+              <img src="assets/screens/03-faltas-modal.jpg" alt="Modal de faltas detectadas">
+              <div class="cap">⚠️ Aviso de faltas</div>
+            </div>
+
+            <div class="shot" data-title="Detalhe do desconto" data-src="assets/screens/04-desconto-modal.jpg">
+              <img src="assets/screens/04-desconto-modal.jpg" alt="Modal com detalhes do desconto">
+              <div class="cap">🔎 Detalhe do desconto</div>
+            </div>
+
+            <div class="shot" data-title="Recibos" data-src="assets/screens/05-recibos.jpg">
+              <img src="assets/screens/05-recibos.jpg" alt="Tela de recibos">
+              <div class="cap">📄 Recibos</div>
+            </div>
+
+            <div class="shot" data-title="Detalhes do ponto" data-src="assets/screens/06-detalhes.jpg">
+              <img src="assets/screens/06-detalhes.jpg" alt="Tela de detalhes do ponto">
+              <div class="cap">🕒 Ponto e detalhes</div>
+            </div>
+
+            <div class="shot" data-title="Atualização" data-src="assets/screens/07-update.jpg">
+              <img src="assets/screens/07-update.jpg" alt="Modal de atualização disponível">
+              <div class="cap">🆕 Atualizações</div>
+            </div>
+          </div>
+
+          <div class="dots" id="dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="funcionalidades">
+      <div class="container">
+        <div class="reveal">
+          <h2>✨ Principais funcionalidades</h2>
+          <p class="lead">
+            Tudo o que você citou do app, organizado de forma clara para o visitante entender em segundos.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="feat reveal">
+            <div class="ico">📥</div>
+            <h3>Importação Automática</h3>
+            <p>Coleta holerites e registros de ponto diretamente do ePays.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">⏱️</div>
+            <h3>Banco de Horas</h3>
+            <p>Controle completo do saldo e das horas extras.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">🔔</div>
+            <h3>Aviso de Faltas</h3>
+            <p>Notificações automáticas em caso de ausência no mês.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">📊</div>
+            <h3>Recibos Detalhados</h3>
+            <p>Visualização clara e organizada de proventos e descontos.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">💳</div>
+            <h3>Saldo Alelo</h3>
+            <p>Integração para consulta do saldo do cartão.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">🎨</div>
+            <h3>Novo Visual</h3>
+            <p>Interface moderna inspirada no padrão iOS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="section" id="privacidade">
+      <div class="container">
+        <div class="privacy reveal">
+          <div>
+            <div style="font-size:18px; font-weight:950;">🔒 Privacidade Garantida</div>
+            <p>
+              Todas as informações ficam armazenadas <b>exclusivamente no seu dispositivo</b>.
+              Sem envio para servidor.
+            </p>
+          </div>
+          <div class="pill">✅ Dados locais</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="reveal">
+          <h2>FAQ</h2>
+          <p class="lead">Dúvidas comuns antes de instalar.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="feat reveal">
+            <div class="ico">🌐</div>
+            <h3>Precisa do ePays?</h3>
+            <p>Sim. O app foi feito para importar documentos a partir do portal ePays.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">🛡️</div>
+            <h3>Meus dados ficam onde?</h3>
+            <p>No seu celular. A proposta é privacidade total com armazenamento local.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="ico">🧰</div>
+            <h3>Tem suporte?</h3>
+            <p>Sim. Deixe seu e-mail/WhatsApp de suporte no site para facilitar o contato.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
+          <!-- TROQUE pelo link real -->
+          <a class="btn btn-primary" href="#" onclick="alert('Coloque aqui o link da Play Store / APK.'); return false;">⬇️ Baixar o app</a>
+          <a class="btn btn-ghost" href="mailto:suporte@seudominio.com" onclick="alert('Troque o e-mail de suporte no HTML.'); return false;">✉️ Falar com suporte</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> Meu Holerite. Todos os direitos reservados.</div>
+        <div class="small-links">
+          <a href="#prints">Prints</a><span class="sep">•</span>
+          <a href="#funcionalidades">Recursos</a><span class="sep">•</span>
+          <a href="#privacidade">Privacidade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Visualização do print">
+    <div class="dialog">
+      <div class="dialog-head">
+        <div class="dialog-title" id="modalTitle">Print</div>
+        <button class="close" id="close">Fechar</button>
+      </div>
+      <div class="dialog-body">
+        <img id="modalImg" src="" alt="Print ampliado">
+      </div>
+      <div class="dialog-foot">
+        <div id="modalHint">Clique fora para fechar • ESC para fechar</div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-ghost" id="mPrev">← Anterior</button>
+          <button class="btn btn-primary" id="mNext">Próximo →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ano
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("on"); });
+    }, {threshold:.12});
+    els.forEach(el=>io.observe(el));
+
+    // Carousel + dots + modal
+    const shots = document.getElementById("shots");
+    const items = Array.from(document.querySelectorAll(".shot"));
+    const dotsEl = document.getElementById("dots");
+
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeBtn = document.getElementById("close");
+    const mPrev = document.getElementById("mPrev");
+    const mNext = document.getElementById("mNext");
+
+    let activeIndex = 0;
+
+    // dots
+    function renderDots(){
+      dotsEl.innerHTML = "";
+      items.forEach((_, i)=>{
+        const d = document.createElement("div");
+        d.className = "dot" + (i===activeIndex ? " on":"");
+        d.addEventListener("click", ()=>scrollToIndex(i));
+        dotsEl.appendChild(d);
+      });
+    }
+
+    function scrollToIndex(i){
+      activeIndex = Math.max(0, Math.min(items.length-1, i));
+      const el = items[activeIndex];
+      el.scrollIntoView({behavior:"smooth", inline:"start", block:"nearest"});
+      renderDots();
+    }
+
+    function getClosestIndex(){
+      const rect = shots.getBoundingClientRect();
+      const center = rect.left + rect.width/2;
+
+      let best = 0;
+      let bestDist = Infinity;
+
+      items.forEach((it, i)=>{
+        const r = it.getBoundingClientRect();
+        const c = r.left + r.width/2;
+        const dist = Math.abs(c - center);
+        if(dist < bestDist){ bestDist = dist; best = i; }
+      });
+
+      activeIndex = best;
+      renderDots();
+    }
+
+    prev.addEventListener("click", ()=>scrollToIndex(activeIndex-1));
+    next.addEventListener("click", ()=>scrollToIndex(activeIndex+1));
+
+    shots.addEventListener("scroll", ()=>{
+      // debounce simples
+      window.clearTimeout(window.__t);
+      window.__t = window.setTimeout(getClosestIndex, 80);
+    });
+
+    // Modal
+    function openModal(i){
+      activeIndex = i;
+      const it = items[activeIndex];
+      modalTitle.textContent = it.dataset.title || "Print";
+      modalImg.src = it.dataset.src;
+      modal.classList.add("on");
+      renderDots();
+    }
+    function closeModal(){
+      modal.classList.remove("on");
+    }
+
+    items.forEach((it, i)=>{
+      it.addEventListener("click", ()=>openModal(i));
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e)=>{
+      if(e.target === modal) closeModal();
+    });
+
+    mPrev.addEventListener("click", ()=>{
+      const i = (activeIndex - 1 + items.length) % items.length;
+      openModal(i);
+      scrollToIndex(i);
+    });
+    mNext.addEventListener("click", ()=>{
+      const i = (activeIndex + 1) % items.length;
+      openModal(i);
+      scrollToIndex(i);
+    });
+
+    window.addEventListener("keydown", (e)=>{
+      if(!modal.classList.contains("on")) return;
+      if(e.key === "Escape") closeModal();
+      if(e.key === "ArrowLeft") mPrev.click();
+      if(e.key === "ArrowRight") mNext.click();
+    });
+
+    // init
+    renderDots();
+    getClosestIndex();
+  </script>
+</body>
+</html>
