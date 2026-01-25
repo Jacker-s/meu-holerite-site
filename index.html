@@ -127,6 +127,7 @@
       max-width: 62ch;
     }
     .cta-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+
     .badges{
       margin-top:14px;
       display:flex; gap:10px; flex-wrap:wrap;
@@ -141,7 +142,17 @@
       box-shadow: 0 10px 18px rgba(16,24,40,.06);
     }
 
-    /* Phone mock (com print real) */
+    .note{
+      margin-top:10px;
+      color: rgba(11,18,32,.62);
+      font-weight:700;
+      font-size:13px;
+      line-height:1.45;
+      max-width: 70ch;
+    }
+    .note b{font-weight:950}
+
+    /* Phone mock (print real) */
     .phone{
       justify-self:end;
       width:min(390px, 100%);
@@ -212,7 +223,7 @@
     .feat h3{margin:12px 0 6px; font-size:16px; letter-spacing:-.2px}
     .feat p{margin:0; color: rgba(11,18,32,.64); line-height:1.55; font-weight:650; font-size:14px}
 
-    /* Carousel de screenshots */
+    /* Carousel */
     .shots-wrap{
       background: rgba(255,255,255,.78);
       border:1px solid rgba(17,24,39,.08);
@@ -265,9 +276,7 @@
       padding:8px 10px;
       box-shadow: 0 12px 22px rgba(16,24,40,.08);
     }
-    .shots-controls{
-      display:flex; gap:8px; align-items:center;
-    }
+    .shots-controls{display:flex; gap:8px; align-items:center}
     .icon-btn{
       width:42px; height:42px; border-radius:14px;
       border:1px solid rgba(17,24,39,.10);
@@ -323,7 +332,7 @@
     .small-links a:hover{color: rgba(11,18,32,.95)}
     .sep{margin:0 8px; opacity:.35}
 
-    /* Modal (lightbox) estilo dialog */
+    /* Modal */
     .modal{
       position:fixed; inset:0;
       background: rgba(0,0,0,.45);
@@ -388,6 +397,12 @@
 </head>
 
 <body>
+  <!-- ✅ LINK DO APK v1.7 -->
+  <script>
+    const APK_URL = "https://github.com/Jacker-s/MeuHolerite/releases/download/1.7/app-release.apk";
+    const APK_VERSION = "v1.7";
+  </script>
+
   <header class="topbar">
     <div class="container">
       <div class="topbar-inner">
@@ -408,8 +423,7 @@
 
         <div style="display:flex; gap:10px; align-items:center;">
           <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
-          <!-- TROQUE este href pelo link da Play Store -->
-          <a class="btn btn-primary" href="#" onclick="alert('Troque o link do botão Baixar no HTML.'); return false;">⬇️ Baixar</a>
+          <a class="btn btn-primary" id="btnTop" href="#" download>⬇️ Baixar</a>
         </div>
       </div>
     </div>
@@ -431,24 +445,28 @@
             </p>
 
             <div class="cta-row">
-              <!-- TROQUE pelo link da Play Store -->
-              <a class="btn btn-primary" href="#" onclick="alert('https://github.com/Jacker-s/MeuHolerite/releases/download/1.7/app-release.apk'); return false;">📱 Baixar agora</a>
+              <a class="btn btn-primary" id="btnHero" href="#" download>📱 Baixar agora</a>
               <a class="btn btn-ghost" href="#funcionalidades">✨ Principais funcionalidades</a>
             </div>
 
             <div class="badges">
+              <span class="badge">🆕 Versão atual: <b id="verBadge">v1.7</b></span>
               <span class="badge">🔒 Dados no dispositivo</span>
               <span class="badge">📥 Importação do ePays</span>
               <span class="badge">⏱️ Banco de horas</span>
               <span class="badge">🔔 Aviso de faltas</span>
               <span class="badge">💳 Saldo Alelo</span>
             </div>
+
+            <div class="note">
+              ⚠️ <b>Instalação via APK:</b> após baixar, o Android pode pedir para permitir
+              <b>“Instalar apps desconhecidos”</b>. Isso é normal quando o app não vem da Play Store.
+            </div>
           </div>
 
-          <!-- Mostra um print real dentro do “celular” -->
+          <!-- Print real dentro do “celular” -->
           <div class="phone reveal" aria-label="Prévia do app">
             <div class="screen">
-              <!-- Troque para o print que você quiser como destaque -->
               <img class="hero-shot" src="assets/screens/05-recibos.jpg" alt="Tela do Meu Holerite" />
               <div class="hero-shot-overlay">
                 <div class="t">Recibos detalhados</div>
@@ -480,7 +498,6 @@
           </div>
 
           <div class="shots" id="shots">
-            <!-- IMPORTANTE: nomes devem bater com /assets/screens/ -->
             <div class="shot" data-title="Bem-vindo" data-src="assets/screens/01-onboarding.jpg">
               <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite">
               <div class="cap">👋 Bem-vindo</div>
@@ -511,9 +528,9 @@
               <div class="cap">🕒 Ponto e detalhes</div>
             </div>
 
-            <div class="shot" data-title="Atualização" data-src="assets/screens/07-update.jpg">
+            <div class="shot" data-title="Atualização disponível" data-src="assets/screens/07-update.jpg">
               <img src="assets/screens/07-update.jpg" alt="Modal de atualização disponível">
-              <div class="cap">🆕 Atualizações</div>
+              <div class="cap">🆕 Atualização</div>
             </div>
           </div>
 
@@ -527,9 +544,7 @@
       <div class="container">
         <div class="reveal">
           <h2>✨ Principais funcionalidades</h2>
-          <p class="lead">
-            Tudo o que você citou do app, organizado de forma clara para o visitante entender em segundos.
-          </p>
+          <p class="lead">Tudo organizado para o visitante entender em segundos.</p>
         </div>
 
         <div class="grid-3">
@@ -564,10 +579,15 @@
           </div>
 
           <div class="feat reveal">
-            <div class="ico">🎨</div>
-            <h3>Novo Visual</h3>
-            <p>Interface moderna inspirada no padrão iOS.</p>
+            <div class="ico">🔒</div>
+            <h3>Privacidade Garantida</h3>
+            <p>Todas as informações ficam armazenadas exclusivamente no seu dispositivo.</p>
           </div>
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
+          <a class="btn btn-primary" id="btnMid" href="#" download>⬇️ Baixar APK (v1.7)</a>
+          <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
         </div>
       </div>
     </section>
@@ -579,8 +599,7 @@
           <div>
             <div style="font-size:18px; font-weight:950;">🔒 Privacidade Garantida</div>
             <p>
-              Todas as informações ficam armazenadas <b>exclusivamente no seu dispositivo</b>.
-              Sem envio para servidor.
+              Sem envio para servidor. Seus dados ficam <b>no seu celular</b>.
             </p>
           </div>
           <div class="pill">✅ Dados locais</div>
@@ -605,21 +624,20 @@
 
           <div class="feat reveal">
             <div class="ico">🛡️</div>
-            <h3>Meus dados ficam onde?</h3>
-            <p>No seu celular. A proposta é privacidade total com armazenamento local.</p>
+            <h3>Play Protect pode avisar?</h3>
+            <p>Como é APK fora da Play Store, o Android pode exibir um aviso. Basta confirmar a instalação.</p>
           </div>
 
           <div class="feat reveal">
-            <div class="ico">🧰</div>
-            <h3>Tem suporte?</h3>
-            <p>Sim. Deixe seu e-mail/WhatsApp de suporte no site para facilitar o contato.</p>
+            <div class="ico">✉️</div>
+            <h3>Suporte</h3>
+            <p>Troque o e-mail abaixo pelo seu contato oficial de suporte.</p>
           </div>
         </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
-          <!-- TROQUE pelo link real -->
-          <a class="btn btn-primary" href="https://github.com/Jacker-s/MeuHolerite/releases/download/1.7/app-release.apk" onclick="alert('Coloque aqui o link da Play Store / APK.'); return false;">⬇️ Baixar o app</a>
-          <a class="btn btn-ghost" href="mailto:suporte@seudominio.com" onclick="alert('Troque o e-mail de suporte no HTML.'); return false;">✉️ Falar com suporte</a>
+          <a class="btn btn-primary" id="btnBottom" href="#" download>⬇️ Baixar agora</a>
+          <a class="btn btn-ghost" href="mailto:suporte@seudominio.com">✉️ suporte@seudominio.com</a>
         </div>
       </div>
     </section>
@@ -662,6 +680,19 @@
     // Ano
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Aplicar link do APK em todos botões
+    const btnIds = ["btnTop","btnHero","btnMid","btnBottom"];
+    btnIds.forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){
+        el.href = APK_URL;
+        // texto dinâmico onde fizer sentido
+        if(id === "btnMid") el.textContent = `⬇️ Baixar APK (${APK_VERSION})`;
+      }
+    });
+    const verBadge = document.getElementById("verBadge");
+    if(verBadge) verBadge.textContent = APK_VERSION;
+
     // Reveal on scroll
     const els = Array.from(document.querySelectorAll(".reveal"));
     const io = new IntersectionObserver((entries)=>{
@@ -686,7 +717,6 @@
 
     let activeIndex = 0;
 
-    // dots
     function renderDots(){
       dotsEl.innerHTML = "";
       items.forEach((_, i)=>{
@@ -726,12 +756,10 @@
     next.addEventListener("click", ()=>scrollToIndex(activeIndex+1));
 
     shots.addEventListener("scroll", ()=>{
-      // debounce simples
       window.clearTimeout(window.__t);
       window.__t = window.setTimeout(getClosestIndex, 80);
     });
 
-    // Modal
     function openModal(i){
       activeIndex = i;
       const it = items[activeIndex];
@@ -740,28 +768,20 @@
       modal.classList.add("on");
       renderDots();
     }
-    function closeModal(){
-      modal.classList.remove("on");
-    }
+    function closeModal(){ modal.classList.remove("on"); }
 
-    items.forEach((it, i)=>{
-      it.addEventListener("click", ()=>openModal(i));
-    });
+    items.forEach((it, i)=> it.addEventListener("click", ()=>openModal(i)));
 
     closeBtn.addEventListener("click", closeModal);
-    modal.addEventListener("click", (e)=>{
-      if(e.target === modal) closeModal();
-    });
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
 
     mPrev.addEventListener("click", ()=>{
       const i = (activeIndex - 1 + items.length) % items.length;
-      openModal(i);
-      scrollToIndex(i);
+      openModal(i); scrollToIndex(i);
     });
     mNext.addEventListener("click", ()=>{
       const i = (activeIndex + 1) % items.length;
-      openModal(i);
-      scrollToIndex(i);
+      openModal(i); scrollToIndex(i);
     });
 
     window.addEventListener("keydown", (e)=>{
@@ -771,7 +791,6 @@
       if(e.key === "ArrowRight") mNext.click();
     });
 
-    // init
     renderDots();
     getClosestIndex();
   </script>
