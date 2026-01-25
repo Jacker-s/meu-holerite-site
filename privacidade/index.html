@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#14b865" />
+  <title>Privacidade — Meu Holerite</title>
+  <meta name="description" content="Política de Privacidade do Meu Holerite." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Meu Holerite" />
+  <meta property="og:title" content="Privacidade — Meu Holerite" />
+  <meta property="og:description" content="Saiba como o Meu Holerite trata seus dados. Privacidade total e armazenamento local." />
+  <meta property="og:url" content="https://jacker-s.github.io/meu-holerite-site/privacidade/" />
+  <meta property="og:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
+
+  <style>
+    :root{
+      --bg:#f6f7fb; --text:#0b1220; --muted:#6b7280;
+      --green:#0ea55a; --green2:#12c26d;
+      --shadow:0 18px 40px rgba(16,24,40,.12);
+      --radius:24px; --max:980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(18,194,109,.20), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(14,165,90,.16), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .top{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(180%) blur(14px);
+      background:rgba(246,247,251,.72);
+      border-bottom:1px solid rgba(17,24,39,.06);
+    }
+    .top-inner{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 0; gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:950}
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg,var(--green2),var(--green));
+      color:#fff; display:grid; place-items:center; font-weight:950;
+      box-shadow:0 10px 18px rgba(14,165,90,.25);
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:14px;
+      font-weight:900; border:1px solid rgba(17,24,39,.08);
+      background:rgba(255,255,255,.86);
+      box-shadow:0 10px 24px rgba(16,24,40,.10);
+    }
+    main{padding:28px 0 46px}
+    .card{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(17,24,39,.08);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h1{margin:0 0 10px; letter-spacing:-.6px}
+    p,li{color:rgba(11,18,32,.74); line-height:1.65; font-weight:650}
+    h2{margin:18px 0 8px; letter-spacing:-.3px}
+    .meta{color:rgba(11,18,32,.55); font-weight:800; font-size:13px}
+    footer{padding:18px 0 28px; color:rgba(11,18,32,.60); font-weight:700}
+    .foot{border-top:1px solid rgba(17,24,39,.08); padding-top:14px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="container">
+      <div class="top-inner">
+        <a class="brand" href="../">
+          <div class="logo">MH</div>
+          <div>
+            <div style="font-size:16px; line-height:1.05">Meu Holerite</div>
+            <div style="font-size:12px; opacity:.68; font-weight:850">Privacidade</div>
+          </div>
+        </a>
+        <a class="btn" href="../">← Voltar ao site</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <h1>Política de Privacidade</h1>
+        <div class="meta">Última atualização: <span id="date"></span></div>
+
+        <p>
+          O <b>Meu Holerite</b> foi desenvolvido com foco em <b>privacidade</b>.
+          Em geral, as informações importadas (holerites, ponto e dados relacionados) ficam <b>armazenadas localmente</b> no seu dispositivo.
+        </p>
+
+        <h2>1) Quais dados o app utiliza</h2>
+        <ul>
+          <li>Dados que você importa/visualiza (holerites, registros de ponto, recibos e detalhes de proventos/descontos).</li>
+          <li>Dados básicos informados por você no app (por exemplo: nome e matrícula, se aplicável).</li>
+        </ul>
+
+        <h2>2) Onde os dados ficam armazenados</h2>
+        <p>
+          As informações ficam <b>no seu celular</b>. O objetivo é evitar envio para servidores externos.
+          Caso você use recursos que acessem serviços de terceiros (ex.: abrir o portal ePays dentro do app),
+          o acesso ocorre diretamente entre você e o serviço.
+        </p>
+
+        <h2>3) Compartilhamento com terceiros</h2>
+        <p>
+          O app não vende seus dados. Se houver integrações (ex.: consulta de saldo Alelo),
+          elas seguem as políticas do serviço utilizado, e você pode optar por não usar esses recursos.
+        </p>
+
+        <h2>4) Permissões do Android</h2>
+        <p>
+          O app pode solicitar permissões necessárias para funcionamento (por exemplo, acesso a arquivos/PDFs no dispositivo).
+          Você pode gerenciar permissões nas configurações do Android.
+        </p>
+
+        <h2>5) Segurança</h2>
+        <p>
+          Medidas de segurança são aplicadas para proteger dados no dispositivo, mas nenhum sistema é 100% infalível.
+          Recomendamos manter seu Android atualizado e com bloqueio de tela.
+        </p>
+
+        <h2>6) Contato</h2>
+        <p>
+          Se você tiver dúvidas sobre privacidade, entre em contato pelo e-mail de suporte do aplicativo.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> Meu Holerite</div>
+        <div>
+          <a href="../termos/">Termos</a> • <a href="../">Início</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // data simples (você pode colocar manualmente se preferir)
+    const d = new Date();
+    document.getElementById("date").textContent =
+      d.toLocaleDateString("pt-BR", { year:"numeric", month:"long", day:"2-digit" });
+  </script>
+</body>
+</html>
