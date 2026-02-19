@@ -4,71 +4,39 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#14b865" />
-
   <title>Meu Holerite — Holerite, Ponto e Recibos</title>
   <meta name="description" content="Importe holerites e espelho de ponto do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: seus dados ficam no seu dispositivo." />
 
   <link rel="canonical" href="https://meuholerite.me/" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Meu Holerite" />
-  <meta property="og:title" content="Meu Holerite — Holerite, Ponto e Recibos" />
-  <meta property="og:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: dados no seu dispositivo." />
-  <meta property="og:url" content="https://jacker-s.github.io/meu-holerite-site/" />
-  <meta property="og:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Meu Holerite — Holerite, Ponto e Recibos" />
-  <meta name="twitter:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total." />
-  <meta name="twitter:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
-
-  <!-- Icons -->
   <link rel="icon" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
   <link rel="preconnect" href="https://play.google.com" />
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Meu Holerite",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Android",
-    "url": "https://play.google.com/store/apps/details?id=com.jack.meuholerite",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
-  }
-  </script>
-
   <style>
     :root{
-      --bg: #ffffff;
-      --bg2:#f7faf8;
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --text: #0b1220;
+      --muted: rgba(11,18,32,.55);
+      --muted2: rgba(11,18,32,.42);
 
-      --text:#0b1220;
-      --muted: rgba(11,18,32,.68);
+      --line: rgba(15,23,42,.08);
 
-      --line: rgba(15,23,42,.10);
-      --card: rgba(255,255,255,.90);
+      --shadow: 0 18px 42px rgba(16,24,40,.08);
+      --shadow2: 0 10px 22px rgba(16,24,40,.06);
 
-      --brand:#0ea55a;
-      --brand2:#12c26d;
+      --r-xl: 28px;
+      --r-l: 22px;
+      --r-m: 18px;
 
-      --shadow: 0 18px 50px rgba(16,24,40,.10);
-      --shadow2: 0 10px 24px rgba(16,24,40,.08);
+      --green: #27ae60;
+      --blue: #1476ff;
+      --red: #e53935;
 
-      --r-xl: 26px;
-      --r-l: 20px;
-      --r-m: 16px;
-
-      --max: 1020px;
+      --max: 1040px;
       --pad: 18px;
 
-      --dur: 180ms;
+      --dur: 170ms;
       --ease: cubic-bezier(.2,.8,.2,1);
     }
 
@@ -78,33 +46,33 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--text);
-      background:
-        radial-gradient(900px 520px at 12% -10%, rgba(18,194,109,.14), transparent 60%),
-        radial-gradient(900px 520px at 88% 0%, rgba(14,165,90,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      background: radial-gradient(900px 520px at 12% -10%, rgba(20,184,101,.12), transparent 60%),
+                  radial-gradient(900px 520px at 88% 0%, rgba(20,118,255,.10), transparent 55%),
+                  linear-gradient(180deg, #fbfbfc, var(--bg));
       -webkit-font-smoothing: antialiased;
       overflow-x:hidden;
     }
 
     a{ color:inherit; text-decoration:none; }
-    .container{ max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 
     :focus-visible{
-      outline: 3px solid rgba(18,194,109,.28);
+      outline: 3px solid rgba(20,184,101,.22);
       outline-offset: 2px;
-      border-radius: 12px;
+      border-radius: 14px;
     }
 
-    /* Header */
+    /* Top */
     header{
       position: sticky;
       top:0;
       z-index: 50;
-      background: rgba(255,255,255,.78);
-      border-bottom: 1px solid rgba(15,23,42,.08);
+      background: rgba(245,246,248,.78);
+      border-bottom: 1px solid rgba(15,23,42,.06);
       backdrop-filter: blur(14px) saturate(170%);
       -webkit-backdrop-filter: blur(14px) saturate(170%);
     }
+
     .top{
       display:flex;
       align-items:center;
@@ -112,231 +80,308 @@
       gap: 12px;
       padding: 12px 0;
     }
+
     .brand{
-      display:flex; align-items:center; gap:10px;
-      min-width: 0;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width:0;
     }
+
     .logo{
       width: 38px; height: 38px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand2), var(--brand));
-      box-shadow: 0 12px 20px rgba(14,165,90,.20);
       display:grid; place-items:center;
+      background: linear-gradient(135deg, #12c26d, #0ea55a);
+      box-shadow: 0 12px 20px rgba(14,165,90,.18);
       color:#fff;
       font-weight: 1000;
       letter-spacing: -.3px;
       flex: 0 0 auto;
     }
+
     .brand-txt{ min-width:0; }
     .brand-txt .t{
       font-weight: 950;
       letter-spacing: -.35px;
-      line-height: 1.05;
       font-size: 14px;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
+      line-height: 1.05;
+      white-space:nowrap; overflow:hidden; text-overflow: ellipsis;
     }
     .brand-txt .s{
       margin-top: 2px;
       color: var(--muted);
       font-weight: 850;
       font-size: 12px;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
+      white-space:nowrap; overflow:hidden; text-overflow: ellipsis;
     }
 
-    .nav{
+    .top-actions{
       display:flex;
       align-items:center;
-      gap: 6px;
+      gap: 10px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
-    .nav a{
-      padding: 10px 12px;
-      border-radius: 999px;
-      color: rgba(11,18,32,.70);
-      font-weight: 850;
-      transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
-    }
-    .nav a:hover{
-      background: rgba(15,23,42,.04);
-      color: rgba(11,18,32,.96);
-    }
 
-    /* Buttons */
     .btn{
       border: 1px solid transparent;
       cursor:pointer;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
+      gap: 10px;
       padding: 12px 14px;
       border-radius: 999px;
       font-weight: 950;
       letter-spacing: -.2px;
       transition: transform var(--dur) var(--ease),
                   box-shadow var(--dur) var(--ease),
-                  background var(--dur) var(--ease),
-                  opacity var(--dur) var(--ease);
+                  opacity var(--dur) var(--ease),
+                  background var(--dur) var(--ease);
       user-select:none;
       white-space:nowrap;
     }
     .btn:active{ transform: scale(.985); }
+
     .btn-primary{
-      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      background: linear-gradient(135deg, #12c26d, #0ea55a);
       color:#fff;
       box-shadow: 0 16px 26px rgba(14,165,90,.20);
     }
-    .btn-primary:hover{ box-shadow: 0 20px 34px rgba(14,165,90,.26); }
+    .btn-primary:hover{ box-shadow: 0 18px 30px rgba(14,165,90,.26); }
+
     .btn-ghost{
-      background: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.85);
       border-color: rgba(15,23,42,.10);
-      color: rgba(11,18,32,.92);
+      color: rgba(11,18,32,.90);
       box-shadow: var(--shadow2);
     }
     .btn-ghost:hover{ opacity:.98; }
 
-    /* Layout */
-    main{ padding: 18px 0 48px; }
-    .hero{
-      padding: 18px 0 10px;
-    }
-    .hero-wrap{
-      border-radius: var(--r-xl);
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(15,23,42,.08);
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(18,194,109,.10);
-      border: 1px solid rgba(18,194,109,.18);
-      font-weight: 900;
-      color: rgba(11,18,32,.86);
-    }
-    .k-dot{
-      width: 9px; height: 9px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--brand2), var(--brand));
-      box-shadow: 0 0 0 4px rgba(14,165,90,.12);
-    }
-    h1{
-      margin: 12px 0 8px;
-      font-size: clamp(28px, 4.4vw, 48px);
-      line-height: 1.05;
-      letter-spacing: -1px;
-    }
-    .sub{
-      margin: 0;
-      color: rgba(11,18,32,.72);
-      line-height: 1.7;
-      font-weight: 650;
-      max-width: 70ch;
-      font-size: 16px;
-    }
-    .cta{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top: 14px;
-    }
-    .mini{
-      margin-top: 12px;
-      color: rgba(11,18,32,.62);
-      font-weight: 750;
-      font-size: 13px;
-      line-height: 1.5;
-    }
+    main{ padding: 14px 0 92px; }
 
-    .section{
-      margin-top: 16px;
-      border-radius: var(--r-xl);
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(15,23,42,.08);
-      box-shadow: var(--shadow2);
-      padding: 16px;
-    }
-    .head{
+    /* Hero (estilo app) */
+    .hello{
+      margin-top: 10px;
       display:flex;
-      align-items:flex-end;
+      align-items:flex-start;
       justify-content:space-between;
       gap: 12px;
       flex-wrap:wrap;
-      margin-bottom: 10px;
     }
-    h2{
-      margin:0;
-      font-size: 20px;
-      letter-spacing: -.3px;
-    }
-    .lead{
-      margin: 6px 0 0;
-      color: rgba(11,18,32,.66);
-      line-height: 1.65;
-      font-weight: 650;
-      max-width: 80ch;
+    .hello .left small{
+      display:block;
+      color: var(--muted2);
+      font-weight: 800;
       font-size: 14px;
+      letter-spacing: .2px;
+    }
+    .hello .left h1{
+      margin: 4px 0 0;
+      font-size: clamp(34px, 4.8vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -1.2px;
+    }
+    .chip-row{
+      margin-top: 10px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: var(--shadow2);
+      font-weight: 900;
+      color: rgba(11,18,32,.74);
+      font-size: 13px;
     }
 
-    /* Feature grid */
-    .grid{
+    /* Highlight cards (2 grandes como no app) */
+    .highlights{
+      margin-top: 14px;
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .hcard{
+      border-radius: var(--r-xl);
+      padding: 18px;
+      color:#fff;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+      min-height: 168px;
+    }
+    .hcard::after{
+      content:"";
+      position:absolute;
+      inset: -120px -120px auto auto;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), transparent 60%);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .hcard .k{
+      font-weight: 950;
+      letter-spacing: .16em;
+      font-size: 12px;
+      text-transform: uppercase;
+      opacity:.92;
+    }
+    .hcard h3{
+      margin: 10px 0 0;
+      font-size: 28px;
+      letter-spacing: -.6px;
+    }
+    .hcard .sub{
       margin-top: 10px;
+      opacity:.92;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1.4;
     }
-    .item{
-      border-radius: 18px;
-      background: rgba(15,23,42,.03);
+    .hcard .big{
+      margin-top: 12px;
+      font-size: 34px;
+      font-weight: 1000;
+      letter-spacing: -.6px;
+    }
+    .hcard .mini{
+      margin-top: 10px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      font-weight: 850;
+      opacity:.92;
+      font-size: 12px;
+    }
+    .h-green{ background: linear-gradient(135deg, #36c66a, #1ea74f); }
+    .h-blue{ background: linear-gradient(135deg, #1f8bff, #0c58d8); }
+
+    /* Section */
+    .section{
+      margin-top: 16px;
+    }
+    .section-title{
+      margin: 18px 0 8px;
+      color: rgba(11,18,32,.35);
+      font-weight: 950;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .panel{
+      border-radius: var(--r-xl);
+      background: rgba(255,255,255,.88);
       border: 1px solid rgba(15,23,42,.08);
+      box-shadow: var(--shadow2);
       padding: 14px;
-      min-height: 120px;
     }
-    .item b{
+
+    /* Summary cards (como lista do app) */
+    .rows{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .row{
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 10px 18px rgba(16,24,40,.05);
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .row .l{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .ico{
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(15,23,42,.08);
+      background: rgba(15,23,42,.03);
+      flex: 0 0 auto;
+    }
+    .ico svg{ width: 20px; height: 20px; opacity:.78; }
+
+    .row b{
       display:block;
       font-weight: 950;
       letter-spacing: -.2px;
-      margin-bottom: 6px;
+      font-size: 15px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      max-width: 48vw;
     }
-    .item p{
-      margin:0;
-      color: rgba(11,18,32,.68);
-      font-weight: 650;
-      line-height: 1.6;
-      font-size: 14px;
+    .row small{
+      display:block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
     }
+    .val{
+      font-weight: 1000;
+      font-size: 18px;
+      letter-spacing: -.2px;
+      white-space:nowrap;
+    }
+    .val.green{ color: var(--green); }
+    .val.blue{ color: var(--blue); }
+    .val.red{ color: var(--red); }
 
-    /* List */
-    ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: rgba(11,18,32,.72);
+    /* Simple grid for “Recursos / Privacidade” */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .card{
+      border-radius: var(--r-xl);
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: var(--shadow2);
+      padding: 14px;
+    }
+    .card h4{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -.3px;
+      font-weight: 950;
+    }
+    .card p{
+      margin: 8px 0 0;
+      color: rgba(11,18,32,.68);
+      line-height: 1.65;
       font-weight: 650;
-      line-height: 1.7;
+      font-size: 14px;
     }
 
     /* FAQ */
     .faq{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 12px;
     }
     details{
-      border-radius: 18px;
-      background: rgba(15,23,42,.03);
+      border-radius: var(--r-xl);
+      background: rgba(255,255,255,.88);
       border: 1px solid rgba(15,23,42,.08);
-      padding: 12px 12px;
+      box-shadow: var(--shadow2);
+      padding: 12px 14px;
     }
     summary{
       cursor:pointer;
@@ -349,34 +394,77 @@
       gap: 10px;
     }
     summary::-webkit-details-marker{ display:none; }
-    .chev{
-      width: 32px; height: 32px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(15,23,42,.10);
-      display:grid; place-items:center;
-      color: rgba(11,18,32,.80);
-      font-weight: 950;
-      flex: 0 0 auto;
-    }
     details p{
       margin: 10px 0 0;
-      color: rgba(11,18,32,.70);
+      color: rgba(11,18,32,.68);
       line-height: 1.65;
       font-weight: 650;
       font-size: 14px;
     }
+    .pill{
+      width: 34px; height: 34px;
+      border-radius: 999px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(15,23,42,.03);
+      color: rgba(11,18,32,.75);
+      font-weight: 1000;
+    }
 
-    /* Footer */
+    /* Bottom nav (semelhante ao app) */
+    .bottom-nav{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 60;
+    }
+    .bn{
+      border-radius: 24px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      padding: 10px 10px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .tab{
+      border-radius: 18px;
+      padding: 10px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      font-weight: 950;
+      color: rgba(11,18,32,.70);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor:pointer;
+      user-select:none;
+      transition: background var(--dur) var(--ease);
+      white-space:nowrap;
+    }
+    .tab:hover{ background: rgba(15,23,42,.04); }
+    .tab.on{
+      background: rgba(20,184,101,.14);
+      color: rgba(11,18,32,.88);
+      border-color: rgba(20,184,101,.10);
+    }
+    .tab svg{ width: 18px; height: 18px; opacity:.8; }
+
     footer{
-      padding: 20px 0 76px;
-      color: rgba(11,18,32,.60);
+      margin-top: 18px;
+      padding: 18px 0 0;
+      color: rgba(11,18,32,.55);
       font-weight: 750;
       font-size: 13px;
     }
-    .foot{
+    .footline{
       border-top: 1px solid rgba(15,23,42,.08);
-      padding-top: 14px;
+      padding-top: 12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -386,74 +474,21 @@
     .links a{
       padding: 10px 10px;
       border-radius: 999px;
+      font-weight: 850;
       color: rgba(11,18,32,.66);
-      font-weight: 850;
     }
-    .links a:hover{
-      background: rgba(15,23,42,.04);
-      color: rgba(11,18,32,.92);
-    }
+    .links a:hover{ background: rgba(15,23,42,.04); color: rgba(11,18,32,.90); }
 
-    /* Mobile CTA */
-    .sticky{
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      z-index: 60;
-      display:none;
-    }
-    .sticky-inner{
-      border-radius: 999px;
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(15,23,42,.10);
-      backdrop-filter: blur(14px) saturate(170%);
-      -webkit-backdrop-filter: blur(14px) saturate(170%);
-      box-shadow: var(--shadow);
-      padding: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-    }
-    .sticky .left{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      min-width: 0;
-    }
-    .sticky .left b{
-      display:block;
-      font-weight: 950;
-      letter-spacing: -.2px;
-      font-size: 13px;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      max-width: 40vw;
-    }
-    .sticky .left span{
-      display:block;
-      margin-top: 2px;
-      color: rgba(11,18,32,.58);
-      font-weight: 850;
-      font-size: 11px;
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      max-width: 40vw;
-    }
-
-    /* Responsive */
     @media (max-width: 980px){
-      .nav{ display:none; }
+      .top-actions .btn-ghost{ display:none; } /* deixa limpo no mobile */
+      .highlights{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: 1fr; }
       .faq{ grid-template-columns: 1fr; }
-      .sticky{ display:block; }
+      .row b{ max-width: 56vw; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      .btn{ transition:none; }
+      .btn,.tab{ transition:none; }
     }
   </style>
 </head>
@@ -473,221 +508,298 @@
     <div class="container">
       <div class="top">
         <a class="brand" href="./" aria-label="Meu Holerite">
-          <div class="logo" aria-hidden="true">MH</div>
+          <div class="logo">MH</div>
           <div class="brand-txt">
             <div class="t" id="brandName">Meu Holerite</div>
             <div class="s" id="brandTag">Holerite • Ponto • Recibos</div>
           </div>
         </a>
 
-        <nav class="nav" aria-label="Menu">
-          <a href="#recursos">Recursos</a>
-          <a href="#novidades">Novidades</a>
-          <a href="#privacidade">Privacidade</a>
-          <a href="#faq">FAQ</a>
-          <a href="./termos/">Termos</a>
-        </nav>
-
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a class="btn btn-ghost" href="./privacidade/">Política</a>
+        <div class="top-actions">
+          <a class="btn btn-ghost" href="./privacidade/">Privacidade</a>
           <a class="btn btn-primary" id="btnTop" href="#">Instalar</a>
         </div>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-wrap">
-          <span class="kicker"><span class="k-dot"></span> Privacidade por padrão • simples • rápido</span>
+  <main class="container">
+    <!-- HERO -->
+    <section class="hello" id="inicio">
+      <div class="left">
+        <small>Olá,</small>
+        <h1>organize seus recibos<br/>com clareza.</h1>
 
-          <h1>Seu holerite e ponto,<br/>bem organizados.</h1>
+        <div class="chip-row" aria-label="Destaques rápidos">
+          <span class="chip">✅ Processamento local</span>
+          <span class="chip">✅ Backup opcional</span>
+          <span class="chip">✅ Controle total</span>
+        </div>
+      </div>
 
-          <p class="sub">
-            Importe documentos do <b>ePays</b>, acompanhe <b>banco de horas</b>, receba <b>alertas</b> e veja
-            <b>proventos e descontos</b> com clareza. Seus dados ficam <b>no seu dispositivo</b>.
-          </p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <a class="btn btn-primary" id="btnHero" href="#">Instalar na Play</a>
+        <a class="btn btn-ghost" href="#privacidade">Como cuidamos dos dados</a>
+      </div>
+    </section>
 
-          <div class="cta">
-            <a class="btn btn-primary" id="btnHero" href="#">Instalar na Google Play</a>
-            <a class="btn btn-ghost" href="#recursos">Ver recursos</a>
-            <a class="btn btn-ghost" href="#privacidade">Privacidade</a>
-          </div>
+    <!-- HIGHLIGHTS -->
+    <section class="highlights" aria-label="Destaques">
+      <div class="hcard h-green">
+        <div class="k">PONTO</div>
+        <h3>Período</h3>
+        <div class="sub">Saldo BH</div>
+        <div class="big">1:24</div>
+        <div class="mini">
+          <span>Crédito • Débito</span>
+          <span>Fechamento</span>
+        </div>
+      </div>
 
-          <div class="mini">
-            ✅ Processamento local • ✅ Backup opcional (se ativado) • ✅ Você controla a exclusão
-          </div>
+      <div class="hcard h-blue">
+        <div class="k">RECIBO</div>
+        <h3>Mês</h3>
+        <div class="sub">Líquido</div>
+        <div class="big">R$ 2.994,34</div>
+        <div class="mini">
+          <span>Proventos • Descontos</span>
+          <span>PDF</span>
         </div>
       </div>
     </section>
 
+    <!-- RESUMO -->
+    <section class="section" id="resumo">
+      <div class="section-title">Resumo</div>
+      <div class="panel">
+        <div class="rows">
+
+          <div class="row">
+            <div class="l">
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 7v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9Z" stroke="currentColor" stroke-width="2"/></svg>
+              </div>
+              <div>
+                <b>Horas Trabalhadas</b>
+                <small>Total do período</small>
+              </div>
+            </div>
+            <div class="val blue">173:19</div>
+          </div>
+
+          <div class="row">
+            <div class="l">
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9Z" stroke="currentColor" stroke-width="2"/><path d="M8.5 20.5c1.2 1 2.4 1.5 3.5 1.5s2.3-.5 3.5-1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <b>Adicional Noturno</b>
+                <small>Horas com adicional</small>
+              </div>
+            </div>
+            <div class="val blue">127:32</div>
+          </div>
+
+          <div class="row">
+            <div class="l">
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 17l6-6 4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 7v10h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <b>Horas Extras 50%</b>
+                <small>Acumulado</small>
+              </div>
+            </div>
+            <div class="val blue">0:55</div>
+          </div>
+
+          <div class="row">
+            <div class="l">
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M17 7l-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 17l3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <b>Atraso no Intervalo</b>
+                <small>Ocorrências</small>
+              </div>
+            </div>
+            <div class="val red">0:24</div>
+          </div>
+
+          <div class="row">
+            <div class="l">
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <b>Saldo Banco de Horas</b>
+                <small>Saldo final</small>
+              </div>
+            </div>
+            <div class="val green">1:24</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RECURSOS -->
     <section class="section" id="recursos">
-      <div class="container">
-        <div class="head">
-          <div>
-            <h2>Recursos principais</h2>
-            <p class="lead">O essencial para importar, entender e guardar seus documentos com segurança.</p>
-          </div>
-          <a class="btn btn-primary" id="btnMid" href="#">Instalar</a>
+      <div class="section-title">Recursos</div>
+      <div class="grid">
+        <div class="card">
+          <h4>Importação do ePays</h4>
+          <p>Importe holerites e espelhos de ponto e organize por período, sem complicar.</p>
         </div>
-
-        <div class="grid">
-          <div class="item">
-            <b>📥 Importação</b>
-            <p>Importe holerites e espelho de ponto do ePays e organize por período.</p>
-          </div>
-
-          <div class="item">
-            <b>⏱️ Banco de horas</b>
-            <p>Saldo final, saldo do período e indicadores para acompanhar sem confusão.</p>
-          </div>
-
-          <div class="item">
-            <b>🔔 Alertas</b>
-            <p>Receba avisos quando houver faltas e possíveis inconsistências no espelho.</p>
-          </div>
-
-          <div class="item">
-            <b>📊 Recibos claros</b>
-            <p>Proventos e descontos com leitura fácil, com detalhes por item.</p>
-          </div>
-
-          <div class="item">
-            <b>🧾 PDFs organizados</b>
-            <p>Visualize PDFs salvos e exporte tudo quando precisar.</p>
-          </div>
-
-          <div class="item">
-            <b>🔒 Privacidade</b>
-            <p>Foco em privacidade: processamento local e controle total do usuário.</p>
-          </div>
+        <div class="card">
+          <h4>Recibos claros</h4>
+          <p>Proventos e descontos com leitura fácil e detalhes por item.</p>
+        </div>
+        <div class="card">
+          <h4>Alertas</h4>
+          <p>Notificações quando houver faltas e possíveis inconsistências (quando ativado).</p>
+        </div>
+        <div class="card">
+          <h4>PDFs organizados</h4>
+          <p>Visualize e exporte quando precisar. Tudo no seu controle.</p>
         </div>
       </div>
     </section>
 
-    <section class="section" id="novidades">
-      <div class="container">
-        <div class="head">
-          <div>
-            <h2>Novidades</h2>
-            <p class="lead">Resumo das últimas melhorias publicadas na Google Play.</p>
-          </div>
-          <a class="btn btn-ghost" id="btnWhatsNew" href="#">Ver na Play</a>
-        </div>
-
-        <ul>
-          <li><b>19 de fevereiro de 2026:</b> melhorias no reconhecimento de espelho de ponto e holerite.</li>
-          <li>Nova opção para exportar todos os PDFs salvos.</li>
-          <li>Ajustes na tela de PDFs (listagem mais organizada e rápida).</li>
-          <li>Correções de bugs e melhorias de estabilidade.</li>
-        </ul>
-      </div>
-    </section>
-
+    <!-- PRIVACIDADE -->
     <section class="section" id="privacidade">
-      <div class="container">
-        <div class="head">
-          <div>
-            <h2>Privacidade</h2>
-            <p class="lead">Seu conteúdo fica no seu dispositivo. Backup/restauração é opcional (quando você ativa).</p>
-          </div>
-          <a class="btn btn-ghost" href="./privacidade/">Ler política</a>
+      <div class="section-title">Privacidade</div>
+      <div class="grid">
+        <div class="card">
+          <h4>Processamento local</h4>
+          <p>Os arquivos importados são processados no próprio dispositivo.</p>
         </div>
-
-        <ul>
-          <li>Arquivos importados são processados localmente no dispositivo.</li>
-          <li>Dados ficam no armazenamento privado do app.</li>
-          <li>Você pode apagar os dados a qualquer momento nas configurações.</li>
-        </ul>
+        <div class="card">
+          <h4>Backup opcional</h4>
+          <p>Se você ativar backup/restauração, os dados podem ir para a nuvem vinculada à sua conta.</p>
+        </div>
+        <div class="card">
+          <h4>Exclusão</h4>
+          <p>Você pode apagar dados locais e/ou backup quando quiser nas configurações.</p>
+        </div>
+        <div class="card">
+          <h4>Leia a política</h4>
+          <p>Detalhes completos na página de privacidade do site/app.</p>
+          <div style="margin-top:10px;">
+            <a class="btn btn-ghost" href="./privacidade/">Abrir política</a>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- FAQ -->
     <section class="section" id="faq">
-      <div class="container">
-        <div class="head">
-          <div>
-            <h2>FAQ</h2>
-            <p class="lead">Dúvidas comuns antes de instalar.</p>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-ghost" href="./termos/">Termos</a>
-            <a class="btn btn-primary" id="btnBottom" href="#">Instalar</a>
-          </div>
-        </div>
+      <div class="section-title">FAQ</div>
+      <div class="faq">
+        <details open>
+          <summary>Precisa do ePays? <span class="pill">+</span></summary>
+          <p>O app foi feito para importar documentos a partir do portal <b>ePays</b> e organizar seu histórico.</p>
+        </details>
 
-        <div class="faq">
-          <details open>
-            <summary>Precisa do ePays? <span class="chev">+</span></summary>
-            <p>O app foi feito para importar documentos a partir do portal <b>ePays</b> e organizar o histórico.</p>
-          </details>
+        <details>
+          <summary>Meus dados vão pra nuvem? <span class="pill">+</span></summary>
+          <p>Por padrão, não. Backup/restauração só acontece se você ativar.</p>
+        </details>
 
-          <details>
-            <summary>É seguro instalar? <span class="chev">+</span></summary>
-            <p>Sim — a instalação é pela <b>Google Play</b>, com verificações e atualizações pela loja.</p>
-          </details>
+        <details>
+          <summary>Como excluir meus dados? <span class="pill">+</span></summary>
+          <p>Você pode limpar os dados locais e/ou apagar o backup na nuvem pelas configurações.</p>
+        </details>
 
-          <details>
-            <summary>Meus dados vão pra nuvem? <span class="chev">+</span></summary>
-            <p>Por padrão, não. Backup/restauração só acontece se você ativar. Você pode desativar quando quiser.</p>
-          </details>
-
-          <details>
-            <summary>Como excluir meus dados? <span class="chev">+</span></summary>
-            <p>Você pode limpar os dados locais e/ou apagar o backup na nuvem pelas configurações do app.</p>
-          </details>
-        </div>
+        <details>
+          <summary>Instalação é segura? <span class="pill">+</span></summary>
+          <p>Sim — instalação e atualizações pela <b>Google Play</b>.</p>
+        </details>
       </div>
+
+      <footer>
+        <div class="footline">
+          <div>© <span id="year"></span> <span id="footName">Meu Holerite</span>.</div>
+          <div class="links">
+            <a href="./termos/">Termos</a>
+            <a href="./privacidade/">Privacidade</a>
+          </div>
+        </div>
+      </footer>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="foot">
-        <div>© <span id="year"></span> <span id="footName">Meu Holerite</span>. Todos os direitos reservados.</div>
-        <div class="links">
-          <a href="#recursos">Recursos</a>
-          <a href="#novidades">Novidades</a>
-          <a href="./privacidade/">Privacidade</a>
-          <a href="./termos/">Termos</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- Bottom nav (estilo app) -->
+  <div class="bottom-nav" aria-label="Navegação">
+    <div class="bn">
+      <button class="tab on" data-to="#inicio" type="button" aria-label="Início">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        Início
+      </button>
 
-  <!-- Mobile Sticky CTA -->
-  <div class="sticky" aria-label="Instalar (atalho)">
-    <div class="sticky-inner">
-      <div class="left">
-        <div class="logo" style="width:34px;height:34px;border-radius:12px;box-shadow:none;">MH</div>
-        <div>
-          <b id="miniName">Meu Holerite</b>
-          <span id="miniTag">Holerite • Ponto • Recibos</span>
-        </div>
-      </div>
-      <a class="btn btn-primary" id="btnSticky" href="#" style="padding:12px 14px;">Instalar</a>
+      <button class="tab" data-to="#resumo" type="button" aria-label="Resumo">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10M7 12h10M7 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Resumo
+      </button>
+
+      <button class="tab" data-to="#recursos" type="button" aria-label="Recursos">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Recursos
+      </button>
+
+      <a class="tab" id="btnInstall" href="#" aria-label="Instalar">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Instalar
+      </a>
     </div>
   </div>
 
   <script>
-    // Year + texts
+    // texts / year
     document.getElementById("year").textContent = new Date().getFullYear();
-    const setTxt = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
-    setTxt("brandName", APP_NAME);
-    setTxt("brandTag", APP_TAGLINE);
-    setTxt("footName", APP_NAME);
-    setTxt("miniName", APP_NAME);
-    setTxt("miniTag", APP_TAGLINE);
+    document.getElementById("brandName").textContent = APP_NAME;
+    document.getElementById("brandTag").textContent = APP_TAGLINE;
+    document.getElementById("footName").textContent = APP_NAME;
 
-    // CTAs -> Play
-    const ids = ["btnTop","btnHero","btnMid","btnBottom","btnSticky","btnWhatsNew"];
-    ids.forEach(id=>{
+    // CTA links
+    const ctas = ["btnTop","btnHero","btnInstall"];
+    ctas.forEach(id=>{
       const el = document.getElementById(id);
       if(!el) return;
       el.href = PLAY_FINAL;
       el.target = "_blank";
       el.rel = "noopener";
     });
+
+    // bottom nav smooth scroll + active state
+    const tabs = Array.from(document.querySelectorAll(".tab[data-to]"));
+    function setActive(hash){
+      tabs.forEach(t=>t.classList.toggle("on", t.getAttribute("data-to") === hash));
+    }
+
+    tabs.forEach(t=>{
+      t.addEventListener("click", ()=>{
+        const to = t.getAttribute("data-to");
+        const el = document.querySelector(to);
+        if(!el) return;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        setActive(to);
+      });
+    });
+
+    // highlight active tab on scroll (simple)
+    const sections = ["#inicio","#resumo","#recursos","#privacidade","#faq"]
+      .map(s=>document.querySelector(s))
+      .filter(Boolean);
+
+    const io = new IntersectionObserver((entries)=>{
+      const vis = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!vis) return;
+      const id = "#" + vis.target.id;
+      if(["#inicio","#resumo","#recursos"].includes(id)) setActive(id);
+    }, { threshold: [0.22, 0.35, 0.5] });
+
+    sections.forEach(s=>io.observe(s));
   </script>
 </body>
 </html>
