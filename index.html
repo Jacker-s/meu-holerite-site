@@ -2,16 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#14b865" />
   <title>Meu Holerite — Holerite, Ponto e Recibos</title>
-  <meta name="description" content="Importe holerites e ponto do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: dados ficam no seu celular." />
+  <meta name="description" content="Importe holerites e espelho de ponto do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: seus dados ficam no seu dispositivo." />
 
-  <!-- Open Graph / WhatsApp / Facebook -->
+  <!-- Canonical -->
+  <link rel="canonical" href="https://meuholerite.me/" />
+
+  <!-- Open Graph / WhatsApp -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Meu Holerite" />
   <meta property="og:title" content="Meu Holerite — Holerite, Ponto e Recibos" />
-  <meta property="og:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: dados ficam no seu celular." />
+  <meta property="og:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: dados no seu dispositivo." />
   <meta property="og:url" content="https://jacker-s.github.io/meu-holerite-site/" />
   <meta property="og:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
   <meta property="og:image:width" content="1200" />
@@ -23,24 +26,43 @@
   <meta name="twitter:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total." />
   <meta name="twitter:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
 
-  <!-- iOS / PWA feel -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- Icons -->
   <link rel="icon" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
 
+  <!-- Optional: preconnect for faster Play open -->
+  <link rel="preconnect" href="https://play.google.com" />
+
+  <!-- JSON-LD (SoftwareApplication) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Meu Holerite",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Android",
+    "url": "https://play.google.com/store/apps/details?id=com.jack.meuholerite",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
+
   <style>
     :root{
-      --bg1:#f5f7fb;
-      --bg2:#eef2f7;
+      --bg1:#f6f8fc;
+      --bg2:#eef3f7;
+
       --text:#0b1220;
       --muted:#6b7280;
 
-      --green:#0ea55a;
-      --green2:#12c26d;
+      --brand:#0ea55a;
+      --brand2:#12c26d;
 
       --glass: rgba(255,255,255,.72);
-      --glassBorder: rgba(255,255,255,.38);
+      --glassBorder: rgba(17,24,39,.08);
 
       --shadow: 0 22px 50px rgba(16,24,40,.12);
       --shadow2: 0 12px 26px rgba(16,24,40,.10);
@@ -60,13 +82,12 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 640px at 20% -10%, rgba(18,194,109,.18), transparent 60%),
+        radial-gradient(1200px 640px at 18% -10%, rgba(18,194,109,.18), transparent 60%),
         radial-gradient(900px 520px at 92% 0%, rgba(14,165,90,.14), transparent 55%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       -webkit-font-smoothing: antialiased;
       overflow-x:hidden;
     }
-
     a{ color:inherit; text-decoration:none; }
     .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
 
@@ -75,7 +96,7 @@
       background: var(--glass);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(17,24,39,.06);
+      border: 1px solid var(--glassBorder);
     }
 
     /* Buttons */
@@ -90,24 +111,57 @@
       border-radius: 18px;
       font-weight: 900;
       letter-spacing: -.2px;
-      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease;
       white-space:nowrap;
       user-select:none;
     }
-    .btn:active{ transform: scale(.98); }
+    .btn:active{ transform: scale(.985); }
     .btn-primary{
-      background: linear-gradient(135deg, var(--green2), var(--green));
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
       color:#fff;
       box-shadow: 0 16px 26px rgba(14,165,90,.22);
     }
     .btn-primary:hover{ box-shadow: 0 18px 30px rgba(14,165,90,.28); }
     .btn-ghost{
-      background: rgba(255,255,255,.82);
-      border: 1px solid rgba(17,24,39,.08);
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(17,24,39,.10);
       box-shadow: var(--shadow3);
       color: rgba(11,18,32,.92);
     }
     .btn-ghost:hover{ opacity:.96; }
+
+    /* Play badge button */
+    .btn-play{
+      padding: 10px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow3);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 950;
+    }
+    .btn-play:hover{ opacity:.96; }
+    .play-ico{
+      width: 26px; height: 26px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(18,194,109,.18), rgba(14,165,90,.12));
+      display:grid; place-items:center;
+    }
+    .btn-play small{
+      display:block;
+      font-weight: 850;
+      color: rgba(11,18,32,.58);
+      letter-spacing: 0;
+      margin-bottom: 2px;
+      font-size: 11px;
+    }
+    .btn-play strong{
+      display:block;
+      font-size: 14px;
+      letter-spacing: -.2px;
+    }
 
     /* Topbar */
     header.topbar{
@@ -129,17 +183,15 @@
       gap:10px;
       font-weight: 950;
       letter-spacing: -.2px;
-      min-width: 180px;
     }
     .logo{
       width:38px; height:38px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--green2), var(--green));
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
       display:grid; place-items:center;
       color:#fff;
       box-shadow: 0 12px 20px rgba(14,165,90,.22);
       font-weight: 950;
-      flex: 0 0 auto;
     }
     .brand-title{ line-height:1.05; }
     .brand-title .t{ font-size:16px; }
@@ -157,7 +209,7 @@
     .nav a:hover{ color: rgba(11,18,32,.98); }
 
     /* Hero */
-    .hero{ padding: 52px 0 22px; }
+    .hero{ padding: 54px 0 26px; }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.08fr .92fr;
@@ -177,10 +229,9 @@
     }
     .k-dot{
       width:10px; height:10px; border-radius: 999px;
-      background: linear-gradient(135deg, var(--green2), var(--green));
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
       box-shadow: 0 0 0 4px rgba(14,165,90,.12);
     }
-
     h1{
       margin: 16px 0 10px;
       font-size: clamp(34px, 4vw, 54px);
@@ -188,11 +239,11 @@
       letter-spacing: -1px;
     }
     .sub{
-      margin: 0 0 16px;
+      margin: 0 0 18px;
       color: rgba(11,18,32,.70);
       font-size: clamp(16px, 1.35vw, 18px);
-      line-height: 1.58;
-      max-width: 70ch;
+      line-height: 1.62;
+      max-width: 66ch;
       font-weight: 650;
     }
     .cta-row{
@@ -200,60 +251,7 @@
       gap:12px;
       flex-wrap:wrap;
       align-items:center;
-      margin-top: 8px;
     }
-
-    /* App-like summary grid */
-    .summary-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 18px 0 14px;
-      max-width: 520px;
-    }
-    .mini-card{
-      border-radius: 20px;
-      background: rgba(255,255,255,.84);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: 0 12px 26px rgba(16,24,40,.08);
-      padding: 14px 14px 12px;
-      position: relative;
-      overflow:hidden;
-    }
-    .mini-card .k{
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: 1px;
-      color: rgba(11,18,32,.52);
-    }
-    .mini-card .v{
-      margin-top: 6px;
-      font-size: 22px;
-      font-weight: 950;
-      letter-spacing: -.3px;
-    }
-    .mini-card .s{
-      margin-top: 6px;
-      font-size: 12px;
-      font-weight: 750;
-      color: rgba(11,18,32,.58);
-      line-height: 1.35;
-    }
-    .mini-pill{
-      position:absolute;
-      top: 10px;
-      right: 10px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 950;
-      border: 1px solid rgba(17,24,39,.08);
-      background: rgba(255,255,255,.80);
-      color: rgba(11,18,32,.72);
-    }
-    .mini-pill.green{ background: rgba(52,199,89,.12); border-color: rgba(52,199,89,.22); color: rgba(16,125,53,.95); }
-    .mini-pill.red{ background: rgba(255,59,48,.10); border-color: rgba(255,59,48,.22); color: rgba(200,40,32,.95); }
-    .mini-pill.purple{ background: rgba(88,86,214,.10); border-color: rgba(88,86,214,.22); color: rgba(54,52,180,.95); }
 
     .badges{
       margin-top: 14px;
@@ -267,10 +265,11 @@
     .badge{
       padding: 9px 11px;
       border-radius: 999px;
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.80);
       border: 1px solid rgba(17,24,39,.08);
       box-shadow: 0 10px 18px rgba(16,24,40,.06);
     }
+
     .note{
       margin-top: 10px;
       padding: 12px 12px;
@@ -282,7 +281,7 @@
       font-weight: 750;
       font-size: 13px;
       line-height: 1.45;
-      max-width: 80ch;
+      max-width: 74ch;
     }
     .note b{ font-weight: 950; }
 
@@ -333,7 +332,7 @@
       color: rgba(11,18,32,.66);
       line-height: 1.62;
       font-weight: 650;
-      max-width: 86ch;
+      max-width: 84ch;
     }
 
     /* Feature grid */
@@ -344,7 +343,7 @@
     }
     .card{
       border-radius: var(--radiusXL);
-      background: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.84);
       border: 1px solid rgba(17,24,39,.08);
       box-shadow: var(--shadow2);
     }
@@ -370,46 +369,33 @@
       font-size: 14px;
     }
 
-    /* Pro highlight row */
-    .pro-row{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .pro-card{
-      border-radius: var(--radiusXL);
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: var(--shadow2);
+    /* What's new */
+    .whatsnew{
       padding: 16px;
-      position: relative;
-      overflow:hidden;
+      border-radius: var(--radiusXL);
     }
-    .pro-card .top{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    .wn-head{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap: 12px; flex-wrap:wrap;
+      margin-bottom: 10px;
     }
-    .pro-card .title{
+    .wn-title{
       font-weight: 950;
       letter-spacing: -.3px;
       font-size: 16px;
     }
-    .pro-card .meta{
-      margin-top: 10px;
-      color: rgba(11,18,32,.66);
+    .wn-sub{
+      color: rgba(11,18,32,.58);
+      font-weight: 800;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .wn-list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(11,18,32,.72);
       font-weight: 700;
       line-height: 1.55;
-      font-size: 14px;
-    }
-    .spark{
-      width: 52px; height: 52px;
-      border-radius: 18px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.84);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: var(--shadow3);
-      font-size: 18px;
-      flex: 0 0 auto;
     }
 
     /* Screenshots carousel */
@@ -431,11 +417,7 @@
       font-weight: 800;
       font-size: 13px;
     }
-    .shots-controls{
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
+    .shots-controls{ display:flex; gap:8px; align-items:center; }
     .icon-btn{
       width: 44px; height: 44px;
       border-radius: 16px;
@@ -499,11 +481,7 @@
       justify-content:center;
       margin-top: 10px;
     }
-    .dot{
-      width: 7px; height: 7px;
-      border-radius: 999px;
-      background: rgba(11,18,32,.18);
-    }
+    .dot{ width: 7px; height: 7px; border-radius: 999px; background: rgba(11,18,32,.18); }
     .dot.on{ background: rgba(14,165,90,.96); }
 
     /* Privacy block */
@@ -571,7 +549,6 @@
       z-index: 80;
     }
     .modal.on{ display:flex; }
-
     .dialog{
       width: min(980px, 100%);
       border-radius: 28px;
@@ -586,10 +563,7 @@
       padding: 14px 14px 10px;
       gap: 10px;
     }
-    .dialog-title{
-      font-weight: 950;
-      letter-spacing: -.3px;
-    }
+    .dialog-title{ font-weight: 950; letter-spacing: -.3px; }
     .close{
       border:0;
       cursor:pointer;
@@ -610,7 +584,6 @@
       border-radius: 20px;
       display:block;
     }
-
     .dialog-foot{
       padding: 12px 14px 16px;
       display:flex;
@@ -632,25 +605,26 @@
       .hero-grid{ grid-template-columns: 1fr; }
       .phone{ justify-self: center; width: min(420px, 100%); }
       .grid-3{ grid-template-columns: 1fr; }
-      .pro-row{ grid-template-columns: 1fr; }
       .shot{ width: 190px; }
       .shot img{ height: 390px; }
       .section{ padding: 44px 0; }
-      .summary-grid{ max-width: 100%; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .reveal{ transition:none !important; transform:none !important; opacity:1 !important; }
-      .btn{ transition:none !important; }
     }
   </style>
 </head>
 
 <body>
-  <!-- CONFIG do APK -->
   <script>
-    const APK_URL = "https://github.com/Jacker-s/MeuHolerite/releases/download/1.3/app-release.apk";
-    const APK_VERSION = "v1.3";
+    // CONFIG
+    const PLAY_URL = "https://play.google.com/store/apps/details?id=com.jack.meuholerite";
+    const PLAY_REF = "&referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlanding";
+    const PLAY_FINAL = PLAY_URL + PLAY_REF;
+
+    const SITE_URL = "https://meuholerite.me//";
+    const APP_NAME = "Meu Holerite";
+    const APP_TAGLINE = "Holerite • Ponto • Recibos";
+
+    // Se quiser mostrar versão no site (manual):
+    const APP_VERSION_BADGE = "Google Play";
   </script>
 
   <header class="topbar glass">
@@ -659,91 +633,67 @@
         <a class="brand" href="./" aria-label="Meu Holerite">
           <div class="logo">MH</div>
           <div class="brand-title">
-            <div class="t">Meu Holerite</div>
-            <div class="s">Holerite • Ponto • Recibos</div>
+            <div class="t" id="brandName">Meu Holerite</div>
+            <div class="s" id="brandTag">Holerite • Ponto • Recibos</div>
           </div>
         </a>
 
         <nav class="nav" aria-label="Menu">
           <a href="#prints">Prints</a>
           <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#novidades">Novidades</a>
           <a href="#privacidade">Privacidade</a>
-          <a href="#faq">FAQ</a>
           <a href="./termos/">Termos</a>
         </nav>
 
         <div style="display:flex; gap:10px; align-items:center;">
           <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
-          <a class="btn btn-primary" id="btnTop" href="#" download>⬇️ Baixar</a>
+          <a class="btn btn-primary" id="btnTop" href="#">Instalar</a>
         </div>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO (mais app-like / profissional) -->
+    <!-- HERO -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
-            <span class="kicker"><span class="k-dot"></span> Visual moderno inspirado no padrão iOS</span>
+            <span class="kicker"><span class="k-dot"></span> Visual moderno e leitura clara (inspirado no iOS)</span>
 
-            <h1>Seu holerite,<br/>na palma da mão.</h1>
+            <h1>Seu holerite e ponto,<br/>bem organizados e privados. ✅</h1>
 
             <p class="sub">
-              Importe holerites e registros de ponto direto do <b>ePays</b>, acompanhe <b>banco de horas</b>,
-              receba <b>alertas de faltas</b> e visualize <b>proventos e descontos</b> com clareza.
-              <b>Privacidade garantida</b>: tudo fica no seu dispositivo.
+              Importe documentos do <b>ePays</b>, acompanhe <b>banco de horas</b>, receba <b>alertas</b> e veja
+              <b>proventos e descontos</b> com clareza. Seu conteúdo fica <b>no seu dispositivo</b>.
             </p>
 
-            <!-- Resumo tipo "Home" do app -->
-            <div class="summary-grid" aria-label="Resumo do app">
-              <div class="mini-card">
-                <span class="mini-pill green">LÍQUIDO</span>
-                <div class="k">SALÁRIO</div>
-                <div class="v">R$ 3.245,00</div>
-                <div class="s">Visualize o líquido e a evolução mensal.</div>
-              </div>
-
-              <div class="mini-card">
-                <span class="mini-pill red">DESCONTOS</span>
-                <div class="k">RETENÇÃO</div>
-                <div class="v" style="color:#ff3b30;">R$ 580,00</div>
-                <div class="s">Entenda rapidamente o que pesou no mês.</div>
-              </div>
-
-              <div class="mini-card">
-                <span class="mini-pill purple">PONTO</span>
-                <div class="k">BANCO DE HORAS</div>
-                <div class="v">+12:30</div>
-                <div class="s">Saldo e resumo do período com 1 toque.</div>
-              </div>
-
-              <div class="mini-card">
-                <span class="mini-pill red">ALERTA</span>
-                <div class="k">FALTAS</div>
-                <div class="v" style="color:#ff3b30;">1 dia</div>
-                <div class="s">Avisos automáticos quando houver ausência.</div>
-              </div>
-            </div>
-
             <div class="cta-row">
-              <a class="btn btn-primary" id="btnHero" href="#" download>🚀 Baixar agora</a>
-              <a class="btn btn-ghost" href="#funcionalidades">✨ Principais funcionalidades</a>
+              <a class="btn btn-primary" id="btnHero" href="#">Instalar na Google Play</a>
+
+              <a class="btn-play" id="btnPlayBadge" href="#" aria-label="Abrir na Google Play">
+                <span class="play-ico" aria-hidden="true">▶</span>
+                <span>
+                  <small>Disponível na</small>
+                  <strong>Google Play</strong>
+                </span>
+              </a>
+
+              <a class="btn btn-ghost" href="#funcionalidades">✨ Ver recursos</a>
             </div>
 
             <div class="badges">
-              <span class="badge">🆕 Versão: <b id="verBadge">v1.3</b></span>
-              <span class="badge">🔒 Dados no dispositivo</span>
+              <span class="badge">✅ Publicado na Play</span>
+              <span class="badge">🔒 Privacidade: dados locais</span>
               <span class="badge">📥 Importação do ePays</span>
               <span class="badge">⏱️ Banco de horas</span>
               <span class="badge">🔔 Aviso de faltas</span>
             </div>
 
             <div class="note">
-              ⚠️ <b>Instalação via APK:</b> após baixar, o Android pode pedir para permitir
-              <b>“Instalar apps desconhecidos”</b>. Isso é normal quando o app não vem da Play Store.
-              <b>Em breve na Play Store</b> para maior segurança.
+              <b>Instalação segura:</b> agora você instala diretamente pela <b>Google Play</b>.
+              Atualizações e verificações de segurança ficam centralizadas na loja.
             </div>
           </div>
 
@@ -761,49 +711,13 @@
       </div>
     </section>
 
-    <!-- NOVA: Seção "produto" (cara de app) -->
-    <section class="section" id="produto">
-      <div class="container">
-        <div class="reveal">
-          <h2>📊 Tudo em um só lugar</h2>
-          <p class="lead">
-            O <b>Meu Holerite</b> organiza o que realmente importa: salário, descontos, banco de horas e faltas — com visual limpo e rápido.
-          </p>
-        </div>
-
-        <div class="pro-row">
-          <div class="pro-card reveal">
-            <div class="top">
-              <div class="title">Visão rápida (estilo iOS)</div>
-              <div class="spark">⚡</div>
-            </div>
-            <div class="meta">
-              Abra o app e veja o resumo do mês em segundos.
-              Toque para entrar nos detalhes, abrir PDFs e entender cada item.
-            </div>
-          </div>
-
-          <div class="pro-card reveal">
-            <div class="top">
-              <div class="title">Privacidade como prioridade</div>
-              <div class="spark">🔒</div>
-            </div>
-            <div class="meta">
-              Sem servidor. Sem upload. Seus dados ficam no seu dispositivo,
-              e você mantém o controle total.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- PRINTS -->
     <section class="section" id="prints">
       <div class="container">
         <div class="reveal">
           <h2>📸 Prints do app</h2>
           <p class="lead">
-            Navegue pelas telas principais do <b>Meu Holerite</b>. Clique em qualquer print para ampliar (modal estilo iOS).
+            Navegue pelas telas principais. Toque em qualquer print para ampliar (modal estilo iOS).
           </p>
         </div>
 
@@ -848,7 +762,7 @@
             </div>
 
             <div class="shot" data-title="Ajustes" data-src="assets/screens/07-ajustes.jpg">
-              <img src="assets/screens/07-ajustes.jpg" alt="Tela de Ajustes" />
+              <img src="assets/screens/07-ajustes.jpg" alt="Tela de ajustes" />
               <div class="cap">🆕 Ajustes</div>
             </div>
           </div>
@@ -863,50 +777,77 @@
       <div class="container">
         <div class="reveal">
           <h2>✨ Principais funcionalidades</h2>
-          <p class="lead">Tudo organizado para o visitante entender em segundos.</p>
+          <p class="lead">Organizado para entender em segundos — e útil no dia a dia.</p>
         </div>
 
         <div class="grid-3">
           <div class="card feat reveal">
             <div class="ico">📥</div>
-            <h3>Importação Automática</h3>
-            <p>Coleta holerites e registros de ponto diretamente do ePays.</p>
+            <h3>Importação rápida</h3>
+            <p>Importe holerites e espelhos de ponto do ePays e organize por período.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">⏱️</div>
-            <h3>Banco de Horas</h3>
-            <p>Controle completo do saldo e das horas extras.</p>
+            <h3>Banco de horas</h3>
+            <p>Saldo final, saldo do período e indicadores para acompanhar sem confusão.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">🔔</div>
-            <h3>Aviso de Faltas</h3>
-            <p>Notificações automáticas em caso de ausência no mês.</p>
+            <h3>Alertas inteligentes</h3>
+            <p>Receba avisos quando houver faltas e possíveis inconsistências no espelho.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">📊</div>
-            <h3>Recibos Detalhados</h3>
-            <p>Visualização clara e organizada de proventos e descontos.</p>
+            <h3>Recibos claros</h3>
+            <p>Proventos e descontos com leitura fácil, com detalhes por item.</p>
+          </div>
+
+          <div class="card feat reveal">
+            <div class="ico">🧾</div>
+            <h3>PDFs organizados</h3>
+            <p>Visualize PDFs salvos e restaurados — e exporte tudo quando precisar.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">🔒</div>
-            <h3>Privacidade Garantida</h3>
-            <p>Todas as informações ficam armazenadas exclusivamente no seu dispositivo.</p>
-          </div>
-
-          <div class="card feat reveal">
-            <div class="ico">🧰</div>
-            <h3>Ferramentas úteis</h3>
-            <p>Acesso rápido a recursos e telas do app para facilitar o dia a dia.</p>
+            <h3>Privacidade</h3>
+            <p>Foco em privacidade: processamento e organização local, sem “bagunçar” sua rotina.</p>
           </div>
         </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
-          <a class="btn btn-primary" id="btnMid" href="#" download>⬇️ Baixar APK</a>
+          <a class="btn btn-primary" id="btnMid" href="#">Instalar na Google Play</a>
           <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT'S NEW -->
+    <section class="section" id="novidades">
+      <div class="container">
+        <div class="reveal">
+          <h2>🆕 Novidades</h2>
+          <p class="lead">Resumo das últimas melhorias publicadas na Google Play.</p>
+        </div>
+
+        <div class="whatsnew glass reveal">
+          <div class="wn-head">
+            <div>
+              <div class="wn-title">Última atualização</div>
+              <div class="wn-sub">Publicada em <b>19 de fevereiro de 2026</b> (Play Store)</div>
+            </div>
+            <a class="btn btn-ghost" id="btnWhatsNew" href="#">Ver na Play</a>
+          </div>
+
+          <ul class="wn-list">
+            <li>Melhorias no reconhecimento de espelho de ponto e holerite para mais modelos de empresas.</li>
+            <li>Nova opção para exportar todos os PDFs salvos.</li>
+            <li>Ajustes na tela de PDFs (listagem mais organizada e rápida).</li>
+            <li>Correções de bugs e melhorias de estabilidade.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -916,8 +857,8 @@
       <div class="container">
         <div class="privacy glass reveal">
           <div>
-            <div class="title">🔒 Privacidade garantida</div>
-            <p>Sem envio para servidor. Seus dados ficam <b>no seu celular</b>.</p>
+            <div class="title">🔒 Privacidade em primeiro lugar</div>
+            <p>Seu conteúdo fica no seu dispositivo. Você mantém o controle.</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
             <div class="pill">✅ Dados locais</div>
@@ -939,26 +880,26 @@
           <div class="card feat reveal">
             <div class="ico">🌐</div>
             <h3>Precisa do ePays?</h3>
-            <p>Sim. O app foi feito para importar documentos a partir do portal ePays.</p>
+            <p>O app foi feito para importar documentos a partir do portal ePays e organizar o histórico.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">🛡️</div>
-            <h3>Play Protect pode avisar?</h3>
-            <p>Como é APK fora da Play Store, o Android pode exibir um aviso. Basta confirmar a instalação.</p>
+            <h3>É seguro instalar?</h3>
+            <p>Sim — agora a instalação é pela Google Play, com verificações e atualizações pela loja.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">📩</div>
             <h3>Suporte</h3>
-            <p>E-mail de suporte em breve (você pode colocar um e-mail real quando quiser).</p>
+            <p>Fale com a gente pelo canal de suporte disponível na página do app.</p>
           </div>
         </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
-          <a class="btn btn-primary" id="btnBottom" href="#" download>⬇️ Baixar agora</a>
-          <a class="btn btn-ghost" href="mailto:aqui@mail.com">✉️ Suporte</a>
+          <a class="btn btn-primary" id="btnBottom" href="#">Instalar agora</a>
           <a class="btn btn-ghost" href="./termos/">📄 Termos</a>
+          <a class="btn btn-ghost" href="./privacidade/">🔒 Privacidade</a>
         </div>
       </div>
     </section>
@@ -967,10 +908,11 @@
   <footer>
     <div class="container">
       <div class="foot">
-        <div>© <span id="year"></span> Meu Holerite. Todos os direitos reservados.</div>
+        <div>© <span id="year"></span> <span id="footName">Meu Holerite</span>. Todos os direitos reservados.</div>
         <div class="small-links">
           <a href="#prints">Prints</a><span class="sep">•</span>
           <a href="#funcionalidades">Recursos</a><span class="sep">•</span>
+          <a href="#novidades">Novidades</a><span class="sep">•</span>
           <a href="./privacidade/">Privacidade</a><span class="sep">•</span>
           <a href="./termos/">Termos</a>
         </div>
@@ -1002,17 +944,23 @@
     // Ano
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Aplicar link do APK em todos os botões
-    const btnIds = ["btnTop","btnHero","btnMid","btnBottom"];
+    // Textos
+    const brandName = document.getElementById("brandName");
+    const brandTag = document.getElementById("brandTag");
+    const footName = document.getElementById("footName");
+    if (brandName) brandName.textContent = APP_NAME;
+    if (brandTag) brandTag.textContent = APP_TAGLINE;
+    if (footName) footName.textContent = APP_NAME;
+
+    // Link Play em todos os CTAs
+    const btnIds = ["btnTop","btnHero","btnMid","btnBottom","btnPlayBadge","btnWhatsNew"];
     btnIds.forEach(id=>{
       const el = document.getElementById(id);
       if(!el) return;
-      el.href = APK_URL;
-      el.setAttribute("download", "");
-      if(id === "btnMid") el.textContent = `⬇️ Baixar APK (${APK_VERSION})`;
+      el.href = PLAY_FINAL;
+      el.target = "_blank";
+      el.rel = "noopener";
     });
-    const ver = document.getElementById("verBadge");
-    if(ver) ver.textContent = APK_VERSION;
 
     // Reveal on scroll
     const els = Array.from(document.querySelectorAll(".reveal"));
@@ -1110,10 +1058,7 @@
       modal.classList.remove("on");
     }
 
-    items.forEach((it, i)=>{
-      it.addEventListener("click", ()=>openModal(i));
-    });
-
+    items.forEach((it, i)=> it.addEventListener("click", ()=>openModal(i)));
     if(closeBtn) closeBtn.addEventListener("click", closeModal);
 
     if(modal){
