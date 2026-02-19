@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#14b865" />
+
   <title>Meu Holerite — Holerite, Ponto e Recibos</title>
   <meta name="description" content="Importe holerites e espelho de ponto do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total: seus dados ficam no seu dispositivo." />
 
-  <!-- Canonical -->
   <link rel="canonical" href="https://meuholerite.me/" />
 
   <!-- Open Graph / WhatsApp -->
@@ -30,10 +30,9 @@
   <link rel="icon" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
 
-  <!-- Optional: preconnect for faster Play open -->
   <link rel="preconnect" href="https://play.google.com" />
 
-  <!-- JSON-LD (SoftwareApplication) -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,37 +41,41 @@
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Android",
     "url": "https://play.google.com/store/apps/details?id=com.jack.meuholerite",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "BRL"
-    }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
   }
   </script>
 
   <style>
+    /* ===== Material-ish tokens (inspirado no seu app) ===== */
     :root{
-      --bg1:#f6f8fc;
-      --bg2:#eef3f7;
+      /* Brand */
+      --primary: #0ea55a;
+      --primary2:#12c26d;
 
-      --text:#0b1220;
-      --muted:#6b7280;
+      /* Surfaces */
+      --bg: #F6F8FC;
+      --surface: #FFFFFF;
+      --surface2:#F2F5F9; /* surfaceVariant */
+      --outline: rgba(15, 23, 42, .10);
 
-      --brand:#0ea55a;
-      --brand2:#12c26d;
+      /* Text */
+      --text: #0B1220;
+      --muted: rgba(11,18,32,.68);
 
-      --glass: rgba(255,255,255,.72);
-      --glassBorder: rgba(17,24,39,.08);
+      /* Elevation / radius */
+      --r-xl: 26px;
+      --r-l: 22px;
+      --r-m: 18px;
+      --shadow1: 0 10px 24px rgba(16,24,40,.08);
+      --shadow2: 0 18px 46px rgba(16,24,40,.12);
 
-      --shadow: 0 22px 50px rgba(16,24,40,.12);
-      --shadow2: 0 12px 26px rgba(16,24,40,.10);
-      --shadow3: 0 6px 14px rgba(16,24,40,.08);
+      /* Layout */
+      --max: 1120px;
+      --pad: 18px;
 
-      --radiusXL: 28px;
-      --radiusL: 22px;
-      --radiusM: 18px;
-
-      --max: 1160px;
+      /* Motion */
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --dur: 220ms;
     }
 
     *{ box-sizing:border-box; }
@@ -82,282 +85,310 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 640px at 18% -10%, rgba(18,194,109,.18), transparent 60%),
-        radial-gradient(900px 520px at 92% 0%, rgba(14,165,90,.14), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+        radial-gradient(1200px 640px at 12% -10%, rgba(18,194,109,.18), transparent 60%),
+        radial-gradient(900px 520px at 92% 0%, rgba(14,165,90,.12), transparent 55%),
+        linear-gradient(180deg, #ffffff, var(--bg));
       -webkit-font-smoothing: antialiased;
       overflow-x:hidden;
     }
-    a{ color:inherit; text-decoration:none; }
-    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
 
-    /* iOS glass */
-    .glass{
-      background: var(--glass);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid var(--glassBorder);
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
+
+    /* Focus */
+    :focus-visible{
+      outline: 3px solid rgba(18,194,109,.35);
+      outline-offset: 2px;
+      border-radius: 12px;
     }
 
-    /* Buttons */
+    /* ===== AppBar (top) ===== */
+    header.appbar{
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(246,248,252,.78);
+      border-bottom: 1px solid rgba(15,23,42,.06);
+    }
+    .appbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      min-width: 0;
+    }
+    .app-icon{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary2), var(--primary));
+      box-shadow: 0 12px 20px rgba(14,165,90,.22);
+      display:grid; place-items:center;
+      color:#fff;
+      font-weight: 900;
+      letter-spacing: -.3px;
+      flex: 0 0 auto;
+    }
+    .brand-txt{ min-width: 0; }
+    .brand-txt .t{
+      font-weight: 950;
+      letter-spacing: -.4px;
+      line-height: 1.05;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-txt .s{
+      margin-top: 2px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+    }
+    .nav a{
+      font-weight: 850;
+      color: rgba(11,18,32,.72);
+      padding: 10px 10px;
+      border-radius: 14px;
+      transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+    }
+    .nav a:hover{
+      background: rgba(255,255,255,.72);
+      color: rgba(11,18,32,.95);
+    }
+
+    /* ===== Buttons (Material-ish) ===== */
     .btn{
-      border:0;
+      border: 1px solid transparent;
       cursor:pointer;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      padding:12px 16px;
-      border-radius: 18px;
+      padding: 12px 14px;
+      border-radius: 16px;
       font-weight: 900;
       letter-spacing: -.2px;
-      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease;
-      white-space:nowrap;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease), opacity var(--dur) var(--ease);
       user-select:none;
+      white-space:nowrap;
     }
     .btn:active{ transform: scale(.985); }
+
     .btn-primary{
-      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      background: linear-gradient(135deg, var(--primary2), var(--primary));
       color:#fff;
-      box-shadow: 0 16px 26px rgba(14,165,90,.22);
+      box-shadow: 0 14px 26px rgba(14,165,90,.20);
     }
-    .btn-primary:hover{ box-shadow: 0 18px 30px rgba(14,165,90,.28); }
-    .btn-ghost{
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(17,24,39,.10);
-      box-shadow: var(--shadow3);
+    .btn-primary:hover{ box-shadow: 0 18px 36px rgba(14,165,90,.26); }
+
+    .btn-tonal{
+      background: rgba(18,194,109,.10);
+      border-color: rgba(18,194,109,.18);
       color: rgba(11,18,32,.92);
     }
-    .btn-ghost:hover{ opacity:.96; }
+    .btn-tonal:hover{ background: rgba(18,194,109,.12); }
 
-    /* Play badge button */
-    .btn-play{
-      padding: 10px 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(17,24,39,.10);
-      background: rgba(255,255,255,.86);
-      box-shadow: var(--shadow3);
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 950;
+    .btn-outline{
+      background: rgba(255,255,255,.76);
+      border-color: rgba(15,23,42,.10);
+      color: rgba(11,18,32,.92);
+      box-shadow: 0 8px 16px rgba(16,24,40,.06);
     }
-    .btn-play:hover{ opacity:.96; }
-    .play-ico{
-      width: 26px; height: 26px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(18,194,109,.18), rgba(14,165,90,.12));
-      display:grid; place-items:center;
-    }
-    .btn-play small{
-      display:block;
-      font-weight: 850;
-      color: rgba(11,18,32,.58);
-      letter-spacing: 0;
-      margin-bottom: 2px;
-      font-size: 11px;
-    }
-    .btn-play strong{
-      display:block;
-      font-size: 14px;
-      letter-spacing: -.2px;
+    .btn-outline:hover{ opacity: .98; }
+
+    .icon{
+      width: 18px; height: 18px;
+      display:inline-grid;
+      place-items:center;
+      border-radius: 8px;
     }
 
-    /* Topbar */
-    header.topbar{
-      position: sticky;
-      top:0;
-      z-index: 50;
-      border-bottom: 1px solid rgba(17,24,39,.06);
+    /* ===== Cards / chips ===== */
+    .card{
+      background: var(--surface);
+      border: 1px solid rgba(15,23,42,.08);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow1);
     }
-    .topbar-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding:14px 0;
+    .card.soft{
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 950;
-      letter-spacing: -.2px;
+    .card.variant{
+      background: rgba(242,245,249,.78);
+      border-color: rgba(15,23,42,.07);
     }
-    .logo{
-      width:38px; height:38px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand2), var(--brand));
-      display:grid; place-items:center;
-      color:#fff;
-      box-shadow: 0 12px 20px rgba(14,165,90,.22);
-      font-weight: 950;
-    }
-    .brand-title{ line-height:1.05; }
-    .brand-title .t{ font-size:16px; }
-    .brand-title .s{ font-size:12px; opacity:.68; font-weight:850; margin-top:2px; }
+    .card-pad{ padding: 18px; }
 
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:14px;
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(15,23,42,.08);
+      font-weight: 900;
+      color: rgba(11,18,32,.78);
     }
-    .nav a{
-      font-weight: 850;
-      color: rgba(11,18,32,.72);
+    .chip .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary2), var(--primary));
+      box-shadow: 0 0 0 4px rgba(14,165,90,.12);
     }
-    .nav a:hover{ color: rgba(11,18,32,.98); }
 
-    /* Hero */
-    .hero{ padding: 54px 0 26px; }
+    /* ===== Hero ===== */
+    .hero{ padding: 26px 0 10px; }
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 26px;
-      align-items:center;
+      grid-template-columns: 1.06fr .94fr;
+      gap: 18px;
+      align-items: stretch;
     }
+
     .kicker{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      padding:10px 12px;
+      padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(14,165,90,.10);
-      border:1px solid rgba(14,165,90,.16);
-      color: rgba(11,18,32,.86);
+      background: rgba(18,194,109,.10);
+      border: 1px solid rgba(18,194,109,.18);
       font-weight: 900;
-    }
-    .k-dot{
-      width:10px; height:10px; border-radius: 999px;
-      background: linear-gradient(135deg, var(--brand2), var(--brand));
-      box-shadow: 0 0 0 4px rgba(14,165,90,.12);
+      color: rgba(11,18,32,.88);
     }
     h1{
-      margin: 16px 0 10px;
-      font-size: clamp(34px, 4vw, 54px);
-      line-height: 1.04;
+      margin: 14px 0 8px;
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height: 1.05;
       letter-spacing: -1px;
     }
     .sub{
-      margin: 0 0 18px;
-      color: rgba(11,18,32,.70);
-      font-size: clamp(16px, 1.35vw, 18px);
+      margin: 0 0 14px;
+      color: rgba(11,18,32,.72);
+      font-size: clamp(15px, 1.4vw, 18px);
       line-height: 1.62;
-      max-width: 66ch;
       font-weight: 650;
+      max-width: 68ch;
     }
-    .cta-row{
+    .cta{
       display:flex;
-      gap:12px;
+      gap: 10px;
       flex-wrap:wrap;
       align-items:center;
-    }
-
-    .badges{
-      margin-top: 14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      color: rgba(11,18,32,.62);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .badge{
-      padding: 9px 11px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: 0 10px 18px rgba(16,24,40,.06);
-    }
-
-    .note{
       margin-top: 10px;
-      padding: 12px 12px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.70);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: 0 10px 18px rgba(16,24,40,.06);
-      color: rgba(11,18,32,.66);
-      font-weight: 750;
-      font-size: 13px;
-      line-height: 1.45;
-      max-width: 74ch;
     }
-    .note b{ font-weight: 950; }
 
-    /* iPhone frame (real print) */
+    /* “Phone” preview – mais clean e Material */
     .phone{
-      justify-self: end;
-      width: min(410px, 100%);
-      border-radius: 40px;
+      border-radius: 34px;
       background: rgba(11,18,32,1);
       padding: 12px;
-      box-shadow: 0 36px 80px rgba(0,0,0,.22);
+      box-shadow: 0 28px 70px rgba(0,0,0,.22);
       position: relative;
+      overflow:hidden;
     }
     .screen{
-      border-radius: 30px;
+      border-radius: 26px;
       overflow:hidden;
       background:#000;
       border: 1px solid rgba(255,255,255,.10);
-      min-height: 680px;
+      height: 640px;
       position: relative;
+      isolation:isolate;
     }
-    .hero-shot{
+    .screen img{
       width:100%;
       height:100%;
       object-fit: cover;
       display:block;
-      opacity:.99;
+      opacity:.98;
     }
     .screen-overlay{
       position:absolute;
       inset: auto 0 0 0;
       padding: 14px 14px 16px;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.66));
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.62));
       color:#fff;
     }
     .screen-overlay .t{ font-weight: 950; font-size: 18px; letter-spacing: -.2px; }
-    .screen-overlay .s{ margin-top:4px; opacity:.88; font-weight: 750; font-size: 13px; line-height: 1.35; }
+    .screen-overlay .s{ margin-top:4px; opacity:.90; font-weight: 750; font-size: 13px; line-height: 1.35; }
 
-    /* Sections */
-    .section{ padding: 54px 0; }
+    .note{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: var(--r-l);
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(15,23,42,.08);
+      color: rgba(11,18,32,.68);
+      font-weight: 750;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .note b{ font-weight: 950; }
+
+    /* ===== Sections ===== */
+    .section{ padding: 22px 0; }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
     .section h2{
-      margin:0 0 8px;
-      font-size: clamp(24px, 2.2vw, 36px);
+      margin: 0;
+      font-size: clamp(22px, 2.3vw, 34px);
       letter-spacing: -.7px;
     }
     .lead{
-      margin:0 0 18px;
+      margin: 8px 0 0;
       color: rgba(11,18,32,.66);
       line-height: 1.62;
       font-weight: 650;
       max-width: 84ch;
     }
 
-    /* Feature grid */
-    .grid-3{
+    /* ===== Feature grid ===== */
+    .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
-    .card{
-      border-radius: var(--radiusXL);
-      background: rgba(255,255,255,.84);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: var(--shadow2);
+    .feat{
+      padding: 16px;
+      min-height: 152px;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
     }
-    .feat{ padding: 16px; min-height: 160px; }
     .feat .ico{
-      width: 48px; height: 48px;
-      border-radius: 18px;
+      width: 44px; height: 44px;
+      border-radius: 16px;
       display:grid; place-items:center;
-      background: rgba(14,165,90,.12);
-      border: 1px solid rgba(14,165,90,.16);
+      background: rgba(18,194,109,.12);
+      border: 1px solid rgba(18,194,109,.16);
       font-size: 20px;
+      flex: 0 0 auto;
     }
     .feat h3{
-      margin: 12px 0 6px;
+      margin: 4px 0 0;
       font-size: 16px;
       letter-spacing: -.3px;
     }
@@ -369,65 +400,29 @@
       font-size: 14px;
     }
 
-    /* What's new */
-    .whatsnew{
-      padding: 16px;
-      border-radius: var(--radiusXL);
-    }
-    .wn-head{
-      display:flex; align-items:flex-start; justify-content:space-between;
-      gap: 12px; flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .wn-title{
-      font-weight: 950;
-      letter-spacing: -.3px;
-      font-size: 16px;
-    }
-    .wn-sub{
-      color: rgba(11,18,32,.58);
-      font-weight: 800;
-      font-size: 13px;
-      margin-top: 2px;
-    }
-    .wn-list{
-      margin: 0;
-      padding-left: 18px;
-      color: rgba(11,18,32,.72);
-      font-weight: 700;
-      line-height: 1.55;
-    }
-
-    /* Screenshots carousel */
-    .shots-wrap{
-      border-radius: var(--radiusXL);
-      padding: 14px;
-      box-shadow: var(--shadow2);
-    }
+    /* ===== Prints carousel ===== */
+    .shots-wrap{ padding: 14px; }
     .shots-head{
       display:flex;
       justify-content: space-between;
-      align-items:flex-end;
-      gap: 12px;
+      align-items:center;
+      gap: 10px;
       flex-wrap:wrap;
       margin-bottom: 10px;
     }
-    .hint{
-      color: rgba(11,18,32,.58);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .shots-controls{ display:flex; gap:8px; align-items:center; }
+    .hint{ color: rgba(11,18,32,.58); font-weight: 850; font-size: 13px; }
+    .controls{ display:flex; gap:8px; align-items:center; }
+
     .icon-btn{
       width: 44px; height: 44px;
       border-radius: 16px;
-      border: 1px solid rgba(17,24,39,.10);
-      background: rgba(255,255,255,.86);
-      box-shadow: var(--shadow3);
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.80);
+      box-shadow: 0 8px 16px rgba(16,24,40,.06);
       cursor:pointer;
       display:grid; place-items:center;
       font-weight: 950;
-      transition: transform .18s ease, opacity .18s ease;
+      transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
       user-select:none;
     }
     .icon-btn:active{ transform: scale(.98); }
@@ -439,15 +434,16 @@
       scroll-snap-type: x mandatory;
       padding: 6px 2px 10px;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
     }
     .shots::-webkit-scrollbar{ height: 10px; }
     .shots::-webkit-scrollbar-thumb{
-      background: rgba(17,24,39,.10);
+      background: rgba(15,23,42,.12);
       border-radius: 999px;
     }
     .shot{
       flex: 0 0 auto;
-      width: 216px;
+      width: 210px;
       border-radius: 26px;
       background: rgba(11,18,32,1);
       padding: 10px;
@@ -455,10 +451,11 @@
       scroll-snap-align: start;
       cursor:pointer;
       user-select:none;
+      outline: none;
     }
     .shot img{
       width: 100%;
-      height: 430px;
+      height: 420px;
       object-fit: cover;
       border-radius: 18px;
       display:block;
@@ -468,10 +465,9 @@
       padding: 9px 10px;
       border-radius: 16px;
       background: rgba(255,255,255,.92);
-      border: 1px solid rgba(17,24,39,.08);
-      box-shadow: 0 12px 22px rgba(16,24,40,.08);
+      border: 1px solid rgba(15,23,42,.08);
       font-weight: 900;
-      color: rgba(11,18,32,.80);
+      color: rgba(11,18,32,.82);
       font-size: 13px;
     }
     .dots{
@@ -481,26 +477,68 @@
       justify-content:center;
       margin-top: 10px;
     }
-    .dot{ width: 7px; height: 7px; border-radius: 999px; background: rgba(11,18,32,.18); }
-    .dot.on{ background: rgba(14,165,90,.96); }
+    .dot2{
+      width: 7px; height: 7px; border-radius: 999px;
+      background: rgba(11,18,32,.18);
+      cursor:pointer;
+    }
+    .dot2.on{ background: rgba(14,165,90,.96); }
 
-    /* Privacy block */
-    .privacy{
+    /* ===== Accordion FAQ / policy-like ===== */
+    .accordion{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    details.acc{
+      border-radius: var(--r-xl);
+      background: var(--surface);
+      border: 1px solid rgba(15,23,42,.08);
+      box-shadow: var(--shadow1);
+      overflow:hidden;
+    }
+    details.acc > summary{
+      list-style: none;
+      cursor:pointer;
+      padding: 16px;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 950;
+      letter-spacing: -.2px;
+    }
+    details.acc > summary::-webkit-details-marker{ display:none; }
+    .acc-ico{
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      background: rgba(18,194,109,.10);
+      border: 1px solid rgba(18,194,109,.16);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .acc-body{
+      padding: 0 16px 16px 16px;
+      color: rgba(11,18,32,.70);
+      font-weight: 650;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* ===== Privacy callout ===== */
+    .privacy-row{
       display:flex;
       align-items:center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       flex-wrap:wrap;
-      padding: 18px;
-      border-radius: var(--radiusXL);
-      box-shadow: var(--shadow2);
     }
-    .privacy .title{
+    .privacy-row .title{
       font-size: 18px;
       font-weight: 950;
       letter-spacing: -.3px;
+      margin: 0;
     }
-    .privacy p{
+    .privacy-row p{
       margin: 6px 0 0;
       color: rgba(11,18,32,.66);
       font-weight: 700;
@@ -512,40 +550,48 @@
       gap:8px;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(14,165,90,.10);
-      border: 1px solid rgba(14,165,90,.18);
+      background: rgba(18,194,109,.10);
+      border: 1px solid rgba(18,194,109,.18);
       font-weight: 950;
-      color: rgba(11,18,32,.82);
+      color: rgba(11,18,32,.84);
       white-space: nowrap;
     }
 
-    /* Footer */
+    /* ===== Footer ===== */
     footer{
-      padding: 26px 0 42px;
+      padding: 20px 0 38px;
       color: rgba(11,18,32,.60);
       font-weight: 750;
     }
     .foot{
-      padding-top: 16px;
-      border-top: 1px solid rgba(17,24,39,.08);
+      padding-top: 14px;
+      border-top: 1px solid rgba(15,23,42,.08);
       display:flex;
       justify-content: space-between;
       gap: 12px;
       flex-wrap:wrap;
     }
-    .small-links a{ color: rgba(11,18,32,.64); font-weight: 800; }
-    .small-links a:hover{ color: rgba(11,18,32,.95); }
-    .sep{ margin: 0 8px; opacity: .35; }
+    .small-links a{
+      color: rgba(11,18,32,.64);
+      font-weight: 850;
+      padding: 8px 8px;
+      border-radius: 12px;
+    }
+    .small-links a:hover{
+      background: rgba(255,255,255,.72);
+      color: rgba(11,18,32,.95);
+    }
+    .sep{ margin: 0 6px; opacity: .35; }
 
-    /* Modal */
+    /* ===== Modal ===== */
     .modal{
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.45);
+      background: rgba(0,0,0,.50);
       display: none;
       align-items:center;
       justify-content:center;
-      padding: 18px;
+      padding: 16px;
       z-index: 80;
     }
     .modal.on{ display:flex; }
@@ -553,8 +599,11 @@
       width: min(980px, 100%);
       border-radius: 28px;
       overflow:hidden;
-      box-shadow: 0 40px 90px rgba(0,0,0,.26);
-      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 40px 90px rgba(0,0,0,.28);
     }
     .dialog-head{
       display:flex;
@@ -565,16 +614,13 @@
     }
     .dialog-title{ font-weight: 950; letter-spacing: -.3px; }
     .close{
-      border:0;
+      border: 1px solid rgba(15,23,42,.10);
       cursor:pointer;
       padding: 10px 12px;
       border-radius: 16px;
-      background: rgba(11,18,32,.08);
+      background: rgba(255,255,255,.80);
       font-weight: 950;
-      transition: transform .18s ease;
     }
-    .close:active{ transform: scale(.98); }
-
     .dialog-body{ padding: 0 14px 14px; }
     .dialog-body img{
       width: 100%;
@@ -595,44 +641,47 @@
       font-weight: 850;
     }
 
-    /* Reveal */
-    .reveal{ opacity:0; transform: translateY(10px); transition: .6s ease; }
+    /* ===== Reveal (bem suave) ===== */
+    .reveal{ opacity:0; transform: translateY(10px); transition: .55s var(--ease); }
     .reveal.on{ opacity:1; transform:none; }
 
-    /* Responsive */
-    @media (max-width: 960px){
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
       .nav{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
-      .phone{ justify-self: center; width: min(420px, 100%); }
-      .grid-3{ grid-template-columns: 1fr; }
-      .shot{ width: 190px; }
-      .shot img{ height: 390px; }
-      .section{ padding: 44px 0; }
+      .screen{ height: 620px; }
+      .grid{ grid-template-columns: 1fr; }
+      .shot{ width: 188px; }
+      .shot img{ height: 380px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ transition:none; }
+      .btn,.icon-btn{ transition:none; }
+      .shots{ scroll-behavior: auto; }
     }
   </style>
 </head>
 
 <body>
   <script>
-    // CONFIG
+    // ===== CONFIG =====
     const PLAY_URL = "https://play.google.com/store/apps/details?id=com.jack.meuholerite";
     const PLAY_REF = "&referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlanding";
     const PLAY_FINAL = PLAY_URL + PLAY_REF;
 
-    const SITE_URL = "https://meuholerite.me//";
+    const SITE_URL = "https://meuholerite.me/";
     const APP_NAME = "Meu Holerite";
     const APP_TAGLINE = "Holerite • Ponto • Recibos";
-
-    // Se quiser mostrar versão no site (manual):
-    const APP_VERSION_BADGE = "Google Play";
   </script>
 
-  <header class="topbar glass">
+  <!-- ===== APPBAR ===== -->
+  <header class="appbar">
     <div class="container">
-      <div class="topbar-inner">
+      <div class="appbar-inner">
         <a class="brand" href="./" aria-label="Meu Holerite">
-          <div class="logo">MH</div>
-          <div class="brand-title">
+          <div class="app-icon" aria-hidden="true">MH</div>
+          <div class="brand-txt">
             <div class="t" id="brandName">Meu Holerite</div>
             <div class="s" id="brandTag">Holerite • Ponto • Recibos</div>
           </div>
@@ -647,122 +696,118 @@
         </nav>
 
         <div style="display:flex; gap:10px; align-items:center;">
-          <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
-          <a class="btn btn-primary" id="btnTop" href="#">Instalar</a>
+          <a class="btn btn-outline" href="#prints" aria-label="Ver prints">📸 Prints</a>
+          <a class="btn btn-primary" id="btnTop" href="#" aria-label="Instalar">Instalar</a>
         </div>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
-            <span class="kicker"><span class="k-dot"></span> Visual moderno e leitura clara (inspirado no iOS)</span>
+            <span class="kicker">✅ Interface moderna • leitura clara • inspirado no app</span>
 
-            <h1>Seu holerite e ponto,<br/>bem organizados e privados. ✅</h1>
+            <h1>Seu holerite e ponto,<br/>bem organizados e privados.</h1>
 
             <p class="sub">
               Importe documentos do <b>ePays</b>, acompanhe <b>banco de horas</b>, receba <b>alertas</b> e veja
-              <b>proventos e descontos</b> com clareza. Seu conteúdo fica <b>no seu dispositivo</b>.
+              <b>proventos e descontos</b> com clareza. Seus dados ficam <b>no seu dispositivo</b>.
             </p>
 
-            <div class="cta-row">
+            <div class="cta">
               <a class="btn btn-primary" id="btnHero" href="#">Instalar na Google Play</a>
-
-              <a class="btn-play" id="btnPlayBadge" href="#" aria-label="Abrir na Google Play">
-                <span class="play-ico" aria-hidden="true">▶</span>
-                <span>
-                  <small>Disponível na</small>
-                  <strong>Google Play</strong>
-                </span>
-              </a>
-
-              <a class="btn btn-ghost" href="#funcionalidades">✨ Ver recursos</a>
+              <a class="btn btn-tonal" href="#funcionalidades">✨ Ver recursos</a>
+              <a class="btn btn-outline" href="#faq">❓ FAQ</a>
             </div>
 
-            <div class="badges">
-              <span class="badge">✅ Publicado na Play</span>
-              <span class="badge">🔒 Privacidade: dados locais</span>
-              <span class="badge">📥 Importação do ePays</span>
-              <span class="badge">⏱️ Banco de horas</span>
-              <span class="badge">🔔 Aviso de faltas</span>
+            <div style="margin-top:12px" class="chips">
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Publicado na Play</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Privacidade: dados locais</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Importação do ePays</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Banco de horas</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Aviso de faltas</span>
             </div>
 
-            <div class="note">
-              <b>Instalação segura:</b> agora você instala diretamente pela <b>Google Play</b>.
+            <div class="note card soft">
+              <b>Instalação segura:</b> agora você instala direto pela <b>Google Play</b>.
               Atualizações e verificações de segurança ficam centralizadas na loja.
             </div>
           </div>
 
-          <!-- Preview no “iPhone” com print real -->
           <div class="phone reveal" aria-label="Prévia do app">
             <div class="screen">
-              <img class="hero-shot" src="assets/screens/05-recibos.jpg" alt="Tela do Meu Holerite" />
+              <img src="assets/screens/05-recibos.jpg" alt="Tela do Meu Holerite" loading="eager" />
               <div class="screen-overlay">
                 <div class="t">Recibos detalhados</div>
                 <div class="s">Veja proventos, descontos e acesse o PDF com 1 toque.</div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- PRINTS -->
+    <!-- ===== PRINTS ===== -->
     <section class="section" id="prints">
       <div class="container">
-        <div class="reveal">
-          <h2>📸 Prints do app</h2>
-          <p class="lead">
-            Navegue pelas telas principais. Toque em qualquer print para ampliar (modal estilo iOS).
-          </p>
+        <div class="section-title reveal">
+          <div>
+            <h2>📸 Prints do app</h2>
+            <p class="lead">Toque em qualquer print para ampliar (modal com navegação por teclado).</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-outline" href="#funcionalidades">✨ Recursos</a>
+            <a class="btn btn-primary" id="btnMid2" href="#">Instalar</a>
+          </div>
         </div>
 
-        <div class="shots-wrap glass reveal">
+        <div class="card soft shots-wrap reveal" role="region" aria-label="Carrossel de prints">
           <div class="shots-head">
-            <div class="hint">Dica: no celular você pode arrastar →</div>
-            <div class="shots-controls">
-              <button class="icon-btn" id="prev" aria-label="Anterior">←</button>
-              <button class="icon-btn" id="next" aria-label="Próximo">→</button>
+            <div class="hint">Dica: no celular, arraste →</div>
+            <div class="controls">
+              <button class="icon-btn" id="prev" aria-label="Anterior" type="button">←</button>
+              <button class="icon-btn" id="next" aria-label="Próximo" type="button">→</button>
             </div>
           </div>
 
-          <div class="shots" id="shots">
-            <div class="shot" data-title="Bem-vindo" data-src="assets/screens/01-onboarding.jpg">
-              <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite" />
+          <div class="shots" id="shots" tabindex="0" aria-label="Lista de prints">
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Bem-vindo" data-title="Bem-vindo" data-src="assets/screens/01-onboarding.jpg">
+              <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite" loading="lazy" />
               <div class="cap">👋 Bem-vindo</div>
             </div>
 
-            <div class="shot" data-title="Cadastro" data-src="assets/screens/02-cadastro.jpg">
-              <img src="assets/screens/02-cadastro.jpg" alt="Cadastro de nome e matrícula" />
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Cadastro" data-title="Cadastro" data-src="assets/screens/02-cadastro.jpg">
+              <img src="assets/screens/02-cadastro.jpg" alt="Cadastro de nome e matrícula" loading="lazy" />
               <div class="cap">🧑‍💼 Nome e matrícula</div>
             </div>
 
-            <div class="shot" data-title="Faltas detectadas" data-src="assets/screens/03-faltas-modal.jpg">
-              <img src="assets/screens/03-faltas-modal.jpg" alt="Modal de faltas detectadas" />
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Faltas detectadas" data-title="Faltas detectadas" data-src="assets/screens/03-faltas-modal.jpg">
+              <img src="assets/screens/03-faltas-modal.jpg" alt="Modal de faltas detectadas" loading="lazy" />
               <div class="cap">⚠️ Aviso de faltas</div>
             </div>
 
-            <div class="shot" data-title="Detalhe do desconto" data-src="assets/screens/04-desconto-modal.jpg">
-              <img src="assets/screens/04-desconto-modal.jpg" alt="Modal com detalhes do desconto" />
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Detalhe do desconto" data-title="Detalhe do desconto" data-src="assets/screens/04-desconto-modal.jpg">
+              <img src="assets/screens/04-desconto-modal.jpg" alt="Modal com detalhes do desconto" loading="lazy" />
               <div class="cap">🔎 Detalhe do desconto</div>
             </div>
 
-            <div class="shot" data-title="Recibos" data-src="assets/screens/05-recibos.jpg">
-              <img src="assets/screens/05-recibos.jpg" alt="Tela de recibos" />
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Recibos" data-title="Recibos" data-src="assets/screens/05-recibos.jpg">
+              <img src="assets/screens/05-recibos.jpg" alt="Tela de recibos" loading="lazy" />
               <div class="cap">📄 Recibos</div>
             </div>
 
-            <div class="shot" data-title="Detalhes do ponto" data-src="assets/screens/06-detalhes.jpg">
-              <img src="assets/screens/06-detalhes.jpg" alt="Tela de detalhes do ponto" />
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Detalhes do ponto" data-title="Detalhes do ponto" data-src="assets/screens/06-detalhes.jpg">
+              <img src="assets/screens/06-detalhes.jpg" alt="Tela de detalhes do ponto" loading="lazy" />
               <div class="cap">🕒 Ponto e detalhes</div>
             </div>
 
-            <div class="shot" data-title="Ajustes" data-src="assets/screens/07-ajustes.jpg">
-              <img src="assets/screens/07-ajustes.jpg" alt="Tela de ajustes" />
+            <div class="shot" tabindex="0" role="button" aria-label="Abrir print: Ajustes" data-title="Ajustes" data-src="assets/screens/07-ajustes.jpg">
+              <img src="assets/screens/07-ajustes.jpg" alt="Tela de ajustes" loading="lazy" />
               <div class="cap">🆕 Ajustes</div>
             </div>
           </div>
@@ -772,15 +817,21 @@
       </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- ===== FEATURES ===== -->
     <section class="section" id="funcionalidades">
       <div class="container">
-        <div class="reveal">
-          <h2>✨ Principais funcionalidades</h2>
-          <p class="lead">Organizado para entender em segundos — e útil no dia a dia.</p>
+        <div class="section-title reveal">
+          <div>
+            <h2>✨ Principais funcionalidades</h2>
+            <p class="lead">Organizado para entender em segundos — e útil no dia a dia.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-primary" id="btnMid" href="#">Instalar</a>
+            <a class="btn btn-outline" href="#prints">📸 Prints</a>
+          </div>
         </div>
 
-        <div class="grid-3">
+        <div class="grid">
           <div class="card feat reveal">
             <div class="ico">📥</div>
             <h3>Importação rápida</h3>
@@ -814,35 +865,35 @@
           <div class="card feat reveal">
             <div class="ico">🔒</div>
             <h3>Privacidade</h3>
-            <p>Foco em privacidade: processamento e organização local, sem “bagunçar” sua rotina.</p>
+            <p>Processamento e organização local, com controle total do usuário.</p>
           </div>
-        </div>
-
-        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
-          <a class="btn btn-primary" id="btnMid" href="#">Instalar na Google Play</a>
-          <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
         </div>
       </div>
     </section>
 
-    <!-- WHAT'S NEW -->
+    <!-- ===== WHAT'S NEW ===== -->
     <section class="section" id="novidades">
       <div class="container">
-        <div class="reveal">
-          <h2>🆕 Novidades</h2>
-          <p class="lead">Resumo das últimas melhorias publicadas na Google Play.</p>
+        <div class="section-title reveal">
+          <div>
+            <h2>🆕 Novidades</h2>
+            <p class="lead">Resumo das últimas melhorias publicadas na Google Play.</p>
+          </div>
+          <a class="btn btn-outline" id="btnWhatsNew" href="#">Ver na Play</a>
         </div>
 
-        <div class="whatsnew glass reveal">
-          <div class="wn-head">
+        <div class="card variant card-pad reveal">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;">
             <div>
-              <div class="wn-title">Última atualização</div>
-              <div class="wn-sub">Publicada em <b>19 de fevereiro de 2026</b> (Play Store)</div>
+              <div style="font-weight:950; letter-spacing:-.2px; font-size:16px;">Última atualização</div>
+              <div style="margin-top:3px; color:rgba(11,18,32,.62); font-weight:850; font-size:13px;">
+                Publicada em <b>19 de fevereiro de 2026</b> (Play Store)
+              </div>
             </div>
-            <a class="btn btn-ghost" id="btnWhatsNew" href="#">Ver na Play</a>
+            <a class="btn btn-primary" id="btnBottom2" href="#">Instalar agora</a>
           </div>
 
-          <ul class="wn-list">
+          <ul style="margin:12px 0 0; padding-left: 18px; color: rgba(11,18,32,.76); font-weight: 750; line-height: 1.6;">
             <li>Melhorias no reconhecimento de espelho de ponto e holerite para mais modelos de empresas.</li>
             <li>Nova opção para exportar todos os PDFs salvos.</li>
             <li>Ajustes na tela de PDFs (listagem mais organizada e rápida).</li>
@@ -852,54 +903,73 @@
       </div>
     </section>
 
-    <!-- PRIVACY -->
+    <!-- ===== PRIVACY ===== -->
     <section class="section" id="privacidade">
       <div class="container">
-        <div class="privacy glass reveal">
-          <div>
-            <div class="title">🔒 Privacidade em primeiro lugar</div>
-            <p>Seu conteúdo fica no seu dispositivo. Você mantém o controle.</p>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-            <div class="pill">✅ Dados locais</div>
-            <a class="btn btn-ghost" href="./privacidade/">Ler política</a>
+        <div class="card soft card-pad reveal">
+          <div class="privacy-row">
+            <div>
+              <p class="title" style="margin:0;">🔒 Privacidade em primeiro lugar</p>
+              <p style="margin:6px 0 0;">Seu conteúdo fica no seu dispositivo. Você mantém o controle.</p>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <div class="pill">✅ Dados locais</div>
+              <a class="btn btn-outline" href="./privacidade/">Ler política</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- ===== FAQ (agora estilo “cards do app”) ===== -->
     <section class="section" id="faq">
       <div class="container">
-        <div class="reveal">
-          <h2>FAQ</h2>
-          <p class="lead">Dúvidas comuns antes de instalar.</p>
-        </div>
-
-        <div class="grid-3">
-          <div class="card feat reveal">
-            <div class="ico">🌐</div>
-            <h3>Precisa do ePays?</h3>
-            <p>O app foi feito para importar documentos a partir do portal ePays e organizar o histórico.</p>
+        <div class="section-title reveal">
+          <div>
+            <h2>❓ FAQ</h2>
+            <p class="lead">Dúvidas comuns antes de instalar.</p>
           </div>
-
-          <div class="card feat reveal">
-            <div class="ico">🛡️</div>
-            <h3>É seguro instalar?</h3>
-            <p>Sim — agora a instalação é pela Google Play, com verificações e atualizações pela loja.</p>
-          </div>
-
-          <div class="card feat reveal">
-            <div class="ico">📩</div>
-            <h3>Suporte</h3>
-            <p>Fale com a gente pelo canal de suporte disponível na página do app.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-outline" href="./termos/">📄 Termos</a>
+            <a class="btn btn-outline" href="./privacidade/">🔒 Privacidade</a>
           </div>
         </div>
 
-        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
+        <div class="accordion reveal">
+          <details class="acc" open>
+            <summary>
+              <span class="acc-ico">🌐</span>
+              Precisa do ePays?
+            </summary>
+            <div class="acc-body">
+              O app foi feito para importar documentos a partir do portal <b>ePays</b> e organizar seu histórico.
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-ico">🛡️</span>
+              É seguro instalar?
+            </summary>
+            <div class="acc-body">
+              Sim — a instalação é pela <b>Google Play</b>, com verificações e atualizações pela loja.
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-ico">📩</span>
+              Como falar com o suporte?
+            </summary>
+            <div class="acc-body">
+              Use o canal de suporte disponível na página do app na Play Store (ou na seção de contato do seu site).
+            </div>
+          </details>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;" class="reveal">
           <a class="btn btn-primary" id="btnBottom" href="#">Instalar agora</a>
-          <a class="btn btn-ghost" href="./termos/">📄 Termos</a>
-          <a class="btn btn-ghost" href="./privacidade/">🔒 Privacidade</a>
+          <a class="btn btn-outline" href="#prints">📸 Ver prints</a>
         </div>
       </div>
     </section>
@@ -920,12 +990,12 @@
     </div>
   </footer>
 
-  <!-- MODAL -->
+  <!-- ===== MODAL ===== -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Visualização do print">
-    <div class="dialog glass">
+    <div class="dialog" role="document" aria-labelledby="modalTitle">
       <div class="dialog-head">
         <div class="dialog-title" id="modalTitle">Print</div>
-        <button class="close" id="close" aria-label="Fechar">Fechar</button>
+        <button class="close" id="close" aria-label="Fechar" type="button">Fechar</button>
       </div>
       <div class="dialog-body">
         <img id="modalImg" src="" alt="Print ampliado" />
@@ -933,7 +1003,7 @@
       <div class="dialog-foot">
         <div id="modalHint">Clique fora para fechar • ESC para fechar</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn btn-ghost" id="mPrev" type="button">← Anterior</button>
+          <button class="btn btn-outline" id="mPrev" type="button">← Anterior</button>
           <button class="btn btn-primary" id="mNext" type="button">Próximo →</button>
         </div>
       </div>
@@ -941,160 +1011,16 @@
   </div>
 
   <script>
-    // Ano
+    // ===== Basic text + year =====
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Textos
     const brandName = document.getElementById("brandName");
     const brandTag = document.getElementById("brandTag");
     const footName = document.getElementById("footName");
+
     if (brandName) brandName.textContent = APP_NAME;
     if (brandTag) brandTag.textContent = APP_TAGLINE;
     if (footName) footName.textContent = APP_NAME;
 
-    // Link Play em todos os CTAs
-    const btnIds = ["btnTop","btnHero","btnMid","btnBottom","btnPlayBadge","btnWhatsNew"];
-    btnIds.forEach(id=>{
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.href = PLAY_FINAL;
-      el.target = "_blank";
-      el.rel = "noopener";
-    });
-
-    // Reveal on scroll
-    const els = Array.from(document.querySelectorAll(".reveal"));
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("on"); });
-    }, {threshold:.12});
-    els.forEach(el=>io.observe(el));
-
-    // Carousel + dots + modal
-    const shots = document.getElementById("shots");
-    const items = Array.from(document.querySelectorAll(".shot"));
-    const dotsEl = document.getElementById("dots");
-
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
-
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modalImg");
-    const modalTitle = document.getElementById("modalTitle");
-    const closeBtn = document.getElementById("close");
-    const mPrev = document.getElementById("mPrev");
-    const mNext = document.getElementById("mNext");
-
-    let activeIndex = 0;
-
-    function renderDots(){
-      if(!dotsEl) return;
-      dotsEl.innerHTML = "";
-      items.forEach((_, i)=>{
-        const d = document.createElement("div");
-        d.className = "dot" + (i === activeIndex ? " on" : "");
-        d.addEventListener("click", ()=>scrollToIndex(i));
-        dotsEl.appendChild(d);
-      });
-    }
-
-    function scrollToIndex(i){
-      if(items.length === 0) return;
-      activeIndex = Math.max(0, Math.min(items.length - 1, i));
-      const el = items[activeIndex];
-      if(el) el.scrollIntoView({ behavior:"smooth", inline:"start", block:"nearest" });
-      renderDots();
-    }
-
-    function getClosestIndex(){
-      if(!shots || items.length === 0) return;
-
-      const rect = shots.getBoundingClientRect();
-      const center = rect.left + rect.width / 2;
-
-      let best = 0;
-      let bestDist = Infinity;
-
-      items.forEach((it, i)=>{
-        const r = it.getBoundingClientRect();
-        const c = r.left + r.width / 2;
-        const dist = Math.abs(c - center);
-        if(dist < bestDist){
-          bestDist = dist;
-          best = i;
-        }
-      });
-
-      activeIndex = best;
-      renderDots();
-    }
-
-    if(prev) prev.addEventListener("click", ()=>scrollToIndex(activeIndex - 1));
-    if(next) next.addEventListener("click", ()=>scrollToIndex(activeIndex + 1));
-
-    if(shots){
-      shots.addEventListener("scroll", ()=>{
-        window.clearTimeout(window.__t);
-        window.__t = window.setTimeout(getClosestIndex, 90);
-      });
-    }
-
-    function openModal(i){
-      if(!modal || items.length === 0) return;
-      activeIndex = Math.max(0, Math.min(items.length - 1, i));
-
-      const it = items[activeIndex];
-      const title = it?.dataset?.title || "Print";
-      const src = it?.dataset?.src || "";
-
-      modalTitle.textContent = title;
-      modalImg.src = src;
-
-      modal.classList.add("on");
-      renderDots();
-    }
-
-    function closeModal(){
-      if(!modal) return;
-      modal.classList.remove("on");
-    }
-
-    items.forEach((it, i)=> it.addEventListener("click", ()=>openModal(i)));
-    if(closeBtn) closeBtn.addEventListener("click", closeModal);
-
-    if(modal){
-      modal.addEventListener("click", (e)=>{
-        if(e.target === modal) closeModal();
-      });
-    }
-
-    if(mPrev){
-      mPrev.addEventListener("click", ()=>{
-        if(items.length === 0) return;
-        const i = (activeIndex - 1 + items.length) % items.length;
-        openModal(i);
-        scrollToIndex(i);
-      });
-    }
-
-    if(mNext){
-      mNext.addEventListener("click", ()=>{
-        if(items.length === 0) return;
-        const i = (activeIndex + 1) % items.length;
-        openModal(i);
-        scrollToIndex(i);
-      });
-    }
-
-    window.addEventListener("keydown", (e)=>{
-      if(!modal || !modal.classList.contains("on")) return;
-      if(e.key === "Escape") closeModal();
-      if(e.key === "ArrowLeft" && mPrev) mPrev.click();
-      if(e.key === "ArrowRight" && mNext) mNext.click();
-    });
-
-    // init
-    renderDots();
-    getClosestIndex();
-  </script>
-</body>
-</html>
+    // ===== Link Play em todos os CTAs =====
+    const btnIds = ["btnTop","btnHero","btnMid","btnBottom","btnMid2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnB]()
