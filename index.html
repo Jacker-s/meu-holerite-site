@@ -10,7 +10,7 @@
 
   <link rel="canonical" href="https://meuholerite.me/" />
 
-  <!-- Open Graph / WhatsApp -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Meu Holerite" />
   <meta property="og:title" content="Meu Holerite — Holerite, Ponto e Recibos" />
@@ -26,10 +26,8 @@
   <meta name="twitter:description" content="Importe do ePays, acompanhe banco de horas, faltas e recibos. Privacidade total." />
   <meta name="twitter:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
 
-  <!-- Icons -->
   <link rel="icon" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
-
   <link rel="preconnect" href="https://play.google.com" />
 
   <!-- JSON-LD -->
@@ -46,36 +44,35 @@
   </script>
 
   <style>
-    /* ===== Material-ish tokens (inspirado no seu app) ===== */
+    /* =======================
+       DESIGN SYSTEM (Material-ish)
+    ======================= */
     :root{
-      /* Brand */
-      --primary: #0ea55a;
+      --primary:#0ea55a;
       --primary2:#12c26d;
 
-      /* Surfaces */
-      --bg: #F6F8FC;
-      --surface: #FFFFFF;
-      --surface2:#F2F5F9; /* surfaceVariant */
-      --outline: rgba(15, 23, 42, .10);
+      --bg:#f6f8fc;
+      --surface:#ffffff;
+      --surface2:#f2f5f9;
+      --outline: rgba(15,23,42,.10);
 
-      /* Text */
-      --text: #0B1220;
+      --text:#0b1220;
       --muted: rgba(11,18,32,.68);
 
-      /* Elevation / radius */
-      --r-xl: 26px;
+      --r-xl: 28px;
       --r-l: 22px;
       --r-m: 18px;
-      --shadow1: 0 10px 24px rgba(16,24,40,.08);
-      --shadow2: 0 18px 46px rgba(16,24,40,.12);
+      --r-s: 14px;
 
-      /* Layout */
+      --shadow1: 0 10px 24px rgba(16,24,40,.08);
+      --shadow2: 0 18px 52px rgba(16,24,40,.14);
+      --shadow3: 0 8px 18px rgba(16,24,40,.08);
+
       --max: 1120px;
       --pad: 18px;
 
-      /* Motion */
-      --ease: cubic-bezier(.2,.8,.2,1);
       --dur: 220ms;
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
 
     *{ box-sizing:border-box; }
@@ -95,22 +92,23 @@
     a{ color:inherit; text-decoration:none; }
     .container{ max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
 
-    /* Focus */
     :focus-visible{
       outline: 3px solid rgba(18,194,109,.35);
       outline-offset: 2px;
       border-radius: 12px;
     }
 
-    /* ===== AppBar (top) ===== */
+    /* =======================
+       APP BAR
+    ======================= */
     header.appbar{
       position: sticky;
       top: 0;
       z-index: 60;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
       background: rgba(246,248,252,.78);
       border-bottom: 1px solid rgba(15,23,42,.06);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
     }
     .appbar-inner{
       display:flex;
@@ -120,7 +118,9 @@
       padding: 12px 0;
     }
     .brand{
-      display:flex; align-items:center; gap: 10px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
       min-width: 0;
     }
     .app-icon{
@@ -130,7 +130,7 @@
       box-shadow: 0 12px 20px rgba(14,165,90,.22);
       display:grid; place-items:center;
       color:#fff;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: -.3px;
       flex: 0 0 auto;
     }
@@ -147,31 +147,32 @@
     .brand-txt .s{
       margin-top: 2px;
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 850;
       font-size: 12px;
       white-space: nowrap;
       overflow:hidden;
       text-overflow: ellipsis;
     }
-
     .nav{
       display:flex;
       align-items:center;
-      gap: 14px;
+      gap: 6px;
     }
     .nav a{
       font-weight: 850;
       color: rgba(11,18,32,.72);
-      padding: 10px 10px;
+      padding: 10px 12px;
       border-radius: 14px;
       transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
     }
     .nav a:hover{
-      background: rgba(255,255,255,.72);
-      color: rgba(11,18,32,.95);
+      background: rgba(255,255,255,.70);
+      color: rgba(11,18,32,.96);
     }
 
-    /* ===== Buttons (Material-ish) ===== */
+    /* =======================
+       BUTTONS
+    ======================= */
     .btn{
       border: 1px solid transparent;
       cursor:pointer;
@@ -181,9 +182,12 @@
       gap:10px;
       padding: 12px 14px;
       border-radius: 16px;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: -.2px;
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease), opacity var(--dur) var(--ease);
+      transition: transform var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  background var(--dur) var(--ease),
+                  opacity var(--dur) var(--ease);
       user-select:none;
       white-space:nowrap;
     }
@@ -194,7 +198,15 @@
       color:#fff;
       box-shadow: 0 14px 26px rgba(14,165,90,.20);
     }
-    .btn-primary:hover{ box-shadow: 0 18px 36px rgba(14,165,90,.26); }
+    .btn-primary:hover{ box-shadow: 0 18px 38px rgba(14,165,90,.26); }
+
+    .btn-outline{
+      background: rgba(255,255,255,.78);
+      border-color: rgba(15,23,42,.10);
+      color: rgba(11,18,32,.92);
+      box-shadow: var(--shadow3);
+    }
+    .btn-outline:hover{ opacity:.98; }
 
     .btn-tonal{
       background: rgba(18,194,109,.10);
@@ -203,40 +215,30 @@
     }
     .btn-tonal:hover{ background: rgba(18,194,109,.12); }
 
-    .btn-outline{
-      background: rgba(255,255,255,.76);
-      border-color: rgba(15,23,42,.10);
-      color: rgba(11,18,32,.92);
-      box-shadow: 0 8px 16px rgba(16,24,40,.06);
-    }
-    .btn-outline:hover{ opacity: .98; }
-
-    .icon{
-      width: 18px; height: 18px;
-      display:inline-grid;
-      place-items:center;
-      border-radius: 8px;
-    }
-
-    /* ===== Cards / chips ===== */
+    /* =======================
+       CARDS / CHIPS
+    ======================= */
     .card{
       background: var(--surface);
       border: 1px solid rgba(15,23,42,.08);
       border-radius: var(--r-xl);
       box-shadow: var(--shadow1);
     }
-    .card.soft{
-      background: rgba(255,255,255,.72);
-      backdrop-filter: blur(12px) saturate(160%);
-      -webkit-backdrop-filter: blur(12px) saturate(160%);
-    }
     .card.variant{
       background: rgba(242,245,249,.78);
       border-color: rgba(15,23,42,.07);
     }
-    .card-pad{ padding: 18px; }
+    .glass{
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(15,23,42,.08);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow1);
+      backdrop-filter: blur(14px) saturate(170%);
+      -webkit-backdrop-filter: blur(14px) saturate(170%);
+    }
+    .pad{ padding: 18px; }
 
-    .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px; }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding: 10px 12px;
@@ -252,12 +254,14 @@
       box-shadow: 0 0 0 4px rgba(14,165,90,.12);
     }
 
-    /* ===== Hero ===== */
-    .hero{ padding: 26px 0 10px; }
+    /* =======================
+       HERO
+    ======================= */
+    .hero{ padding: 22px 0 10px; }
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.06fr .94fr;
-      gap: 18px;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
       align-items: stretch;
     }
 
@@ -279,7 +283,7 @@
       letter-spacing: -1px;
     }
     .sub{
-      margin: 0 0 14px;
+      margin: 0;
       color: rgba(11,18,32,.72);
       font-size: clamp(15px, 1.4vw, 18px);
       line-height: 1.62;
@@ -291,16 +295,27 @@
       gap: 10px;
       flex-wrap:wrap;
       align-items:center;
-      margin-top: 10px;
+      margin-top: 14px;
     }
+    .note{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: var(--r-l);
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(15,23,42,.08);
+      color: rgba(11,18,32,.68);
+      font-weight: 750;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .note b{ font-weight: 950; }
 
-    /* “Phone” preview – mais clean e Material */
+    /* Preview */
     .phone{
       border-radius: 34px;
       background: rgba(11,18,32,1);
       padding: 12px;
       box-shadow: 0 28px 70px rgba(0,0,0,.22);
-      position: relative;
       overflow:hidden;
     }
     .screen{
@@ -329,28 +344,17 @@
     .screen-overlay .t{ font-weight: 950; font-size: 18px; letter-spacing: -.2px; }
     .screen-overlay .s{ margin-top:4px; opacity:.90; font-weight: 750; font-size: 13px; line-height: 1.35; }
 
-    .note{
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: var(--r-l);
-      background: rgba(255,255,255,.70);
-      border: 1px solid rgba(15,23,42,.08);
-      color: rgba(11,18,32,.68);
-      font-weight: 750;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .note b{ font-weight: 950; }
-
-    /* ===== Sections ===== */
+    /* =======================
+       SECTIONS
+    ======================= */
     .section{ padding: 22px 0; }
-    .section-title{
+    .section-head{
       display:flex;
       align-items:flex-end;
       justify-content: space-between;
       gap: 12px;
       flex-wrap:wrap;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .section h2{
       margin: 0;
@@ -365,7 +369,7 @@
       max-width: 84ch;
     }
 
-    /* ===== Feature grid ===== */
+    /* Feature grid */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -400,7 +404,9 @@
       font-size: 14px;
     }
 
-    /* ===== Prints carousel ===== */
+    /* =======================
+       PRINTS CAROUSEL
+    ======================= */
     .shots-wrap{ padding: 14px; }
     .shots-head{
       display:flex;
@@ -411,14 +417,14 @@
       margin-bottom: 10px;
     }
     .hint{ color: rgba(11,18,32,.58); font-weight: 850; font-size: 13px; }
-    .controls{ display:flex; gap:8px; align-items:center; }
 
+    .controls{ display:flex; gap:8px; align-items:center; }
     .icon-btn{
       width: 44px; height: 44px;
       border-radius: 16px;
       border: 1px solid rgba(15,23,42,.10);
-      background: rgba(255,255,255,.80);
-      box-shadow: 0 8px 16px rgba(16,24,40,.06);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow3);
       cursor:pointer;
       display:grid; place-items:center;
       font-weight: 950;
@@ -484,7 +490,38 @@
     }
     .dot2.on{ background: rgba(14,165,90,.96); }
 
-    /* ===== Accordion FAQ / policy-like ===== */
+    /* =======================
+       WHATS NEW
+    ======================= */
+    .wn-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .wn-title{
+      font-weight: 950;
+      letter-spacing: -.2px;
+      font-size: 16px;
+    }
+    .wn-sub{
+      margin-top: 3px;
+      color: rgba(11,18,32,.62);
+      font-weight: 850;
+      font-size: 13px;
+    }
+    .wn-list{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: rgba(11,18,32,.76);
+      font-weight: 750;
+      line-height: 1.6;
+    }
+
+    /* =======================
+       ACCORDION (FAQ)
+    ======================= */
     .accordion{
       display:flex;
       flex-direction:column;
@@ -524,7 +561,9 @@
       font-size: 14px;
     }
 
-    /* ===== Privacy callout ===== */
+    /* =======================
+       PRIVACY STRIP
+    ======================= */
     .privacy-row{
       display:flex;
       align-items:center;
@@ -557,9 +596,11 @@
       white-space: nowrap;
     }
 
-    /* ===== Footer ===== */
+    /* =======================
+       FOOTER
+    ======================= */
     footer{
-      padding: 20px 0 38px;
+      padding: 20px 0 82px; /* espaço pro CTA fixo mobile */
       color: rgba(11,18,32,.60);
       font-weight: 750;
     }
@@ -583,7 +624,9 @@
     }
     .sep{ margin: 0 6px; opacity: .35; }
 
-    /* ===== Modal ===== */
+    /* =======================
+       MODAL
+    ======================= */
     .modal{
       position: fixed;
       inset: 0;
@@ -600,9 +643,9 @@
       border-radius: 28px;
       overflow:hidden;
       background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.28);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255,255,255,.28);
       box-shadow: 0 40px 90px rgba(0,0,0,.28);
     }
     .dialog-head{
@@ -641,11 +684,66 @@
       font-weight: 850;
     }
 
-    /* ===== Reveal (bem suave) ===== */
+    /* =======================
+       MOBILE FIXED CTA BAR
+    ======================= */
+    .cta-bar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 70;
+      display:none;
+    }
+    .cta-bar-inner{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+    .cta-mini{
+      min-width: 0;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .cta-mini .mini-t{
+      font-weight: 950;
+      letter-spacing: -.2px;
+      line-height: 1.1;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      max-width: 38vw;
+    }
+    .cta-mini .mini-s{
+      margin-top: 2px;
+      font-weight: 800;
+      color: rgba(11,18,32,.60);
+      font-size: 11px;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      max-width: 38vw;
+    }
+
+    /* =======================
+       REVEAL
+    ======================= */
     .reveal{ opacity:0; transform: translateY(10px); transition: .55s var(--ease); }
     .reveal.on{ opacity:1; transform:none; }
 
-    /* ===== Responsive ===== */
+    /* =======================
+       RESPONSIVE
+    ======================= */
     @media (max-width: 980px){
       .nav{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
@@ -653,6 +751,7 @@
       .grid{ grid-template-columns: 1fr; }
       .shot{ width: 188px; }
       .shot img{ height: 380px; }
+      .cta-bar{ display:block; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -670,7 +769,6 @@
     const PLAY_REF = "&referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlanding";
     const PLAY_FINAL = PLAY_URL + PLAY_REF;
 
-    const SITE_URL = "https://meuholerite.me/";
     const APP_NAME = "Meu Holerite";
     const APP_TAGLINE = "Holerite • Ponto • Recibos";
   </script>
@@ -709,7 +807,7 @@
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
-            <span class="kicker">✅ Interface moderna • leitura clara • inspirado no app</span>
+            <span class="kicker">✅ Interface moderna • leitura clara • privacidade em primeiro lugar</span>
 
             <h1>Seu holerite e ponto,<br/>bem organizados e privados.</h1>
 
@@ -724,15 +822,15 @@
               <a class="btn btn-outline" href="#faq">❓ FAQ</a>
             </div>
 
-            <div style="margin-top:12px" class="chips">
+            <div class="chips">
               <span class="chip"><span class="dot" aria-hidden="true"></span> Publicado na Play</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span> Privacidade: dados locais</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span> Importação do ePays</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Dados locais</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Importação ePays</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span> Banco de horas</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span> Aviso de faltas</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span> Alertas</span>
             </div>
 
-            <div class="note card soft">
+            <div class="note">
               <b>Instalação segura:</b> agora você instala direto pela <b>Google Play</b>.
               Atualizações e verificações de segurança ficam centralizadas na loja.
             </div>
@@ -755,10 +853,10 @@
     <!-- ===== PRINTS ===== -->
     <section class="section" id="prints">
       <div class="container">
-        <div class="section-title reveal">
+        <div class="section-head reveal">
           <div>
             <h2>📸 Prints do app</h2>
-            <p class="lead">Toque em qualquer print para ampliar (modal com navegação por teclado).</p>
+            <p class="lead">Toque em qualquer print para ampliar (modal com teclado e navegação).</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn btn-outline" href="#funcionalidades">✨ Recursos</a>
@@ -766,7 +864,7 @@
           </div>
         </div>
 
-        <div class="card soft shots-wrap reveal" role="region" aria-label="Carrossel de prints">
+        <div class="glass shots-wrap reveal" role="region" aria-label="Carrossel de prints">
           <div class="shots-head">
             <div class="hint">Dica: no celular, arraste →</div>
             <div class="controls">
@@ -820,7 +918,7 @@
     <!-- ===== FEATURES ===== -->
     <section class="section" id="funcionalidades">
       <div class="container">
-        <div class="section-title reveal">
+        <div class="section-head reveal">
           <div>
             <h2>✨ Principais funcionalidades</h2>
             <p class="lead">Organizado para entender em segundos — e útil no dia a dia.</p>
@@ -871,10 +969,10 @@
       </div>
     </section>
 
-    <!-- ===== WHAT'S NEW ===== -->
+    <!-- ===== WHATS NEW ===== -->
     <section class="section" id="novidades">
       <div class="container">
-        <div class="section-title reveal">
+        <div class="section-head reveal">
           <div>
             <h2>🆕 Novidades</h2>
             <p class="lead">Resumo das últimas melhorias publicadas na Google Play.</p>
@@ -882,18 +980,16 @@
           <a class="btn btn-outline" id="btnWhatsNew" href="#">Ver na Play</a>
         </div>
 
-        <div class="card variant card-pad reveal">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div class="card variant pad reveal">
+          <div class="wn-head">
             <div>
-              <div style="font-weight:950; letter-spacing:-.2px; font-size:16px;">Última atualização</div>
-              <div style="margin-top:3px; color:rgba(11,18,32,.62); font-weight:850; font-size:13px;">
-                Publicada em <b>19 de fevereiro de 2026</b> (Play Store)
-              </div>
+              <div class="wn-title">Última atualização</div>
+              <div class="wn-sub">Publicada em <b>19 de fevereiro de 2026</b> (Play Store)</div>
             </div>
             <a class="btn btn-primary" id="btnBottom2" href="#">Instalar agora</a>
           </div>
 
-          <ul style="margin:12px 0 0; padding-left: 18px; color: rgba(11,18,32,.76); font-weight: 750; line-height: 1.6;">
+          <ul class="wn-list">
             <li>Melhorias no reconhecimento de espelho de ponto e holerite para mais modelos de empresas.</li>
             <li>Nova opção para exportar todos os PDFs salvos.</li>
             <li>Ajustes na tela de PDFs (listagem mais organizada e rápida).</li>
@@ -906,11 +1002,11 @@
     <!-- ===== PRIVACY ===== -->
     <section class="section" id="privacidade">
       <div class="container">
-        <div class="card soft card-pad reveal">
+        <div class="glass pad reveal">
           <div class="privacy-row">
             <div>
-              <p class="title" style="margin:0;">🔒 Privacidade em primeiro lugar</p>
-              <p style="margin:6px 0 0;">Seu conteúdo fica no seu dispositivo. Você mantém o controle.</p>
+              <p class="title">🔒 Privacidade em primeiro lugar</p>
+              <p>Seu conteúdo fica no seu dispositivo. Você mantém o controle.</p>
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
               <div class="pill">✅ Dados locais</div>
@@ -921,10 +1017,10 @@
       </div>
     </section>
 
-    <!-- ===== FAQ (agora estilo “cards do app”) ===== -->
+    <!-- ===== FAQ ===== -->
     <section class="section" id="faq">
       <div class="container">
-        <div class="section-title reveal">
+        <div class="section-head reveal">
           <div>
             <h2>❓ FAQ</h2>
             <p class="lead">Dúvidas comuns antes de instalar.</p>
@@ -959,10 +1055,10 @@
           <details class="acc">
             <summary>
               <span class="acc-ico">📩</span>
-              Como falar com o suporte?
+              Suporte
             </summary>
             <div class="acc-body">
-              Use o canal de suporte disponível na página do app na Play Store (ou na seção de contato do seu site).
+              Fale com a gente pelo canal de suporte disponível na página do app (Play Store).
             </div>
           </details>
         </div>
@@ -990,6 +1086,20 @@
     </div>
   </footer>
 
+  <!-- ===== MOBILE CTA BAR ===== -->
+  <div class="cta-bar" aria-label="Barra de instalação">
+    <div class="cta-bar-inner">
+      <div class="cta-mini">
+        <div class="app-icon" style="width:34px;height:34px;border-radius:12px;box-shadow:none;">MH</div>
+        <div>
+          <div class="mini-t" id="miniName">Meu Holerite</div>
+          <div class="mini-s" id="miniTag">Holerite • Ponto • Recibos</div>
+        </div>
+      </div>
+      <a class="btn btn-primary" id="btnSticky" href="#" style="padding:12px 14px;">Instalar</a>
+    </div>
+  </div>
+
   <!-- ===== MODAL ===== -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Visualização do print">
     <div class="dialog" role="document" aria-labelledby="modalTitle">
@@ -1011,16 +1121,173 @@
   </div>
 
   <script>
-    // ===== Basic text + year =====
+    // ===== Year + titles =====
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const brandName = document.getElementById("brandName");
     const brandTag = document.getElementById("brandTag");
     const footName = document.getElementById("footName");
+    const miniName = document.getElementById("miniName");
+    const miniTag = document.getElementById("miniTag");
 
     if (brandName) brandName.textContent = APP_NAME;
     if (brandTag) brandTag.textContent = APP_TAGLINE;
     if (footName) footName.textContent = APP_NAME;
+    if (miniName) miniName.textContent = APP_NAME;
+    if (miniTag) miniTag.textContent = APP_TAGLINE;
 
-    // ===== Link Play em todos os CTAs =====
-    const btnIds = ["btnTop","btnHero","btnMid","btnBottom","btnMid2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnBottom2","btnB]()
+    // ===== CTA Links =====
+    const ctas = ["btnTop","btnHero","btnMid","btnBottom","btnMid2","btnBottom2","btnWhatsNew","btnSticky"];
+    ctas.forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.href = PLAY_FINAL;
+      el.target = "_blank";
+      el.rel = "noopener";
+    });
+
+    // ===== Reveal on scroll =====
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("on"); });
+    }, {threshold: .12});
+    revealEls.forEach(el => io.observe(el));
+
+    // ===== Carousel + dots + modal =====
+    const shots = document.getElementById("shots");
+    const items = Array.from(document.querySelectorAll(".shot"));
+    const dotsEl = document.getElementById("dots");
+
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeBtn = document.getElementById("close");
+    const mPrev = document.getElementById("mPrev");
+    const mNext = document.getElementById("mNext");
+
+    let activeIndex = 0;
+    let lastFocusEl = null;
+
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+
+    function renderDots(){
+      if(!dotsEl) return;
+      dotsEl.innerHTML = "";
+      items.forEach((_, i)=>{
+        const d = document.createElement("div");
+        d.className = "dot2" + (i === activeIndex ? " on" : "");
+        d.addEventListener("click", ()=>scrollToIndex(i));
+        dotsEl.appendChild(d);
+      });
+    }
+
+    function scrollToIndex(i){
+      if(items.length === 0) return;
+      activeIndex = clamp(i, 0, items.length - 1);
+      const el = items[activeIndex];
+      if(el) el.scrollIntoView({ behavior:"smooth", inline:"start", block:"nearest" });
+      renderDots();
+    }
+
+    function getClosestIndex(){
+      if(!shots || items.length === 0) return;
+
+      const rect = shots.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+
+      let best = 0;
+      let bestDist = Infinity;
+
+      for(let i=0;i<items.length;i++){
+        const r = items[i].getBoundingClientRect();
+        const c = r.left + r.width / 2;
+        const dist = Math.abs(c - center);
+        if(dist < bestDist){
+          bestDist = dist;
+          best = i;
+        }
+      }
+
+      activeIndex = best;
+      renderDots();
+    }
+
+    if(prev) prev.addEventListener("click", ()=>scrollToIndex(activeIndex - 1));
+    if(next) next.addEventListener("click", ()=>scrollToIndex(activeIndex + 1));
+
+    let t = null;
+    if(shots){
+      shots.addEventListener("scroll", ()=>{
+        if(t) clearTimeout(t);
+        t = setTimeout(getClosestIndex, 90);
+      }, {passive:true});
+    }
+
+    function openModal(i){
+      if(!modal || items.length === 0) return;
+      lastFocusEl = document.activeElement;
+
+      activeIndex = clamp(i, 0, items.length - 1);
+      const it = items[activeIndex];
+      const title = it?.dataset?.title || "Print";
+      const src = it?.dataset?.src || "";
+
+      modalTitle.textContent = title;
+      modalImg.src = src;
+
+      modal.classList.add("on");
+      closeBtn?.focus();
+      renderDots();
+    }
+
+    function closeModal(){
+      if(!modal) return;
+      modal.classList.remove("on");
+      modalImg.src = "";
+      if(lastFocusEl && typeof lastFocusEl.focus === "function") lastFocusEl.focus();
+    }
+
+    items.forEach((it, i)=>{
+      it.addEventListener("click", ()=>openModal(i));
+      it.addEventListener("keydown", (e)=>{
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          openModal(i);
+        }
+      });
+    });
+
+    if(closeBtn) closeBtn.addEventListener("click", closeModal);
+
+    if(modal){
+      modal.addEventListener("click", (e)=>{
+        if(e.target === modal) closeModal();
+      });
+    }
+
+    function modalGo(delta){
+      if(items.length === 0) return;
+      const i = (activeIndex + delta + items.length) % items.length;
+      openModal(i);
+      scrollToIndex(i);
+    }
+
+    if(mPrev) mPrev.addEventListener("click", ()=>modalGo(-1));
+    if(mNext) mNext.addEventListener("click", ()=>modalGo(+1));
+
+    window.addEventListener("keydown", (e)=>{
+      if(!modal || !modal.classList.contains("on")) return;
+      if(e.key === "Escape") closeModal();
+      if(e.key === "ArrowLeft") modalGo(-1);
+      if(e.key === "ArrowRight") modalGo(+1);
+    });
+
+    // init
+    renderDots();
+    requestAnimationFrame(()=>getClosestIndex());
+  </script>
+</body>
+</html>
