@@ -2,157 +2,637 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#14b865" />
-  <title>Termos de Uso — Meu Holerite</title>
-  <meta name="description" content="Termos de Uso do Meu Holerite." />
+  <title>Privacidade — Meu Holerite</title>
+  <meta name="description" content="Política de Privacidade do Meu Holerite. Entenda como seus dados são tratados, armazenados e protegidos." />
+
+  <link rel="canonical" href="https://jacker-s.github.io/meu-holerite-site/privacidade/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Meu Holerite" />
-  <meta property="og:title" content="Termos de Uso — Meu Holerite" />
-  <meta property="og:description" content="Regras de uso e responsabilidades ao utilizar o Meu Holerite." />
-  <meta property="og:url" content="https://jacker-s.github.io/meu-holerite-site/termos/" />
+  <meta property="og:title" content="Privacidade — Meu Holerite" />
+  <meta property="og:description" content="Entenda como o Meu Holerite trata seus dados. Privacidade em primeiro lugar." />
+  <meta property="og:url" content="https://jacker-s.github.io/meu-holerite-site/privacidade/" />
   <meta property="og:image" content="https://jacker-s.github.io/meu-holerite-site/assets/og/og-meu-holerite.png" />
+
+  <link rel="icon" href="../assets/icon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+  <link rel="preconnect" href="https://play.google.com" />
 
   <style>
     :root{
-      --bg:#f6f7fb; --text:#0b1220; --muted:#6b7280;
-      --green:#0ea55a; --green2:#12c26d;
-      --shadow:0 18px 40px rgba(16,24,40,.12);
-      --radius:24px; --max:980px;
+      --bg1:#f6f8fc;
+      --bg2:#eef3f7;
+
+      --text:#0b1220;
+      --muted:#6b7280;
+
+      --brand:#0ea55a;
+      --brand2:#12c26d;
+
+      --glass: rgba(255,255,255,.72);
+      --glassBorder: rgba(17,24,39,.08);
+
+      --shadow2: 0 12px 26px rgba(16,24,40,.10);
+      --shadow3: 0 6px 14px rgba(16,24,40,.08);
+
+      --radiusXL: 28px;
+      --radiusL: 22px;
+      --radiusM: 18px;
+
+      --max: 980px;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
-      margin:0; color:var(--text);
+      margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(18,194,109,.20), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(14,165,90,.16), transparent 55%),
-        var(--bg);
+        radial-gradient(1200px 640px at 18% -10%, rgba(18,194,109,.18), transparent 60%),
+        radial-gradient(900px 520px at 92% 0%, rgba(14,165,90,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      -webkit-font-smoothing: antialiased;
+      overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
-    .top{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter:saturate(180%) blur(14px);
-      background:rgba(246,247,251,.72);
-      border-bottom:1px solid rgba(17,24,39,.06);
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+
+    /* glass */
+    .glass{
+      background: var(--glass);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid var(--glassBorder);
     }
-    .top-inner{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:14px 0; gap:14px;
+
+    /* Topbar (igual ao index) */
+    header.topbar{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(17,24,39,.06);
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:950}
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 950;
+      letter-spacing: -.2px;
+    }
     .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:linear-gradient(135deg,var(--green2),var(--green));
-      color:#fff; display:grid; place-items:center; font-weight:950;
-      box-shadow:0 10px 18px rgba(14,165,90,.25);
+      width:38px; height:38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      display:grid; place-items:center;
+      color:#fff;
+      box-shadow: 0 12px 20px rgba(14,165,90,.22);
+      font-weight: 950;
     }
+    .brand-title{ line-height:1.05; }
+    .brand-title .t{ font-size:16px; }
+    .brand-title .s{ font-size:12px; opacity:.68; font-weight:850; margin-top:2px; }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .nav a{
+      font-weight: 850;
+      color: rgba(11,18,32,.72);
+    }
+    .nav a:hover{ color: rgba(11,18,32,.98); }
+
+    /* Buttons */
     .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 14px; border-radius:14px;
-      font-weight:900; border:1px solid rgba(17,24,39,.08);
-      background:rgba(255,255,255,.86);
-      box-shadow:0 10px 24px rgba(16,24,40,.10);
+      border:0;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius: 18px;
+      font-weight: 900;
+      letter-spacing: -.2px;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease;
+      white-space:nowrap;
+      user-select:none;
     }
-    main{padding:28px 0 46px}
+    .btn:active{ transform: scale(.985); }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      color:#fff;
+      box-shadow: 0 16px 26px rgba(14,165,90,.22);
+    }
+    .btn-primary:hover{ box-shadow: 0 18px 30px rgba(14,165,90,.28); }
+    .btn-ghost{
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(17,24,39,.10);
+      box-shadow: var(--shadow3);
+      color: rgba(11,18,32,.92);
+    }
+    .btn-ghost:hover{ opacity:.96; }
+
+    /* Page */
+    .page{ padding: 26px 0 44px; }
+    .hero{
+      padding: 18px 0 14px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(14,165,90,.10);
+      border:1px solid rgba(14,165,90,.16);
+      color: rgba(11,18,32,.86);
+      font-weight: 900;
+    }
+    .k-dot{
+      width:10px; height:10px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      box-shadow: 0 0 0 4px rgba(14,165,90,.12);
+    }
+    h1{
+      margin: 14px 0 8px;
+      font-size: clamp(30px, 3.2vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 0 0 14px;
+      color: rgba(11,18,32,.70);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 76ch;
+      font-weight: 650;
+    }
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      margin-top: 10px;
+    }
+
+    /* Cards */
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+      margin-top: 14px;
+    }
     .card{
-      background:rgba(255,255,255,.86);
-      border:1px solid rgba(17,24,39,.08);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px;
+      border-radius: var(--radiusXL);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
     }
-    h1{margin:0 0 10px; letter-spacing:-.6px}
-    p,li{color:rgba(11,18,32,.74); line-height:1.65; font-weight:650}
-    h2{margin:18px 0 8px; letter-spacing:-.3px}
-    .meta{color:rgba(11,18,32,.55); font-weight:800; font-size:13px}
-    footer{padding:18px 0 28px; color:rgba(11,18,32,.60); font-weight:700}
-    .foot{border-top:1px solid rgba(17,24,39,.08); padding-top:14px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .card-inner{
+      padding: 16px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(17,24,39,.08);
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 950;
+      letter-spacing: -.3px;
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .section-desc{
+      margin:0;
+      color: rgba(11,18,32,.68);
+      font-weight: 650;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(14,165,90,.10);
+      border: 1px solid rgba(14,165,90,.18);
+      font-weight: 950;
+      color: rgba(11,18,32,.82);
+      white-space: nowrap;
+      font-size: 13px;
+    }
+    .pill.gray{
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(17,24,39,.10);
+      color: rgba(11,18,32,.74);
+      font-weight: 900;
+    }
+
+    .list{
+      margin: 12px 0 0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .li{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow3);
+    }
+    .ico{
+      width: 38px;
+      height: 38px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
+      font-weight: 950;
+      background: rgba(14,165,90,.12);
+      border: 1px solid rgba(14,165,90,.16);
+      flex: 0 0 auto;
+    }
+    .li h3{
+      margin:0;
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: -.2px;
+    }
+    .li p{
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: rgba(11,18,32,.68);
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .meta{
+      margin-top: 14px;
+      padding: 14px 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow3);
+      color: rgba(11,18,32,.66);
+      font-weight: 750;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .meta b{ font-weight: 950; }
+
+    footer{
+      padding: 26px 0 42px;
+      color: rgba(11,18,32,.60);
+      font-weight: 750;
+    }
+    .foot{
+      padding-top: 16px;
+      border-top: 1px solid rgba(17,24,39,.08);
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .small-links a{ color: rgba(11,18,32,.64); font-weight: 800; }
+    .small-links a:hover{ color: rgba(11,18,32,.95); }
+    .sep{ margin: 0 8px; opacity: .35; }
+
+    .reveal{ opacity:0; transform: translateY(10px); transition: .6s ease; }
+    .reveal.on{ opacity:1; transform:none; }
+
+    @media (max-width: 920px){
+      .nav{ display:none; }
+    }
   </style>
 </head>
+
 <body>
-  <header class="top">
+  <script>
+    const PLAY_URL = "https://play.google.com/store/apps/details?id=com.jack.meuholerite";
+    const PLAY_REF = "&referrer=utm_source%3Dsite%26utm_medium%3Dprivacy%26utm_campaign%3Dlanding";
+    const PLAY_FINAL = PLAY_URL + PLAY_REF;
+  </script>
+
+  <header class="topbar glass">
     <div class="container">
-      <div class="top-inner">
-        <a class="brand" href="../">
+      <div class="topbar-inner">
+        <a class="brand" href="../" aria-label="Meu Holerite">
           <div class="logo">MH</div>
-          <div>
-            <div style="font-size:16px; line-height:1.05">Meu Holerite</div>
-            <div style="font-size:12px; opacity:.68; font-weight:850">Termos de Uso</div>
+          <div class="brand-title">
+            <div class="t">Meu Holerite</div>
+            <div class="s">Holerite • Ponto • Recibos</div>
           </div>
         </a>
-        <a class="btn" href="../">← Voltar ao site</a>
+
+        <nav class="nav" aria-label="Menu">
+          <a href="../#prints">Prints</a>
+          <a href="../#funcionalidades">Funcionalidades</a>
+          <a href="../#novidades">Novidades</a>
+          <a href="../termos/">Termos</a>
+        </nav>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn btn-ghost" href="../">← Voltar</a>
+          <a class="btn btn-primary" id="btnPlay" href="#">Instalar</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
+  <main class="page">
     <div class="container">
-      <div class="card">
-        <h1>Termos de Uso</h1>
-        <div class="meta">Última atualização: <span id="date"></span></div>
-
-        <p>
-          Ao instalar e utilizar o <b>Meu Holerite</b>, você concorda com estes Termos de Uso.
-          Se não concordar, não utilize o aplicativo.
+      <section class="hero reveal">
+        <span class="kicker"><span class="k-dot"></span> Privacidade em primeiro lugar</span>
+        <h1>Política de Privacidade</h1>
+        <p class="sub">
+          O <b>Meu Holerite</b> foi projetado para manter seus dados sob seu controle.
+          A leitura e organização de documentos acontece principalmente <b>no seu dispositivo</b>.
+          Aqui explicamos com clareza o que o app faz (e o que ele <b>não</b> faz).
         </p>
 
-        <h2>1) Finalidade</h2>
-        <p>
-          O aplicativo auxilia na <b>organização e visualização</b> de holerites, registros de ponto e informações relacionadas,
-          incluindo importação de documentos e visualização de detalhes (proventos/descontos).
-        </p>
+        <div class="cta">
+          <a class="btn btn-primary" id="btnPlay2" href="#">Abrir na Google Play</a>
+          <a class="btn btn-ghost" href="../#privacidade">Ver resumo no site</a>
+        </div>
 
-        <h2>2) Responsabilidade do usuário</h2>
-        <ul>
-          <li>Você é responsável pelas informações inseridas/importadas e por manter o acesso ao seu dispositivo seguro.</li>
-          <li>Você deve utilizar o app de forma lícita e respeitando regras do seu empregador e serviços que acessar (ex.: ePays).</li>
-        </ul>
+        <div class="meta">
+          <b>Última atualização:</b> 19/02/2026<br/>
+          <b>Aplicativo:</b> Meu Holerite (Android)<br/>
+          <b>Objetivo:</b> organizar holerites, espelho de ponto e PDFs do usuário.
+        </div>
+      </section>
 
-        <h2>3) Isenção de garantias</h2>
-        <p>
-          O app é fornecido “como está”. Apesar dos esforços, podem ocorrer indisponibilidades, mudanças de layout de serviços terceiros,
-          ou falhas de importação/visualização.
-        </p>
+      <div class="stack">
+        <!-- 1) O que coletamos -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">🔎 O que o app usa</div>
+            <p class="section-desc">
+              Para funcionar, o app precisa de algumas informações operacionais. Sempre que possível, isso fica restrito ao seu aparelho.
+            </p>
 
-        <h2>4) Serviços de terceiros</h2>
-        <p>
-          O app pode interagir com serviços de terceiros (ex.: ePays, Alelo). Esses serviços têm políticas próprias.
-          O funcionamento pode depender de alterações e disponibilidade desses provedores.
-        </p>
+            <ul class="list">
+              <li class="li">
+                <div class="ico">📄</div>
+                <div>
+                  <h3>Documentos importados</h3>
+                  <p>Holerites/espelhos de ponto que você importar (PDF). O conteúdo é usado para extrair campos e organizar por período.</p>
+                </div>
+              </li>
 
-        <h2>5) Atualizações</h2>
-        <p>
-          Podemos atualizar o app para melhorias, correções e novos recursos. Recomenda-se manter a versão atualizada.
-        </p>
+              <li class="li">
+                <div class="ico">🧠</div>
+                <div>
+                  <h3>Preferências do app</h3>
+                  <p>Ex.: tema escuro, configurações e ajustes de interface — para manter sua experiência consistente.</p>
+                </div>
+              </li>
 
-        <h2>6) Contato</h2>
-        <p>
-          Para suporte, utilize o contato informado no site/app.
-        </p>
+              <li class="li">
+                <div class="ico">🔐</div>
+                <div>
+                  <h3>Dados de conta (se você usar)</h3>
+                  <p>Se você fizer login/sincronização, podem existir dados mínimos de autenticação para backup/restauração (ex.: identidade da conta).</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="pill-row">
+              <span class="pill">✅ Controle do usuário</span>
+              <span class="pill gray">📦 Organização por períodos</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2) O que NÃO coletamos -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">🚫 O que não fazemos</div>
+            <p class="section-desc">
+              O app não foi criado para “espionar”. A proposta é ser útil sem invadir sua privacidade.
+            </p>
+
+            <ul class="list">
+              <li class="li">
+                <div class="ico">🛰️</div>
+                <div>
+                  <h3>Não rastreamos sua localização</h3>
+                  <p>O app não precisa de GPS para funcionar.</p>
+                </div>
+              </li>
+
+              <li class="li">
+                <div class="ico">📬</div>
+                <div>
+                  <h3>Não lemos suas mensagens</h3>
+                  <p>O app não acessa SMS, WhatsApp ou conversas.</p>
+                </div>
+              </li>
+
+              <li class="li">
+                <div class="ico">👂</div>
+                <div>
+                  <h3>Não gravamos áudio</h3>
+                  <p>Sem microfone para funcionar.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="pill-row">
+              <span class="pill">🔒 Privacidade por design</span>
+              <span class="pill gray">Sem GPS • Sem SMS • Sem microfone</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3) Armazenamento -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">💾 Onde seus dados ficam</div>
+            <p class="section-desc">
+              Por padrão, seus PDFs e registros organizados ficam armazenados localmente no seu dispositivo.
+            </p>
+
+            <ul class="list">
+              <li class="li">
+                <div class="ico">📱</div>
+                <div>
+                  <h3>Armazenamento local</h3>
+                  <p>PDFs importados e dados organizados ficam em armazenamento do app (sandbox). Você pode apagar a qualquer momento.</p>
+                </div>
+              </li>
+
+              <li class="li">
+                <div class="ico">☁️</div>
+                <div>
+                  <h3>Backup/Restaurar (quando ativado)</h3>
+                  <p>Se você usar backup, dados podem ser enviados para a nuvem do provedor de autenticação/backup configurado no app.</p>
+                </div>
+              </li>
+
+              <li class="li">
+                <div class="ico">🧾</div>
+                <div>
+                  <h3>Exportação de PDFs</h3>
+                  <p>Quando você exporta, o app gera arquivos para você compartilhar/armazenar onde quiser (ex.: Drive, e-mail, etc.).</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 4) Permissões -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">🧩 Permissões</div>
+            <p class="section-desc">
+              O app solicita apenas o necessário. Algumas permissões dependem da versão do Android.
+            </p>
+
+            <ul class="list">
+              <li class="li">
+                <div class="ico">🔔</div>
+                <div>
+                  <h3>Notificações</h3>
+                  <p>Usado para alertas (ex.: faltas/avisos). Você pode desativar nas configurações do sistema.</p>
+                </div>
+              </li>
+
+              <li class="li">
+                <div class="ico">📂</div>
+                <div>
+                  <h3>Acesso a arquivo selecionado</h3>
+                  <p>Ao importar um PDF, você escolhe o arquivo. O app não “varre” seus arquivos sem você solicitar.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 5) Anúncios -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">📢 Anúncios</div>
+            <p class="section-desc">
+              Se o app exibir anúncios, eles podem usar identificadores e sinais do dispositivo para exibição/medição conforme as políticas da plataforma.
+            </p>
+
+            <div class="pill-row">
+              <span class="pill">📊 Medição e estabilidade</span>
+              <span class="pill gray">Configurações podem variar</span>
+            </div>
+
+            <p class="section-desc" style="margin-top:12px;">
+              Para detalhes completos sobre coleta por SDKs (ex.: anúncios/analytics), consulte as informações exibidas na página do app na Google Play.
+            </p>
+          </div>
+        </section>
+
+        <!-- 6) Segurança e controles -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">🛡️ Segurança e seus controles</div>
+            <p class="section-desc">
+              Você pode controlar e apagar dados quando quiser.
+            </p>
+
+            <ul class="list">
+              <li class="li">
+                <div class="ico">🧼</div>
+                <div>
+                  <h3>Apagar dados</h3>
+                  <p>Você pode remover PDFs e limpar dados do app pelas configurações internas ou do Android.</p>
+                </div>
+              </li>
+
+              <li class="li">
+                <div class="ico">🔒</div>
+                <div>
+                  <h3>Bloqueio do app (opcional)</h3>
+                  <p>Se ativado, ajuda a proteger o acesso ao conteúdo no seu dispositivo.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 7) Contato -->
+        <section class="card reveal">
+          <div class="card-inner">
+            <div class="section-title">✉️ Contato</div>
+            <p class="section-desc">
+              Para dúvidas sobre privacidade, sugestões ou solicitações relacionadas aos seus dados, use o canal de suporte indicado na página do app.
+            </p>
+
+            <div class="cta" style="margin-top:12px;">
+              <a class="btn btn-primary" id="btnPlay3" href="#">Abrir página na Play</a>
+              <a class="btn btn-ghost" href="../">← Voltar ao site</a>
+            </div>
+          </div>
+        </section>
       </div>
+
     </div>
   </main>
 
   <footer>
     <div class="container">
       <div class="foot">
-        <div>© <span id="year"></span> Meu Holerite</div>
-        <div>
-          <a href="../privacidade/">Privacidade</a> • <a href="../">Início</a>
+        <div>© <span id="year"></span> Meu Holerite. Todos os direitos reservados.</div>
+        <div class="small-links">
+          <a href="../#prints">Prints</a><span class="sep">•</span>
+          <a href="../#funcionalidades">Recursos</a><span class="sep">•</span>
+          <a href="../termos/">Termos</a>
         </div>
       </div>
     </div>
   </footer>
 
   <script>
+    // Ano
     document.getElementById("year").textContent = new Date().getFullYear();
-    const d = new Date();
-    document.getElementById("date").textContent =
-      d.toLocaleDateString("pt-BR", { year:"numeric", month:"long", day:"2-digit" });
+
+    // CTAs Play
+    ["btnPlay","btnPlay2","btnPlay3"].forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.href = PLAY_FINAL;
+      el.target = "_blank";
+      el.rel = "noopener";
+    });
+
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("on"); });
+    }, {threshold:.12});
+    els.forEach(el=>io.observe(el));
   </script>
 </body>
 </html>
