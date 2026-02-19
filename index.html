@@ -84,6 +84,7 @@
       cursor:pointer;
       display:inline-flex;
       align-items:center;
+      justify-content:center;
       gap:10px;
       padding:12px 16px;
       border-radius: 18px;
@@ -128,6 +129,7 @@
       gap:10px;
       font-weight: 950;
       letter-spacing: -.2px;
+      min-width: 180px;
     }
     .logo{
       width:38px; height:38px;
@@ -137,6 +139,7 @@
       color:#fff;
       box-shadow: 0 12px 20px rgba(14,165,90,.22);
       font-weight: 950;
+      flex: 0 0 auto;
     }
     .brand-title{ line-height:1.05; }
     .brand-title .t{ font-size:16px; }
@@ -154,9 +157,7 @@
     .nav a:hover{ color: rgba(11,18,32,.98); }
 
     /* Hero */
-    .hero{
-      padding: 56px 0 26px;
-    }
+    .hero{ padding: 52px 0 22px; }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.08fr .92fr;
@@ -187,11 +188,11 @@
       letter-spacing: -1px;
     }
     .sub{
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       color: rgba(11,18,32,.70);
       font-size: clamp(16px, 1.35vw, 18px);
       line-height: 1.58;
-      max-width: 64ch;
+      max-width: 70ch;
       font-weight: 650;
     }
     .cta-row{
@@ -199,7 +200,60 @@
       gap:12px;
       flex-wrap:wrap;
       align-items:center;
+      margin-top: 8px;
     }
+
+    /* App-like summary grid */
+    .summary-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 18px 0 14px;
+      max-width: 520px;
+    }
+    .mini-card{
+      border-radius: 20px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: 0 12px 26px rgba(16,24,40,.08);
+      padding: 14px 14px 12px;
+      position: relative;
+      overflow:hidden;
+    }
+    .mini-card .k{
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 1px;
+      color: rgba(11,18,32,.52);
+    }
+    .mini-card .v{
+      margin-top: 6px;
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: -.3px;
+    }
+    .mini-card .s{
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 750;
+      color: rgba(11,18,32,.58);
+      line-height: 1.35;
+    }
+    .mini-pill{
+      position:absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 950;
+      border: 1px solid rgba(17,24,39,.08);
+      background: rgba(255,255,255,.80);
+      color: rgba(11,18,32,.72);
+    }
+    .mini-pill.green{ background: rgba(52,199,89,.12); border-color: rgba(52,199,89,.22); color: rgba(16,125,53,.95); }
+    .mini-pill.red{ background: rgba(255,59,48,.10); border-color: rgba(255,59,48,.22); color: rgba(200,40,32,.95); }
+    .mini-pill.purple{ background: rgba(88,86,214,.10); border-color: rgba(88,86,214,.22); color: rgba(54,52,180,.95); }
 
     .badges{
       margin-top: 14px;
@@ -228,7 +282,7 @@
       font-weight: 750;
       font-size: 13px;
       line-height: 1.45;
-      max-width: 72ch;
+      max-width: 80ch;
     }
     .note b{ font-weight: 950; }
 
@@ -268,9 +322,7 @@
     .screen-overlay .s{ margin-top:4px; opacity:.88; font-weight: 750; font-size: 13px; line-height: 1.35; }
 
     /* Sections */
-    .section{
-      padding: 54px 0;
-    }
+    .section{ padding: 54px 0; }
     .section h2{
       margin:0 0 8px;
       font-size: clamp(24px, 2.2vw, 36px);
@@ -281,7 +333,7 @@
       color: rgba(11,18,32,.66);
       line-height: 1.62;
       font-weight: 650;
-      max-width: 80ch;
+      max-width: 86ch;
     }
 
     /* Feature grid */
@@ -296,10 +348,7 @@
       border: 1px solid rgba(17,24,39,.08);
       box-shadow: var(--shadow2);
     }
-    .feat{
-      padding: 16px;
-      min-height: 160px;
-    }
+    .feat{ padding: 16px; min-height: 160px; }
     .feat .ico{
       width: 48px; height: 48px;
       border-radius: 18px;
@@ -319,6 +368,48 @@
       line-height: 1.55;
       font-weight: 650;
       font-size: 14px;
+    }
+
+    /* Pro highlight row */
+    .pro-row{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .pro-card{
+      border-radius: var(--radiusXL);
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+      position: relative;
+      overflow:hidden;
+    }
+    .pro-card .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .pro-card .title{
+      font-weight: 950;
+      letter-spacing: -.3px;
+      font-size: 16px;
+    }
+    .pro-card .meta{
+      margin-top: 10px;
+      color: rgba(11,18,32,.66);
+      font-weight: 700;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .spark{
+      width: 52px; height: 52px;
+      border-radius: 18px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow3);
+      font-size: 18px;
+      flex: 0 0 auto;
     }
 
     /* Screenshots carousel */
@@ -510,9 +601,7 @@
     }
     .close:active{ transform: scale(.98); }
 
-    .dialog-body{
-      padding: 0 14px 14px;
-    }
+    .dialog-body{ padding: 0 14px 14px; }
     .dialog-body img{
       width: 100%;
       height: min(76vh, 900px);
@@ -543,9 +632,16 @@
       .hero-grid{ grid-template-columns: 1fr; }
       .phone{ justify-self: center; width: min(420px, 100%); }
       .grid-3{ grid-template-columns: 1fr; }
+      .pro-row{ grid-template-columns: 1fr; }
       .shot{ width: 190px; }
       .shot img{ height: 390px; }
       .section{ padding: 44px 0; }
+      .summary-grid{ max-width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ transition:none !important; transform:none !important; opacity:1 !important; }
+      .btn{ transition:none !important; }
     }
   </style>
 </head>
@@ -553,9 +649,9 @@
 <body>
   <!-- CONFIG do APK -->
   <script>
-  const APK_URL = "https://github.com/Jacker-s/MeuHolerite/releases/download/1.3/app-release.apk";
-  const APK_VERSION = "v1.3";
-</script>
+    const APK_URL = "https://github.com/Jacker-s/MeuHolerite/releases/download/1.3/app-release.apk";
+    const APK_VERSION = "v1.3";
+  </script>
 
   <header class="topbar glass">
     <div class="container">
@@ -572,6 +668,7 @@
           <a href="#prints">Prints</a>
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#privacidade">Privacidade</a>
+          <a href="#faq">FAQ</a>
           <a href="./termos/">Termos</a>
         </nav>
 
@@ -584,28 +681,59 @@
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- HERO (mais app-like / profissional) -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
             <span class="kicker"><span class="k-dot"></span> Visual moderno inspirado no padrão iOS</span>
 
-            <h1>Meu Holerite.<br/>Simples, bonito e privado. ✅</h1>
+            <h1>Seu holerite,<br/>na palma da mão.</h1>
 
             <p class="sub">
               Importe holerites e registros de ponto direto do <b>ePays</b>, acompanhe <b>banco de horas</b>,
-              receba <b>alertas de faltas</b>, visualize <b>proventos e descontos</b> com clareza e consulte <b>saldo Alelo</b>.
+              receba <b>alertas de faltas</b> e visualize <b>proventos e descontos</b> com clareza.
               <b>Privacidade garantida</b>: tudo fica no seu dispositivo.
             </p>
 
+            <!-- Resumo tipo "Home" do app -->
+            <div class="summary-grid" aria-label="Resumo do app">
+              <div class="mini-card">
+                <span class="mini-pill green">LÍQUIDO</span>
+                <div class="k">SALÁRIO</div>
+                <div class="v">R$ 3.245,00</div>
+                <div class="s">Visualize o líquido e a evolução mensal.</div>
+              </div>
+
+              <div class="mini-card">
+                <span class="mini-pill red">DESCONTOS</span>
+                <div class="k">RETENÇÃO</div>
+                <div class="v" style="color:#ff3b30;">R$ 580,00</div>
+                <div class="s">Entenda rapidamente o que pesou no mês.</div>
+              </div>
+
+              <div class="mini-card">
+                <span class="mini-pill purple">PONTO</span>
+                <div class="k">BANCO DE HORAS</div>
+                <div class="v">+12:30</div>
+                <div class="s">Saldo e resumo do período com 1 toque.</div>
+              </div>
+
+              <div class="mini-card">
+                <span class="mini-pill red">ALERTA</span>
+                <div class="k">FALTAS</div>
+                <div class="v" style="color:#ff3b30;">1 dia</div>
+                <div class="s">Avisos automáticos quando houver ausência.</div>
+              </div>
+            </div>
+
             <div class="cta-row">
-              <a class="btn btn-primary" id="btnHero" href="#" download>📱 Baixar agora</a>
+              <a class="btn btn-primary" id="btnHero" href="#" download>🚀 Baixar agora</a>
               <a class="btn btn-ghost" href="#funcionalidades">✨ Principais funcionalidades</a>
             </div>
 
             <div class="badges">
-              <span class="badge">🆕 Versão: <b id="verBadge">v1.7</b></span>
+              <span class="badge">🆕 Versão: <b id="verBadge">v1.3</b></span>
               <span class="badge">🔒 Dados no dispositivo</span>
               <span class="badge">📥 Importação do ePays</span>
               <span class="badge">⏱️ Banco de horas</span>
@@ -615,19 +743,54 @@
             <div class="note">
               ⚠️ <b>Instalação via APK:</b> após baixar, o Android pode pedir para permitir
               <b>“Instalar apps desconhecidos”</b>. Isso é normal quando o app não vem da Play Store.
-              <b> Em breve estava na Play Store Para maior segurança!</b>
+              <b>Em breve na Play Store</b> para maior segurança.
             </div>
           </div>
 
           <!-- Preview no “iPhone” com print real -->
           <div class="phone reveal" aria-label="Prévia do app">
             <div class="screen">
-              <!-- Escolha o print que quer destacar -->
               <img class="hero-shot" src="assets/screens/05-recibos.jpg" alt="Tela do Meu Holerite" />
               <div class="screen-overlay">
                 <div class="t">Recibos detalhados</div>
                 <div class="s">Veja proventos, descontos e acesse o PDF com 1 toque.</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOVA: Seção "produto" (cara de app) -->
+    <section class="section" id="produto">
+      <div class="container">
+        <div class="reveal">
+          <h2>📊 Tudo em um só lugar</h2>
+          <p class="lead">
+            O <b>Meu Holerite</b> organiza o que realmente importa: salário, descontos, banco de horas e faltas — com visual limpo e rápido.
+          </p>
+        </div>
+
+        <div class="pro-row">
+          <div class="pro-card reveal">
+            <div class="top">
+              <div class="title">Visão rápida (estilo iOS)</div>
+              <div class="spark">⚡</div>
+            </div>
+            <div class="meta">
+              Abra o app e veja o resumo do mês em segundos.
+              Toque para entrar nos detalhes, abrir PDFs e entender cada item.
+            </div>
+          </div>
+
+          <div class="pro-card reveal">
+            <div class="top">
+              <div class="title">Privacidade como prioridade</div>
+              <div class="spark">🔒</div>
+            </div>
+            <div class="meta">
+              Sem servidor. Sem upload. Seus dados ficam no seu dispositivo,
+              e você mantém o controle total.
             </div>
           </div>
         </div>
@@ -654,7 +817,6 @@
           </div>
 
           <div class="shots" id="shots">
-            <!-- IMPORTANTE: ajuste os nomes conforme seus arquivos em assets/screens/ -->
             <div class="shot" data-title="Bem-vindo" data-src="assets/screens/01-onboarding.jpg">
               <img src="assets/screens/01-onboarding.jpg" alt="Bem-vindo ao Meu Holerite" />
               <div class="cap">👋 Bem-vindo</div>
@@ -685,8 +847,8 @@
               <div class="cap">🕒 Ponto e detalhes</div>
             </div>
 
-            <div class="shot" data-title="Atualização disponível" data-src="assets/screens/07-update.jpg">
-              <img src="assets/screens/07-ajustes.jpg" alt="Modal de Ajustes" />
+            <div class="shot" data-title="Ajustes" data-src="assets/screens/07-ajustes.jpg">
+              <img src="assets/screens/07-ajustes.jpg" alt="Tela de Ajustes" />
               <div class="cap">🆕 Ajustes</div>
             </div>
           </div>
@@ -729,16 +891,21 @@
             <p>Visualização clara e organizada de proventos e descontos.</p>
           </div>
 
-
           <div class="card feat reveal">
             <div class="ico">🔒</div>
             <h3>Privacidade Garantida</h3>
             <p>Todas as informações ficam armazenadas exclusivamente no seu dispositivo.</p>
           </div>
+
+          <div class="card feat reveal">
+            <div class="ico">🧰</div>
+            <h3>Ferramentas úteis</h3>
+            <p>Acesso rápido a recursos e telas do app para facilitar o dia a dia.</p>
+          </div>
         </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
-          <a class="btn btn-primary" id="btnMid" href="#" download>⬇️ Baixar APK (v 1.3)</a>
+          <a class="btn btn-primary" id="btnMid" href="#" download>⬇️ Baixar APK</a>
           <a class="btn btn-ghost" href="#prints">📸 Ver prints</a>
         </div>
       </div>
@@ -779,20 +946,18 @@
             <div class="ico">🛡️</div>
             <h3>Play Protect pode avisar?</h3>
             <p>Como é APK fora da Play Store, o Android pode exibir um aviso. Basta confirmar a instalação.</p>
-            <p>Tambem e possivel fazer a verificaçao de segurança do apk.</p>
           </div>
 
           <div class="card feat reveal">
             <div class="ico">📩</div>
             <h3>Suporte</h3>
-            <p>E-mail de Suporte em breve.</p>
+            <p>E-mail de suporte em breve (você pode colocar um e-mail real quando quiser).</p>
           </div>
         </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
           <a class="btn btn-primary" id="btnBottom" href="#" download>⬇️ Baixar agora</a>
-          <!-- TROQUE AQUI pelo seu email real -->
-          <a class="btn btn-ghost" href="mailto:aqui@mail.com">✉️ E-mail de Suporte em breve.</a>
+          <a class="btn btn-ghost" href="mailto:aqui@mail.com">✉️ Suporte</a>
           <a class="btn btn-ghost" href="./termos/">📄 Termos</a>
         </div>
       </div>
@@ -953,7 +1118,6 @@
 
     if(modal){
       modal.addEventListener("click", (e)=>{
-        // clicar fora do dialog fecha
         if(e.target === modal) closeModal();
       });
     }
@@ -978,7 +1142,6 @@
 
     window.addEventListener("keydown", (e)=>{
       if(!modal || !modal.classList.contains("on")) return;
-
       if(e.key === "Escape") closeModal();
       if(e.key === "ArrowLeft" && mPrev) mPrev.click();
       if(e.key === "ArrowRight" && mNext) mNext.click();
