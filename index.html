@@ -42,12 +42,6 @@
         </span>
       </a>
 
-      <button class="mobile-menu-toggle" type="button" id="mobileMenuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
       <nav class="nav-links">
         <a class="is-active" href="./">Início</a>
         <a href="./noticias/">Notícias</a>
@@ -60,33 +54,6 @@
       </div>
     </div>
   </header>
-
-  <div class="mobile-menu" id="mobileMenuPanel" aria-hidden="true">
-    <button class="mobile-menu-backdrop" type="button" data-close-mobile-menu aria-label="Fechar menu"></button>
-    <div class="mobile-menu-sheet shell">
-      <div class="mobile-menu-head">
-        <div class="mobile-menu-brand">
-          <img src="./assets/icon.svg" alt="Ícone do Meu Holerite" />
-          <div>
-            <strong>Meu Holerite</strong>
-            <small>Navegação rápida</small>
-          </div>
-        </div>
-        <button class="mobile-menu-close" type="button" data-close-mobile-menu aria-label="Fechar menu">×</button>
-      </div>
-
-      <nav class="mobile-menu-links">
-        <a class="is-active" href="./">Início</a>
-        <a href="./noticias/">Notícias</a>
-        <a href="./privacidade/">Privacidade</a>
-        <a href="#comentarios">Comentários</a>
-      </nav>
-
-      <div class="mobile-menu-actions">
-        <a class="button primary" href="https://play.google.com/store/apps/details?id=com.jack.meuholerite" target="_blank" rel="noreferrer">Baixar app</a>
-      </div>
-    </div>
-  </div>
 
   <main>
     <section class="hero">
@@ -248,6 +215,14 @@
       </div>
     </section>
   </main>
+
+  <nav class="mobile-bottom-nav shell" aria-label="Menu mobile">
+    <a class="is-active" href="./">Início</a>
+    <a href="./noticias/">Notícias</a>
+    <a href="./privacidade/">Privacidade</a>
+    <a href="#comentarios">Comentários</a>
+    <a href="https://play.google.com/store/apps/details?id=com.jack.meuholerite" target="_blank" rel="noreferrer">Baixar app</a>
+  </nav>
 
   <footer class="footer">
     <div class="container footer-line">
