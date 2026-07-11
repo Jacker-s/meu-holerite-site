@@ -184,52 +184,40 @@
             <p>Se você usa o app e tem algo para sugerir, criticar ou elogiar, esse espaço foi pensado para isso. Os comentários ficam publicados no próprio site.</p>
           </div>
 
-          <div class="comment-form shell">
-            <p class="form-note">
-              Entre com sua conta do GitHub para comentar. Cada mensagem enviada aparece publicada aqui no site,
-              ajudando a reunir sugestões e críticas em um espaço público e organizado.
-            </p>
-            <div class="comments-embed" id="commentsEmbed">
-              <script src="https://utteranc.es/client.js"
-                repo="Jacker-s/meu-holerite-site"
-                issue-term="pathname"
-                label="comentarios-site"
-                theme="github-light"
-                crossorigin="anonymous"
-                async>
-              </script>
+          <form class="comment-form shell" id="publicCommentsForm">
+            <div class="field-grid">
+              <label>
+                <span>Seu nome</span>
+                <input type="text" name="name" maxlength="60" placeholder="Como quer aparecer" required />
+              </label>
+              <label>
+                <span>Seu perfil</span>
+                <input type="text" name="role" maxlength="60" placeholder="Ex: usuário do app" />
+              </label>
             </div>
-          </div>
+            <label>
+              <span>Sua mensagem</span>
+              <textarea name="message" rows="6" maxlength="600" placeholder="Escreva sua crítica, sugestão ou opinião." required></textarea>
+            </label>
+            <button class="button primary" type="submit" id="submitCommentButton">Publicar comentário</button>
+            <p class="form-note" id="commentsFormStatus">Seu comentário ficará visível publicamente no site.</p>
+          </form>
         </div>
 
         <div>
           <div class="section-head">
             <span class="section-tag">Comentários publicados</span>
-            <h2>Um mural vivo de sugestões e opiniões</h2>
-            <p>Esse espaço agora funciona como uma área pública de feedback do site, para concentrar ideias de melhoria e impressões reais dos usuários.</p>
+            <h2>Últimos 5 comentários</h2>
+            <p>As mensagens mais recentes aparecem aqui para manter um mural vivo de sugestões, impressões e ideias sobre o app.</p>
           </div>
 
-          <div class="comment-list">
+          <div class="comment-list" id="publicCommentsList">
             <article class="comment-card">
               <div class="comment-head">
-                <strong>Feedback público</strong>
-                <span>Direto no site</span>
+                <strong>Carregando comentários...</strong>
+                <span>aguarde</span>
               </div>
-              <p>Agora os comentários ficam publicados aqui mesmo, criando um histórico visível de ideias, críticas e sugestões para o Meu Holerite.</p>
-            </article>
-            <article class="comment-card">
-              <div class="comment-head">
-                <strong>Mais transparência</strong>
-                <span>Feedback aberto</span>
-              </div>
-              <p>Isso ajuda novos usuários a entenderem o que já foi sugerido e reforça a sensação de evolução contínua do produto.</p>
-            </article>
-            <article class="comment-card">
-              <div class="comment-head">
-                <strong>Comunidade</strong>
-                <span>Participação ativa</span>
-              </div>
-              <p>O objetivo é transformar o site também em um ponto de contato entre o app e quem usa ele na rotina real de trabalho.</p>
+              <p>Estamos buscando os comentários públicos mais recentes.</p>
             </article>
           </div>
         </div>
@@ -253,6 +241,6 @@
     <div class="container" style="margin-top:12px; color:var(--muted);">© <span id="year"></span> Meu Holerite.</div>
   </footer>
 
-  <script src="./site.js"></script>
+  <script type="module" src="./site.js"></script>
 </body>
 </html>

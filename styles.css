@@ -626,4 +626,40 @@ img {
   .section-head h2 {
     letter-spacing: -1.1px;
   }
+
+  .nav-bar {
+    gap: 14px;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    text-align: center;
+    padding: 11px 12px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid var(--stroke);
+  }
+
+  .nav-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .nav-actions .chip-link,
+  .nav-actions .button {
+    width: 100%;
+    text-align: center;
+  }
 }
