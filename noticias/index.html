@@ -25,6 +25,12 @@
         </span>
       </a>
 
+      <button class="mobile-menu-toggle" type="button" id="mobileMenuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <nav class="nav-links">
         <a href="../">Início</a>
         <a class="is-active" href="./">Notícias</a>
@@ -37,6 +43,33 @@
       </div>
     </div>
   </header>
+
+  <div class="mobile-menu" id="mobileMenuPanel" aria-hidden="true">
+    <button class="mobile-menu-backdrop" type="button" data-close-mobile-menu aria-label="Fechar menu"></button>
+    <div class="mobile-menu-sheet shell">
+      <div class="mobile-menu-head">
+        <div class="mobile-menu-brand">
+          <img src="../assets/icon.svg" alt="Ícone do Meu Holerite" />
+          <div>
+            <strong>Meu Holerite</strong>
+            <small>Navegação rápida</small>
+          </div>
+        </div>
+        <button class="mobile-menu-close" type="button" data-close-mobile-menu aria-label="Fechar menu">×</button>
+      </div>
+
+      <nav class="mobile-menu-links">
+        <a href="../">Início</a>
+        <a class="is-active" href="./">Notícias</a>
+        <a href="../privacidade/">Privacidade</a>
+        <a href="../#comentarios">Comentários</a>
+      </nav>
+
+      <div class="mobile-menu-actions">
+        <a class="button primary" href="https://play.google.com/store/apps/details?id=com.jack.meuholerite" target="_blank" rel="noreferrer">Baixar app</a>
+      </div>
+    </div>
+  </div>
 
   <main>
     <section class="page-hero">

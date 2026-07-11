@@ -289,6 +289,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const firstVisitModal = document.getElementById('firstVisitFeedbackModal');
   const openFeedbackFromModal = document.getElementById('openFeedbackFromModal');
   const closeFeedbackTriggers = Array.from(document.querySelectorAll('[data-close-feedback-modal]'));
+  const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const closeMobileMenuTriggers = Array.from(document.querySelectorAll('[data-close-mobile-menu]'));
+  const mobileMenuLinks = Array.from(document.querySelectorAll('.mobile-menu-links a'));
   const firstVisitStorageKey = 'meuHoleriteFeedbackModalSeen';
   const commentsSection = document.getElementById('publicCommentsForm');
   const commentsForm = document.getElementById('publicCommentsForm');
@@ -312,6 +316,22 @@ document.addEventListener('DOMContentLoaded', () => {
     firstVisitModal.setAttribute('aria-hidden', 'false');
   };
 
+  const closeMobileMenu = () => {
+    if (!mobileMenuPanel || !mobileMenuToggle) return;
+    mobileMenuPanel.classList.remove('is-open');
+    mobileMenuPanel.setAttribute('aria-hidden', 'true');
+    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-menu-open');
+  };
+
+  const openMobileMenu = () => {
+    if (!mobileMenuPanel || !mobileMenuToggle) return;
+    mobileMenuPanel.classList.add('is-open');
+    mobileMenuPanel.setAttribute('aria-hidden', 'false');
+    mobileMenuToggle.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('mobile-menu-open');
+  };
+
   if (firstVisitModal) {
     const hasSeenModal = localStorage.getItem(firstVisitStorageKey) === 'true';
     if (!hasSeenModal) {
@@ -328,7 +348,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         closeFeedbackModal();
+        closeMobileMenu();
       }
+    });
+  }
+
+  if (mobileMenuPanel && mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenuPanel.classList.contains('is-open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    closeMobileMenuTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', closeMobileMenu);
+    });
+
+    mobileMenuLinks.forEach((link) => {
+      link.addEventListener('click', closeMobileMenu);
     });
   }
 
