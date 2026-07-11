@@ -454,6 +454,7 @@ img {
   min-height: 360px;
   display: grid;
   align-items: end;
+  background: linear-gradient(135deg, #173d84 0%, #245ea0 48%, #2d8a79 100%);
 }
 
 .live-news-feature-media {
@@ -493,6 +494,18 @@ img {
   margin: 0;
   color: rgba(255,255,255,0.82);
   line-height: 1.7;
+}
+
+.live-news-feature .button.soft {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+.live-news-feature .button.primary {
+  background: #fff;
+  color: var(--blue-deep);
+  box-shadow: none;
 }
 
 .live-news-actions {
