@@ -15,6 +15,23 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <div class="feedback-modal" id="firstVisitFeedbackModal" aria-hidden="true">
+    <div class="feedback-modal-backdrop" data-close-feedback-modal></div>
+    <div class="feedback-modal-card shell" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle">
+      <button class="feedback-modal-close" type="button" aria-label="Fechar" data-close-feedback-modal>×</button>
+      <span class="hero-kicker">Sua opinião é importante</span>
+      <h2 id="feedbackModalTitle">Quer deixar uma crítica ou sugestão sobre o Meu Holerite?</h2>
+      <p>
+        Esse convite aparece só na sua primeira visita ao site. Se quiser, você já pode nos contar
+        o que acha do app ou o que gostaria de ver melhorado.
+      </p>
+      <div class="feedback-modal-actions">
+        <button class="button primary" type="button" id="openFeedbackFromModal">Quero comentar</button>
+        <button class="button soft" type="button" data-close-feedback-modal>Agora não</button>
+      </div>
+    </div>
+  </div>
+
   <header class="site-header">
     <div class="container shell nav-bar">
       <a class="brand" href="./">
@@ -164,61 +181,55 @@
           <div class="section-head">
             <span class="section-tag">Críticas e sugestões</span>
             <h2>Ajude a melhorar o Meu Holerite</h2>
-            <p>Se você usa o app e tem algo para sugerir, criticar ou elogiar, esse espaço foi pensado para isso.</p>
+            <p>Se você usa o app e tem algo para sugerir, criticar ou elogiar, esse espaço foi pensado para isso. Os comentários ficam publicados no próprio site.</p>
           </div>
 
-          <form class="comment-form shell" id="feedbackMailForm">
-            <div class="field-grid">
-              <label>
-                <span>Seu nome</span>
-                <input type="text" name="name" maxlength="60" placeholder="Como quer se identificar" required />
-              </label>
-              <label>
-                <span>Seu perfil</span>
-                <input type="text" name="role" maxlength="60" placeholder="Ex: usuário do app" />
-              </label>
+          <div class="comment-form shell">
+            <p class="form-note">
+              Entre com sua conta do GitHub para comentar. Cada mensagem enviada aparece publicada aqui no site,
+              ajudando a reunir sugestões e críticas em um espaço público e organizado.
+            </p>
+            <div class="comments-embed" id="commentsEmbed">
+              <script src="https://utteranc.es/client.js"
+                repo="Jacker-s/meu-holerite-site"
+                issue-term="pathname"
+                label="comentarios-site"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+              </script>
             </div>
-            <label>
-              <span>E-mail</span>
-              <input type="email" name="email" maxlength="120" placeholder="Opcional, para retorno" />
-            </label>
-            <label>
-              <span>Sua mensagem</span>
-              <textarea name="message" rows="6" maxlength="1200" placeholder="Escreva sua crítica, sugestão ou opinião." required></textarea>
-            </label>
-            <button class="button primary" type="submit">Enviar comentário</button>
-            <p class="form-note">Ao enviar, seu aplicativo de e-mail será aberto com a mensagem pronta para envio.</p>
-          </form>
+          </div>
         </div>
 
         <div>
           <div class="section-head">
-            <span class="section-tag">O que os usuários valorizam</span>
-            <h2>Comentários em destaque</h2>
-            <p>Alguns exemplos do tipo de retorno que ajuda o app a evoluir de forma mais inteligente.</p>
+            <span class="section-tag">Comentários publicados</span>
+            <h2>Um mural vivo de sugestões e opiniões</h2>
+            <p>Esse espaço agora funciona como uma área pública de feedback do site, para concentrar ideias de melhoria e impressões reais dos usuários.</p>
           </div>
 
           <div class="comment-list">
             <article class="comment-card">
               <div class="comment-head">
-                <strong>Usuário do app</strong>
-                <span>Home personalizável</span>
+                <strong>Feedback público</strong>
+                <span>Direto no site</span>
               </div>
-              <p>Gostei da ideia de poder deixar na home só os cards que realmente fazem sentido para a minha rotina.</p>
+              <p>Agora os comentários ficam publicados aqui mesmo, criando um histórico visível de ideias, críticas e sugestões para o Meu Holerite.</p>
             </article>
             <article class="comment-card">
               <div class="comment-head">
-                <strong>Usuário do app</strong>
-                <span>Visual do recibo</span>
+                <strong>Mais transparência</strong>
+                <span>Feedback aberto</span>
               </div>
-              <p>A forma como o valor líquido e os descontos aparecem ficou mais fácil de entender do que no formato tradicional.</p>
+              <p>Isso ajuda novos usuários a entenderem o que já foi sugerido e reforça a sensação de evolução contínua do produto.</p>
             </article>
             <article class="comment-card">
               <div class="comment-head">
-                <strong>Usuário do app</strong>
-                <span>Tela de ponto</span>
+                <strong>Comunidade</strong>
+                <span>Participação ativa</span>
               </div>
-              <p>Seria ótimo continuar evoluindo a leitura das ocorrências e do banco de horas porque isso ajuda muito no dia a dia.</p>
+              <p>O objetivo é transformar o site também em um ponto de contato entre o app e quem usa ele na rotina real de trabalho.</p>
             </article>
           </div>
         </div>

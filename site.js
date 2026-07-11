@@ -1,28 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const firstVisitModal = document.getElementById('firstVisitFeedbackModal');
+  const openFeedbackFromModal = document.getElementById('openFeedbackFromModal');
+  const closeFeedbackTriggers = Array.from(document.querySelectorAll('[data-close-feedback-modal]'));
+  const firstVisitStorageKey = 'meuHoleriteFeedbackModalSeen';
+  const commentsSection = document.getElementById('commentsEmbed');
+
   const year = document.getElementById('year');
   if (year) {
     year.textContent = new Date().getFullYear();
   }
 
-  const feedbackForm = document.getElementById('feedbackMailForm');
-  if (feedbackForm) {
-    feedbackForm.addEventListener('submit', (event) => {
-      event.preventDefault();
+  const closeFeedbackModal = () => {
+    if (!firstVisitModal) return;
+    firstVisitModal.classList.remove('is-open');
+    firstVisitModal.setAttribute('aria-hidden', 'true');
+  };
 
-      const name = feedbackForm.querySelector('[name="name"]').value.trim();
-      const role = feedbackForm.querySelector('[name="role"]').value.trim();
-      const email = feedbackForm.querySelector('[name="email"]').value.trim();
-      const message = feedbackForm.querySelector('[name="message"]').value.trim();
+  const openFeedbackModal = () => {
+    if (!firstVisitModal) return;
+    firstVisitModal.classList.add('is-open');
+    firstVisitModal.setAttribute('aria-hidden', 'false');
+  };
 
-      const subject = encodeURIComponent(`Comentario sobre o Meu Holerite - ${name || 'Usuario'}`);
-      const body = encodeURIComponent(
-        `Nome: ${name}\n` +
-        `Perfil: ${role || 'Usuario do app'}\n` +
-        `Email: ${email || 'Nao informado'}\n\n` +
-        `Mensagem:\n${message}`
-      );
+  if (firstVisitModal) {
+    const hasSeenModal = localStorage.getItem(firstVisitStorageKey) === 'true';
+    if (!hasSeenModal) {
+      window.setTimeout(() => {
+        openFeedbackModal();
+        localStorage.setItem(firstVisitStorageKey, 'true');
+      }, 600);
+    }
 
-      window.location.href = `mailto:suporte@meuholerite.me?subject=${subject}&body=${body}`;
+    closeFeedbackTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', closeFeedbackModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeFeedbackModal();
+      }
+    });
+  }
+
+  if (openFeedbackFromModal && commentsSection) {
+    openFeedbackFromModal.addEventListener('click', () => {
+      closeFeedbackModal();
+      commentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 });

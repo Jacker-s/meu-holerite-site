@@ -189,6 +189,72 @@ img {
   border: 1px solid var(--stroke);
 }
 
+.feedback-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 80;
+}
+
+.feedback-modal.is-open {
+  display: flex;
+}
+
+.feedback-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 19, 40, 0.46);
+  backdrop-filter: blur(6px);
+}
+
+.feedback-modal-card {
+  position: relative;
+  width: min(560px, 100%);
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-lg);
+}
+
+.feedback-modal-card h2 {
+  margin: 16px 0 12px;
+  font-family: "Sora", sans-serif;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.9px;
+}
+
+.feedback-modal-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.feedback-modal-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.feedback-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.82);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+}
+
 .hero {
   padding: 44px 0 26px;
 }
@@ -419,6 +485,13 @@ img {
   font-size: 13px;
 }
 
+.comments-embed {
+  border-radius: 20px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--stroke);
+  padding: 10px;
+}
+
 .comment-list {
   display: grid;
   gap: 14px;
@@ -543,7 +616,8 @@ img {
   .policy-card,
   .news-article,
   .page-hero .shell,
-  .comment-form {
+  .comment-form,
+  .feedback-modal-card {
     padding: 18px;
   }
 
