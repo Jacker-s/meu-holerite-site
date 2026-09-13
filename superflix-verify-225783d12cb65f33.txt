@@ -1,0 +1,2 @@
+domain=meuholerite.me
+token=kwgg84mun3pa3yojtjfspxr0gfpxjm4w
